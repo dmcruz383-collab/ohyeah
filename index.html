@@ -2082,6 +2082,10 @@ footer { background:var(--fp); padding:40px var(--px) 0 }
           <div class="field-row" style="gap:8px"><select class="fi fi-sel"><option>Mes</option></select><input class="fi" placeholder="Día"></div>
         </div>
       </div>
+      <div class="fg" style="margin-bottom:12px">
+        <label class="fl">CONTRASEÑA</label>
+        <input id="su-password" class="fi fi-full" type="password" placeholder="Mínimo 6 caracteres">
+      </div>
       <button class="btn-reservar btn-full" style="border-radius:10px" onclick="doSignup()">Crear cuenta</button>
       <div class="terms-sm">Al seleccionar <strong>"Crear una cuenta"</strong>, aceptas los <span class="lnk" onclick="goPg('pg-terms')">Términos de uso</span> y la <span class="lnk">Política de privacidad</span> de Oh yeah!</div>
     </div>
@@ -2107,7 +2111,10 @@ footer { background:var(--fp); padding:40px var(--px) 0 }
     <button class="btn-reservar btn-full" style="border-radius:10px" onclick="doLogin()">INICIAR SESIÓN</button>
     <div class="divider">o</div>
     <button class="btn-gs btn-full" style="justify-content:center" onclick="closeOv('ov-login');goPg('pg-signup')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px;flex-shrink:0"><circle cx="8" cy="8" r="5"/><path d="M21 21l-8.5-8.5"/><path d="M13.5 13.5l2 2"/></svg> Crear cuenta en Gourmand Society</button>
-    <div style="text-align:center;margin-top:14px;font-size:12px;color:var(--gr)">¿No tienes cuenta? <span class="lnk" onclick="closeOv('ov-login');goPg('pg-signup')">Regístrate</span></div>
+    <div style="text-align:center;margin-top:10px;font-size:12px;color:var(--gr)">
+      <span class="lnk" onclick="forgotPassword()">¿Olvidaste tu contraseña?</span>
+    </div>
+    <div style="text-align:center;margin-top:8px;font-size:12px;color:var(--gr)">¿No tienes cuenta? <span class="lnk" onclick="closeOv('ov-login');goPg('pg-signup')">Regístrate</span></div>
   </div>
 </div>
 
@@ -2505,28 +2512,52 @@ setPaxAll(2);
    AUTH
 ====================================================== */
 async function doLogin() {
-  const email = document.getElementById('login-email');
-  const pass  = document.getElementById('login-pass');
-  if (!email.value && !pass.value) {
+  const emailEl = document.getElementById('login-email');
+  const passEl  = document.getElementById('login-pass');
+  if (!emailEl.value || !passEl.value) {
     showToast('⚠️ Ingresa tu correo y contraseña');
     return;
   }
-  closeOv('ov-login');
-  STATE.loggedIn = true;
-  activateUserMode();
 
-  // Update last_login in NEXUM clients
-  if (supa && email.value) {
+  showToast('Iniciando sesión...');
+
+  if (supa) {
     try {
-      await supa.from('ohyeah_clientes').upsert([{
-        email:      email.value,
-        last_login: new Date().toISOString(),
-        source:     'ohyeah',
-      }], { onConflict: 'email' });
-    } catch(e) {}
+      const { data, error } = await supa.auth.signInWithPassword({
+        email:    emailEl.value,
+        password: passEl.value
+      });
+      if (error) {
+        showToast('❌ ' + (error.message === 'Invalid login credentials'
+          ? 'Correo o contraseña incorrectos'
+          : error.message));
+        return;
+      }
+      // Load profile from ohyeah_clientes
+      const { data: perfil } = await supa
+        .from('ohyeah_clientes')
+        .select('*')
+        .eq('email', emailEl.value)
+        .single();
+
+      closeOv('ov-login');
+      STATE.loggedIn = true;
+      STATE.user = perfil || { nombre: emailEl.value.split('@')[0], email: emailEl.value };
+      loadUserProfile(STATE.user);
+      activateUserMode();
+      showToast('¡Bienvenido, ' + (STATE.user.nombre || '') + '! 🎉');
+      setTimeout(() => goPg('pg-profile'), 400);
+      return;
+    } catch(e) { console.warn(e); }
   }
 
-  showToast('¡Bienvenida, Samantha Leal! 🎉');
+  // Fallback demo sin Supabase
+  closeOv('ov-login');
+  STATE.loggedIn = true;
+  STATE.user = { nombre: emailEl.value.split('@')[0], email: emailEl.value };
+  loadUserProfile(STATE.user);
+  activateUserMode();
+  showToast('¡Bienvenido! 🎉');
   setTimeout(() => goPg('pg-profile'), 400);
 }
 
@@ -2542,36 +2573,64 @@ function doSignup() {
 
 async function acceptTerms() {
   closeOv('ov-terms');
-  STATE.loggedIn = true;
-  activateUserMode();
 
-  // Collect signup data
   var nombre   = document.getElementById('su-name')?.value || '';
   var apellido = document.getElementById('su-last')?.value || '';
   var email    = document.getElementById('su-email')?.value || '';
   var telefono = document.getElementById('su-phone')?.value || '';
   var ciudad   = document.getElementById('su-city')?.value || '';
+  var password = document.getElementById('su-password')?.value || '';
 
-  // Save to Supabase → appears in NEXUM Clientes instantly
-  if (supa && email) {
-    try {
-      await supa.from('ohyeah_clientes').upsert([{
-        nombre:          nombre + (apellido ? ' ' + apellido : ''),
-        email:           email,
-        telefono:        telefono,
-        ciudad:          ciudad,
-        gourmand_level:  'INICIADO',
-        visit_count:     0,
-        is_first_visit:  true,
-        source:          'ohyeah',
-        acepto_terminos: true,
-        registro_at:     new Date().toISOString(),
-      }], { onConflict: 'email' });
-      console.log('✅ Cliente guardado en NEXUM');
-    } catch(e) { console.warn('Supabase error:', e); }
+  if (!email) {
+    showToast('⚠️ Ingresa tu correo');
+    return;
   }
 
-  showToast('¡Bienvenida a Gourmand Society! 🗝');
+  showToast('Creando tu cuenta...');
+
+  var perfil = {
+    nombre:          (nombre + ' ' + apellido).trim(),
+    email:           email,
+    telefono:        telefono,
+    ciudad:          ciudad,
+    gourmand_level:  'INICIADO',
+    visit_count:     0,
+    is_first_visit:  true,
+    source:          'ohyeah',
+    acepto_terminos: true,
+    registro_at:     new Date().toISOString(),
+  };
+
+  if (supa && password) {
+    try {
+      // 1. Create auth user
+      const { data: authData, error: authErr } = await supa.auth.signUp({
+        email:    email,
+        password: password,
+        options:  { data: { nombre: perfil.nombre } }
+      });
+      if (authErr && !authErr.message.includes('already registered')) {
+        showToast('❌ ' + authErr.message);
+        return;
+      }
+
+      // 2. Save profile to ohyeah_clientes → NEXUM receives it
+      await supa.from('ohyeah_clientes').upsert([perfil], { onConflict: 'email' });
+      console.log('✅ Cliente guardado en NEXUM');
+
+    } catch(e) { console.warn('Supabase error:', e); }
+  } else if (supa) {
+    // No password field — save profile only (magic link flow)
+    try {
+      await supa.from('ohyeah_clientes').upsert([perfil], { onConflict: 'email' });
+    } catch(e) {}
+  }
+
+  STATE.loggedIn = true;
+  STATE.user = perfil;
+  loadUserProfile(STATE.user);
+  activateUserMode();
+  showToast('¡Bienvenido a Gourmand Society! 🗝');
   setTimeout(() => goPg('pg-profile'), 400);
 }
 
