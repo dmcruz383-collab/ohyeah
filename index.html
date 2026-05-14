@@ -977,6 +977,42 @@ footer { background:var(--fp); padding:40px var(--px) 0 }
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
 }
+
+/* ── NETFLIX STYLE RESTAURANTS ── */
+.nf-section { margin-top:32px; margin-bottom:8px }
+.nf-section-title {
+  font-size:16px; font-weight:800; color:var(--wh);
+  margin-bottom:14px; letter-spacing:-.2px;
+  display:flex; justify-content:space-between; align-items:center;
+}
+.nf-section-title span { font-size:11px; color:var(--pk); font-weight:600; cursor:pointer }
+.nf-row { display:flex; gap:8px; overflow-x:auto; padding-bottom:6px }
+.nf-row::-webkit-scrollbar { display:none }
+.nf-card {
+  flex-shrink:0; width:160px; border-radius:6px; overflow:hidden;
+  cursor:pointer; position:relative;
+  transition:transform .25s ease, box-shadow .25s;
+  background:var(--d2);
+}
+.nf-card:hover { transform:scale(1.08); z-index:10; box-shadow:0 20px 48px rgba(0,0,0,.8) }
+.nf-card img { width:100%; height:240px; object-fit:cover; display:block }
+.nf-card-info {
+  position:absolute; bottom:0; left:0; right:0;
+  background:linear-gradient(to top, rgba(0,0,0,.95) 0%, transparent 100%);
+  padding:32px 10px 10px;
+}
+.nf-card-name { font-size:11px; font-weight:800; color:#fff; letter-spacing:.4px }
+.nf-card-meta { font-size:9px; color:rgba(255,255,255,.6); margin-top:2px }
+.nf-card-badge {
+  position:absolute; top:6px; left:6px;
+  background:var(--pk); color:#fff; font-size:8px; font-weight:700;
+  padding:2px 6px; border-radius:3px; letter-spacing:.04em;
+}
+.nf-card-match {
+  position:absolute; top:8px; right:8px;
+  font-size:10px; font-weight:800; color:#4ade80;
+}
+
 </style>
 
 <body>
@@ -1002,7 +1038,7 @@ footer { background:var(--fp); padding:40px var(--px) 0 }
     </div>
     <!-- Guest nav -->
     <div class="nav-right" id="nav-guest">
-      <button class="btn-login" onclick="openOv('ov-login')">INICIAR SESIÓN</button>
+      <button class="btn-login" id="btn-iniciar" onclick="STATE.loggedIn?goPg('pg-profile'):openOv('ov-login')">INICIAR SESIÓN</button>
       <button class="btn-canje" onclick="openOv('ov-canje')" style="background:var(--d3);color:var(--yw);border:1.5px solid var(--yw);border-radius:22px;padding:7px 14px;font-size:11px;font-weight:800;cursor:pointer;letter-spacing:.05em;margin-right:4px;font-family:Montserrat,sans-serif">🎟 CANJEAR</button>
       <button class="btn-gs" onclick="STATE.loggedIn?goPg('pg-profile'):openOv('ov-login')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px;flex-shrink:0"><circle cx="8" cy="8" r="5"/><path d="M21 21l-8.5-8.5"/><path d="M13.5 13.5l2 2"/></svg> GOURMAND SOCIETY</button>
     </div>
@@ -1436,7 +1472,7 @@ footer { background:var(--fp); padding:40px var(--px) 0 }
       <div class="logo" onclick="goPg('pg-home')"><span class="lo">Oh</span><span class="ly">Yeah</span><span class="lx">!</span></div>
     </div>
     <div class="nav-right" id="rest-nav-guest">
-      <button class="btn-login" onclick="openOv('ov-login')">INICIAR SESIÓN</button>
+      <button class="btn-login" id="btn-iniciar" onclick="STATE.loggedIn?goPg('pg-profile'):openOv('ov-login')">INICIAR SESIÓN</button>
       <button class="btn-gs" onclick="STATE.loggedIn?goPg('pg-profile'):openOv('ov-login')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px;flex-shrink:0"><circle cx="8" cy="8" r="5"/><path d="M21 21l-8.5-8.5"/><path d="M13.5 13.5l2 2"/></svg> GOURMAND SOCIETY</button>
     </div>
     <div class="nav-icons" id="rest-nav-user" style="display:none">
@@ -1735,7 +1771,7 @@ footer { background:var(--fp); padding:40px var(--px) 0 }
       <div class="logo" onclick="goPg('pg-home')"><span class="lo">Oh</span><span class="ly">Yeah</span><span class="lx">!</span></div>
     </div>
     <div class="nav-right" id="disc-nav-guest">
-      <button class="btn-login" onclick="openOv('ov-login')">INICIAR SESIÓN</button>
+      <button class="btn-login" id="btn-iniciar" onclick="STATE.loggedIn?goPg('pg-profile'):openOv('ov-login')">INICIAR SESIÓN</button>
       <button class="btn-gs" onclick="STATE.loggedIn?goPg('pg-profile'):openOv('ov-login')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;flex-shrink:0"><circle cx="8" cy="8" r="5"/><path d="M21 21l-8.5-8.5"/><path d="M13.5 13.5l2 2"/></svg> GOURMAND SOCIETY</button>
     </div>
   </nav>
@@ -1998,6 +2034,9 @@ footer { background:var(--fp); padding:40px var(--px) 0 }
         <div style="font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--gr);margin-bottom:12px">HACIA DÓNDE VAS</div>
         <div id="av-levels-ahead"></div>
 
+        <!-- ═══ NETFLIX RESTAURANTS ═══ -->
+        <div id="av-netflix"></div>
+
       </div>
 
 
@@ -2131,7 +2170,7 @@ footer { background:var(--fp); padding:40px var(--px) 0 }
   <div class="tb"><div></div><div class="tb-right"><a onclick="goPg('pg-home')">← Volver</a><button class="lang-btn">ES ▾</button></div></div>
   <nav>
     <div class="nav-left"><div class="logo" onclick="goPg('pg-home')"><span class="lo">Oh</span><span class="ly">Yeah</span><span class="lx">!</span></div></div>
-    <div class="nav-right"><button class="btn-login" onclick="openOv('ov-login')">INICIAR SESIÓN</button><button class="btn-gs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px;flex-shrink:0"><circle cx="8" cy="8" r="5"/><path d="M21 21l-8.5-8.5"/><path d="M13.5 13.5l2 2"/></svg> GOURMAND SOCIETY</button></div>
+    <div class="nav-right"><button class="btn-login" id="btn-iniciar" onclick="STATE.loggedIn?goPg('pg-profile'):openOv('ov-login')">INICIAR SESIÓN</button><button class="btn-gs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px;flex-shrink:0"><circle cx="8" cy="8" r="5"/><path d="M21 21l-8.5-8.5"/><path d="M13.5 13.5l2 2"/></svg> GOURMAND SOCIETY</button></div>
   </nav>
   <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:40px var(--px)">
     <div style="background:var(--d2);border:1px solid var(--d3);border-radius:18px;padding:40px;width:640px;max-width:100%">
@@ -3642,6 +3681,8 @@ function renderMiAvance() {
 
   // Start avatar animation
   startAvatarAnimation();
+  // Render Netflix section
+  setTimeout(renderNetflixSection, 100);
 }
 
 // renderMiAvance se llama desde el onclick del menu
