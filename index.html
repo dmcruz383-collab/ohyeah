@@ -2679,9 +2679,11 @@ async function doLogin() {
         password: passEl.value
       });
       if (error) {
-        showToast('❌ ' + (error.message === 'Invalid login credentials'
-          ? 'Correo o contraseña incorrectos'
-          : error.message));
+        var msg = error.message;
+        if (msg.includes('Invalid login credentials')) msg = 'Correo o contraseña incorrectos';
+        else if (msg.includes('Email not confirmed')) msg = '📧 Confirma tu correo primero — revisa tu bandeja de entrada';
+        else if (msg.includes('Too many requests')) msg = 'Demasiados intentos, espera un momento';
+        showToast('❌ ' + msg, 5000);
         return;
       }
       // Load profile from ohyeah_clientes
