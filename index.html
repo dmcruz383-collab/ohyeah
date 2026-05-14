@@ -3751,6 +3751,94 @@ function scrollToEvents() {
   }
 }
 
+
+/* ════════ LOAD USER PROFILE ════════ */
+function loadUserProfile(user) {
+  if (!user) return;
+  STATE.user  = user;
+  USER_VISITS = user.visit_count || 0;
+  var nombre    = (user.nombre || user.email || 'Usuario').trim();
+  var firstName = nombre.split(' ')[0];
+  var iniciales = nombre.split(' ').filter(function(w){return w.length>0;}).map(function(w){return w[0].toUpperCase();}).join('').substring(0,2) || '?';
+
+  var btn = document.getElementById('btn-iniciar');
+  if (btn) { btn.textContent=nombre.split(' ').slice(0,2).join(' '); btn.style.background='var(--pk)'; btn.style.color='#fff'; btn.style.borderColor='var(--pk)'; btn.onclick=function(){goPg('pg-profile');}; }
+
+  var navG = document.getElementById('nav-greeting');
+  if (navG) navG.innerHTML = '¡HOLA, ' + firstName.toUpperCase() + '! ▾';
+  var umN = document.getElementById('um-name');
+  if (umN) umN.textContent = nombre.toUpperCase();
+  var pg = document.getElementById('prof-greeting');
+  if (pg) pg.textContent = '¡HOLA, ' + nombre.toUpperCase() + '!';
+  var pi = document.getElementById('prof-initials');
+  if (pi) pi.textContent = iniciales;
+  var ps = document.getElementById('prof-since');
+  if (ps) { var fecha = user.registro_at ? new Date(user.registro_at).toLocaleDateString('es-CO',{month:'long',year:'numeric'}) : 'recientemente'; ps.textContent = 'Forma parte de la red desde ' + fecha; }
+
+  var lv = getUserLevel ? getUserLevel() : null;
+  var badge = document.getElementById('prof-status-badge');
+  if (badge && lv) { badge.textContent=lv.emoji+' '+lv.name; badge.style.color=lv.color; badge.style.background='rgba(0,0,0,.3)'; badge.style.border='1px solid '+lv.color+'44'; }
+  var vb = document.getElementById('prof-visits-badge');
+  if (vb) vb.textContent = USER_VISITS + (USER_VISITS===1?' visita':' visitas');
+  var nb = document.getElementById('prof-next-badge');
+  if (nb && lv && typeof GS_LEVELS!=='undefined') { var li=GS_LEVELS.findIndex(function(l){return l.id===lv.id;}); if(li>=0&&li<GS_LEVELS.length-1){var nxt=GS_LEVELS[li+1]; var f=nxt.visits_needed-USER_VISITS; nb.style.display='block'; nb.textContent=f+' visita'+(f===1?'':'s')+' para '+nxt.name;} }
+  var aw = document.getElementById('prof-avatar-wrap');
+  if (aw && lv) aw.style.background = 'linear-gradient(135deg,'+lv.color+' 0%,#1a1a1a 100%)';
+
+  var partes = nombre.split(' ');
+  var fields  = [['cuenta-nombre',partes[0]||''],['cuenta-apellido',partes.slice(1).join(' ')||''],['cuenta-email',user.email||'']];
+  fields.forEach(function(f){ var el=document.getElementById(f[0]); if(el) el.value=f[1]; });
+
+  var banner = document.getElementById('home-welcome-banner');
+  if (banner) banner.style.display = 'flex';
+  var wt = document.getElementById('home-welcome-text');
+  var ws = document.getElementById('home-welcome-sub');
+  if (wt) wt.textContent = '¡Hola, ' + firstName + '! 👋';
+  if (ws && lv) ws.textContent = lv.emoji+' '+lv.name+' — Estamos listos para tu próxima experiencia';
+
+  console.log('✅ Perfil cargado:', nombre, '| Nivel:', lv?lv.name:'-');
+}
+
+/* ════════ SESSION MANAGEMENT ════════ */
+async function checkSession() {
+  if (!supa) return;
+  try {
+    var s = await supa.auth.getSession();
+    var session = s && s.data && s.data.session;
+    if (session && session.user) {
+      var res = await supa.from('ohyeah_clientes').select('*').eq('email', session.user.email).single();
+      STATE.loggedIn = true;
+      STATE.user = res.data || { nombre: session.user.email.split('@')[0], email: session.user.email, visit_count:0 };
+      USER_VISITS = STATE.user.visit_count || 0;
+      loadUserProfile(STATE.user);
+      activateUserMode();
+    }
+  } catch(e) { console.warn('Session error:', e); }
+}
+
+if (supa) {
+  supa.auth.onAuthStateChange(function(event, session) {
+    if (event === 'SIGNED_IN' && session) {
+      supa.from('ohyeah_clientes').select('*').eq('email', session.user.email).single().then(function(res) {
+        STATE.loggedIn = true;
+        STATE.user = res.data || { nombre: session.user.email.split('@')[0], email: session.user.email, visit_count:0 };
+        USER_VISITS = STATE.user.visit_count || 0;
+        loadUserProfile(STATE.user);
+        activateUserMode();
+      });
+    }
+    if (event === 'SIGNED_OUT') {
+      STATE.loggedIn = false; STATE.user = null;
+      deactivateUserMode();
+      var btn = document.getElementById('btn-iniciar');
+      if (btn) { btn.textContent='INICIAR SESIÓN'; btn.style.background=''; btn.style.color=''; btn.style.borderColor=''; btn.onclick=function(){openOv('ov-login');}; }
+      var banner = document.getElementById('home-welcome-banner');
+      if (banner) banner.style.display = 'none';
+    }
+  });
+}
+
+checkSession();
 </script>
 
 <!-- ===== OVERLAY CANJEAR CÓDIGO ===== -->
