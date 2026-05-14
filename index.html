@@ -1654,7 +1654,16 @@ footer { background:var(--fp); padding:40px var(--px) 0 }
         <input class="cr-fi" placeholder="Celular o correo electrónico" id="res-contact">
       </div>
       <div class="cr-note">Para encontrarte más rápido o crear tu perfil.</div>
-      <div class="res-subtitle">Detalles de la reservación</div>
+      <div id="res-capacity-bar" style="background:var(--d2);border-radius:10px;padding:12px 14px;margin-bottom:16px;display:none">
+      <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+        <span style="font-size:11px;font-weight:700;color:var(--gr2)">DISPONIBILIDAD</span>
+        <span id="res-cap-text" style="font-size:11px;font-weight:700;color:var(--yw)">Cargando...</span>
+      </div>
+      <div style="background:var(--d4);border-radius:4px;height:6px;overflow:hidden">
+        <div id="res-cap-fill" style="height:100%;border-radius:4px;background:linear-gradient(90deg,#4ade80,var(--yw));width:0%;transition:width .5s ease"></div>
+      </div>
+    </div>
+    <div class="res-subtitle">Detalles de la reservación</div>
       <select class="occ-dropdown" id="occ-select">
         <option value="">SELECCIÓNA UNA OCASIÓN ESPECIAL</option>
         <option>🎂 Cumpleaños</option>
@@ -1796,16 +1805,23 @@ footer { background:var(--fp); padding:40px var(--px) 0 }
     </div>
   </nav>
 
-  <div class="prof-header">
-    <div class="prof-row">
-      <div class="prof-avatar">
-        <span id="prof-initials">?</span>
+  <div class="prof-header" style="background:linear-gradient(135deg,var(--d1),var(--d2));border-bottom:1px solid var(--d3)">
+    <div class="prof-row" style="align-items:center;gap:20px">
+      <div class="prof-avatar" id="prof-avatar-wrap" style="background:linear-gradient(135deg,var(--pk),var(--yw));font-size:22px;font-weight:900;color:var(--bk);cursor:pointer" onclick="setPanel('cuenta')">
+        <span id="prof-initials" style="position:relative;z-index:1">?</span>
         <div class="prof-cam"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
       </div>
-      <div>
-        <div class="prof-name" id="prof-greeting">¡HOLA...!</div>
-        <div class="prof-since" id="prof-since">Forma parte desde que te registraste</div>
-        <div class="prof-badge pb-iniciado" id="prof-status-badge">🏠 INICIADO</div>
+      <div style="flex:1">
+        <div class="prof-name" id="prof-greeting" style="font-size:18px">¡HOLA...!</div>
+        <div class="prof-since" id="prof-since" style="font-size:11px;color:var(--gr);margin-top:2px">Forma parte desde que te registraste</div>
+        <div style="display:flex;align-items:center;gap:8px;margin-top:8px;flex-wrap:wrap">
+          <div class="prof-badge" id="prof-status-badge" style="margin:0">🏠 INICIADO</div>
+          <div id="prof-visits-badge" style="background:var(--d3);border:1px solid var(--d4);border-radius:20px;padding:4px 12px;font-size:10px;font-weight:700;color:var(--gr2)">0 visitas</div>
+          <div id="prof-next-badge" style="background:rgba(223,255,0,.06);border:1px solid rgba(223,255,0,.2);border-radius:20px;padding:4px 12px;font-size:10px;color:var(--yw);display:none"></div>
+        </div>
+      </div>
+      <div style="text-align:right;flex-shrink:0">
+        <button onclick="setPanelMenu('beneficios','MI AVANCE');renderMiAvance()" style="background:var(--pk);color:#fff;border:none;border-radius:20px;padding:8px 16px;font-size:11px;font-weight:700;cursor:pointer;font-family:Montserrat,sans-serif">Ver mi avance →</button>
       </div>
     </div>
   </div>
@@ -2192,9 +2208,13 @@ function goPg(id) {
   window.scrollTo(0, 0);
   closeAllDrops();
   if (id === 'pg-profile') {
-    // Auto-open active panel
-    var activePp = document.querySelector('.ppanel.active');
-    if (!activePp || activePp.id === 'pp-beneficios') setTimeout(renderMiAvance, 100);
+    // Refresh user data every time profile opens
+    if (STATE.loggedIn && STATE.user) {
+      loadUserProfile(STATE.user);
+    }
+    // Render Mi Avance if that panel is active
+    var activePp = document.querySelector('#pg-profile .ppanel.active');
+    if (!activePp || activePp.id === 'pp-beneficios') setTimeout(renderMiAvance, 150);
   }
 }
 
@@ -2667,10 +2687,34 @@ function deactivateUserMode() {
 /* ======================================================
    NAVIGATION HELPERS
 ====================================================== */
-function goReserve() {
+async function goReserve() {
   updateDatePills();
   updateTimePills();
   goPg('pg-reserve');
+  // Check real-time availability
+  var dateStr = STATE.date.toISOString().split('T')[0];
+  if (supa) {
+    var capBar = document.getElementById('res-capacity-bar');
+    var capTxt = document.getElementById('res-cap-text');
+    var capFill= document.getElementById('res-cap-fill');
+    if (capBar) capBar.style.display = 'block';
+    try {
+      var { data } = await supa
+        .from('ohyeah_reservas')
+        .select('pax')
+        .eq('restaurant_id', 'omm')
+        .eq('date', dateStr)
+        .eq('status', 'confirmed');
+      var total = (data || []).reduce(function(s,r){ return s + (r.pax||0); }, 0);
+      var CAPACITY = 40;
+      var pct = Math.min(100, Math.round(total / CAPACITY * 100));
+      var libre = CAPACITY - total;
+      if (capTxt) capTxt.textContent = libre > 10 ? 'Alta disponibilidad' : libre > 0 ? 'Solo ' + libre + ' plazas' : 'Completo';
+      if (capTxt) capTxt.style.color = libre > 10 ? '#4ade80' : libre > 0 ? '#FFD700' : '#FF4444';
+      if (capFill) { capFill.style.width = pct + '%'; capFill.style.background = libre > 10 ? '#4ade80' : libre > 0 ? '#FFD700' : '#FF4444'; }
+    } catch(e) {}
+    await checkTimeAvailability(dateStr);
+  }
 }
 
 /* ======================================================
@@ -2711,6 +2755,43 @@ async function confirmRes() {
   const contact = document.getElementById('res-contact');
   const occ     = document.getElementById('occ-select');
   const detail  = document.getElementById('conf-detail');
+  const btn     = document.querySelector('#pg-reserve .btn-reservar');
+
+  // ── Validate contact ──
+  var contactVal = contact ? contact.value.trim() : '';
+  if (!STATE.loggedIn && !contactVal) {
+    showToast('⚠️ Ingresa tu correo o celular para continuar');
+    if (contact) contact.focus();
+    return;
+  }
+
+  // ── Check availability in Supabase ──
+  if (supa) {
+    if (btn) { btn.textContent = 'Verificando...'; btn.disabled = true; }
+    try {
+      var dateStr = STATE.date.toISOString().split('T')[0];
+      var { data: existing, error } = await supa
+        .from('ohyeah_reservas')
+        .select('id, pax')
+        .eq('restaurant_id', 'omm')
+        .eq('date', dateStr)
+        .eq('time', STATE.time)
+        .eq('status', 'confirmed');
+
+      if (!error && existing) {
+        var totalPax = existing.reduce(function(sum, r){ return sum + (r.pax || 0); }, 0);
+        var CAPACITY = 40; // capacidad del restaurante
+        if (totalPax + STATE.pax > CAPACITY) {
+          showToast('😔 No hay disponibilidad para ' + STATE.pax + ' personas a las ' + STATE.time + '. Prueba otro horario.');
+          if (btn) { btn.textContent = 'CONFIRMAR RESERVACIÓN'; btn.disabled = false; }
+          // Show alternative times
+          showAlternativeTimes(dateStr, STATE.pax);
+          return;
+        }
+      }
+    } catch(e) { console.warn('Availability check failed:', e); }
+    if (btn) { btn.textContent = 'CONFIRMAR RESERVACIÓN'; btn.disabled = false; }
+  }
 
   /* ── 1. Build reservation object ── */
   const reservation = {
