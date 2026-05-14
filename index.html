@@ -1029,11 +1029,11 @@ footer { background:var(--fp); padding:40px var(--px) 0 }
       </div>
       <!-- User dropdown -->
       <div style="position:relative">
-        <div style="font-size:12px;font-weight:700;color:var(--yw);cursor:pointer;padding:6px 10px;background:var(--d3);border-radius:8px" onclick="toggleUserMenu()">
-          ¡HOLA, SAMANTHA! ▾
+        <div style="font-size:12px;font-weight:700;color:var(--yw);cursor:pointer;padding:6px 10px;background:var(--d3);border-radius:8px" onclick="toggleUserMenu()" id="nav-greeting">
+          ¡HOLA! ▾
         </div>
         <div class="user-menu" id="user-menu">
-          <div class="um-hi">SAMANTHA LEAL</div>
+          <div class="um-hi" id="um-name">USUARIO</div>
           <div class="um-item" onclick="goPg('pg-profile');closeUserMenu()">Mi Perfil</div>
           <div class="um-item" onclick="goPg('pg-profile');setPanel('historial');closeUserMenu()">Reservaciones</div>
           <div class="um-item" onclick="goPg('pg-profile');setPanel('guardados');closeUserMenu()">Restaurantes Guardados</div>
@@ -1799,12 +1799,12 @@ footer { background:var(--fp); padding:40px var(--px) 0 }
   <div class="prof-header">
     <div class="prof-row">
       <div class="prof-avatar">
-        SL
+        <span id="prof-initials">?</span>
         <div class="prof-cam"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
       </div>
       <div>
-        <div class="prof-name">¡HOLA, SAMANTHA LEAL!</div>
-        <div class="prof-since">Forma parte de la red desde febrero de 2026</div>
+        <div class="prof-name" id="prof-greeting">¡HOLA...!</div>
+        <div class="prof-since" id="prof-since">Forma parte desde que te registraste</div>
         <div class="prof-badge pb-iniciado" id="prof-status-badge">🏠 INICIADO</div>
       </div>
     </div>
@@ -1923,10 +1923,10 @@ footer { background:var(--fp); padding:40px var(--px) 0 }
         <div class="acerca-box">
           <div class="acerca-title">ACERCA DE MÍ</div>
           <div class="acerca-sub">La información que ingreses aquí se compartirá con los restaurantes cuando hagas una reservación.</div>
-          <div class="field-row"><input class="fi" placeholder="Nombre" value="Samantha"><input class="fi" placeholder="Apellidos" value="Leal"></div>
+          <div class="field-row"><input class="fi" placeholder="Nombre" id="cuenta-nombre"><input class="fi" placeholder="Apellidos" id="cuenta-apellido"></div>
           <input class="fi fi-full" placeholder="Restricciones alimentarias">
           <div class="field-row">
-            <input class="fi" placeholder="Correo" value="samantha@email.com">
+            <input class="fi" placeholder="Correo" id="cuenta-email">
             <div class="ph-row"><div class="ph-pre">+57</div><input class="fi" placeholder="Teléfono"></div>
           </div>
           <div class="field-row" style="margin-bottom:14px">
@@ -2722,8 +2722,8 @@ async function confirmRes() {
     pax:             STATE.pax,
     mood:            STATE.mood || null,
     occasion:        occ ? occ.value : null,
-    guest_name:      STATE.loggedIn ? 'Samantha Leal' : (contact ? contact.value : null),
-    guest_email:     STATE.loggedIn ? 'samantha@email.com' : null,
+    guest_name:      STATE.user ? STATE.user.nombre : (contact ? contact.value : null),
+    guest_email:     STATE.user ? STATE.user.email : null,
     gourmand_level:  getUserLevel ? getUserLevel().name : 'INICIADO',
     is_first_visit:  USER_VISITS === 0,
     visit_count:     USER_VISITS,
@@ -3370,7 +3370,7 @@ function drawAvatar(canvas, level, pulse) {
   ctx.font = 'bold 36px Montserrat,sans-serif';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.fillText('SL', cx, cy - 8);
+  ctx.fillText(STATE.user ? (STATE.user.nombre||'').split(' ').map(function(w){return w[0]||'';}).join('').substring(0,2).toUpperCase() : '?', cx, cy - 8);
 
   // Emoji badge
   ctx.font = '22px serif';
