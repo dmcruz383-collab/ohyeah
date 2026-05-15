@@ -1013,6 +1013,111 @@ footer { background:var(--fp); padding:40px var(--px) 0 }
   font-size:10px; font-weight:800; color:#4ade80;
 }
 
+
+/* ══ NETFLIX PROFILE STYLE ══ */
+.nf-profile-hero {
+  background: linear-gradient(to bottom, #141414 0%, #000 100%);
+  padding: 0;
+  position: relative;
+}
+.nf-profile-header {
+  display: flex;
+  align-items: flex-end;
+  gap: 28px;
+  padding: 40px var(--px) 28px;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.8) 100%);
+  position: relative;
+  z-index: 2;
+}
+.nf-avatar-large {
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  font-weight: 900;
+  flex-shrink: 0;
+  position: relative;
+  box-shadow: 0 8px 32px rgba(0,0,0,.6);
+}
+.nf-avatar-large .nf-level-badge {
+  position: absolute;
+  bottom: -8px;
+  right: -8px;
+  background: var(--pk);
+  border-radius: 4px;
+  padding: 2px 7px;
+  font-size: 9px;
+  font-weight: 800;
+  color: #fff;
+  white-space: nowrap;
+}
+.nf-profile-meta { flex: 1 }
+.nf-profile-meta .nf-name { font-size: 28px; font-weight: 900; letter-spacing: -.5px; line-height: 1.1 }
+.nf-profile-meta .nf-sub  { font-size: 13px; color: var(--gr2); margin-top: 4px }
+.nf-profile-meta .nf-tags { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap }
+.nf-tag { background: rgba(255,255,255,.1); border-radius: 4px; padding: 4px 10px; font-size: 11px; font-weight: 600; color: var(--gr2) }
+.nf-tag.highlight { background: var(--pk); color: #fff }
+.nf-progress-row { padding: 0 var(--px) 20px; background: #141414 }
+.nf-prog-label { font-size:11px; color:var(--gr); margin-bottom:6px; display:flex; justify-content:space-between }
+.nf-prog-bar { background:rgba(255,255,255,.15); border-radius:3px; height:4px; overflow:hidden }
+.nf-prog-fill { height:100%; border-radius:3px; transition:width .8s ease }
+
+/* ══ NETFLIX CONTENT ROWS ══ */
+.nf-content { background:#141414; padding:8px 0 40px }
+.nf-row-section { margin-bottom:24px }
+.nf-row-label {
+  font-size:15px; font-weight:700; color:var(--wh);
+  padding:0 var(--px); margin-bottom:10px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.nf-row-label a { font-size:12px; color:var(--pk); cursor:pointer; font-weight:600 }
+.nf-cards-row { display:flex; gap:6px; overflow-x:auto; padding:0 var(--px) 4px }
+.nf-cards-row::-webkit-scrollbar { display:none }
+.nf-card-nf {
+  flex-shrink:0;
+  width:140px;
+  border-radius:4px;
+  overflow:hidden;
+  cursor:pointer;
+  position:relative;
+  transition:transform .25s, box-shadow .25s;
+  background:var(--d2);
+}
+.nf-card-nf:hover { transform:scale(1.1); z-index:10; box-shadow:0 20px 48px rgba(0,0,0,.9) }
+.nf-card-nf img { width:100%; height:200px; object-fit:cover; display:block }
+.nf-card-nf-placeholder { width:100%; height:200px; background:linear-gradient(135deg,var(--d3),var(--d4)); display:flex; align-items:center; justify-content:center; font-size:36px }
+.nf-card-nf-info {
+  position:absolute; bottom:0; left:0; right:0;
+  background:linear-gradient(to top, rgba(0,0,0,.95) 0%, transparent 80%);
+  padding:28px 8px 8px;
+}
+.nf-card-nf-name { font-size:11px; font-weight:800; color:#fff; line-height:1.2 }
+.nf-card-nf-meta { font-size:9px; color:rgba(255,255,255,.55); margin-top:2px }
+.nf-card-nf-badge {
+  position:absolute; top:6px; left:6px;
+  background:var(--pk); color:#fff;
+  font-size:8px; font-weight:700;
+  padding:2px 6px; border-radius:3px;
+}
+.nf-card-nf-match {
+  position:absolute; top:6px; right:6px;
+  font-size:9px; font-weight:800; color:#4ade80;
+}
+
+/* ══ PANEL TABS ══ */
+.nf-tabs { display:flex; gap:0; border-bottom:1px solid #333; padding:0 var(--px); margin-bottom:24px; overflow-x:auto }
+.nf-tabs::-webkit-scrollbar { display:none }
+.nf-tab {
+  padding:12px 16px; font-size:12px; font-weight:700; color:var(--gr);
+  cursor:pointer; border-bottom:2px solid transparent; white-space:nowrap;
+  letter-spacing:.04em; transition:color .2s, border-color .2s;
+}
+.nf-tab.active { color:var(--wh); border-bottom-color:var(--pk) }
+.nf-tab:hover:not(.active) { color:var(--gr2) }
+
 </style>
 
 <body>
@@ -1443,10 +1548,11 @@ footer { background:var(--fp); padding:40px var(--px) 0 }
     <div id="faq-home"></div>
   </div>
 
+  
   <footer>
     <div class="ft-grid">
       <div><div class="ft-logo"><span class="lo">Oh</span><span class="ly">Yeah</span><span class="lx">!</span></div><div class="ft-tag">Los mejores restaurantes, eventos y experiencias.</div></div>
-      <div class="ft-col"><a onclick="showToast('Próximamente 🔜')">RESTAURANTES AFILIADOS</a><a onclick="openOv('ov-login')">GOURMAND SOCIETY</a><a onclick="showToast('Próximamente')">REVISTA GOURMAND SOCIETY</a><a onclick="showToast('Próximamente')">TENGO UN RESTAURANTE</a></div>
+      <div class="ft-col"><a onclick="showToast('Próximamente 🔜')">RESTAURANTES AFILIADOS</a><a onclick="STATE.loggedIn?goPg('pg-profile'):openOv('ov-login')">GOURMAND SOCIETY</a><a onclick="showToast('Próximamente')">REVISTA GOURMAND SOCIETY</a><a onclick="showToast('Próximamente')">TENGO UN RESTAURANTE</a></div>
       <div class="ft-col"><a class="sm" onclick="showToast('Próximamente')">Curaduría</a><a class="sm" onclick="goPg('pg-profile');setPanel('beneficios')">Estatus</a><a class="sm" onclick="showToast('Próximamente')">Miembro de una sociedad</a><a class="sm" onclick="showToast('Próximamente')">Memoria viva</a></div>
     </div>
   </footer>
@@ -1850,34 +1956,59 @@ footer { background:var(--fp); padding:40px var(--px) 0 }
     </div>
   </nav>
 
-  <div class="prof-header" style="background:linear-gradient(135deg,var(--d1),var(--d2));border-bottom:1px solid var(--d3)">
-    <div class="prof-row" style="align-items:center;gap:20px">
-      <div class="prof-avatar" id="prof-avatar-wrap" style="background:linear-gradient(135deg,var(--pk),var(--yw));font-size:22px;font-weight:900;color:var(--bk);cursor:pointer" onclick="setPanel('cuenta')">
-        <span id="prof-initials" style="position:relative;z-index:1">?</span>
-        <div class="prof-cam"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+  <!-- NETFLIX PROFILE HERO -->
+  <div class="nf-profile-hero">
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,0,127,.08) 0%,transparent 50%);pointer-events:none"></div>
+    <div class="nf-profile-header">
+      <div class="nf-avatar-large" id="prof-avatar-wrap"
+           style="background:linear-gradient(135deg,var(--pk),#8B0057);color:#fff;cursor:pointer"
+           onclick="setPanelMenu('beneficios','MI AVANCE');renderMiAvance()">
+        <span id="prof-initials">?</span>
+        <div class="nf-level-badge" id="prof-level-badge">🏠 INICIADO</div>
       </div>
-      <div style="flex:1">
-        <div class="prof-name" id="prof-greeting" style="font-size:18px">¡HOLA...!</div>
-        <div class="prof-since" id="prof-since" style="font-size:11px;color:var(--gr);margin-top:2px">Forma parte desde que te registraste</div>
-        <div style="display:flex;align-items:center;gap:8px;margin-top:8px;flex-wrap:wrap">
-          <div class="prof-badge" id="prof-status-badge" style="margin:0">🏠 INICIADO</div>
-          <div id="prof-visits-badge" style="background:var(--d3);border:1px solid var(--d4);border-radius:20px;padding:4px 12px;font-size:10px;font-weight:700;color:var(--gr2)">0 visitas</div>
-          <div id="prof-next-badge" style="background:rgba(223,255,0,.06);border:1px solid rgba(223,255,0,.2);border-radius:20px;padding:4px 12px;font-size:10px;color:var(--yw);display:none"></div>
+      <div class="nf-profile-meta">
+        <div class="nf-name" id="prof-greeting">¡HOLA...!</div>
+        <div class="nf-sub" id="prof-since">Miembro desde recientemente</div>
+        <div class="nf-tags" style="margin-top:10px">
+          <span class="nf-tag highlight" id="prof-status-badge">🏠 INICIADO</span>
+          <span class="nf-tag" id="prof-visits-badge">0 visitas</span>
+          <span class="nf-tag" id="prof-next-badge" style="display:none"></span>
         </div>
       </div>
-      <div style="text-align:right;flex-shrink:0">
-        <button onclick="setPanelMenu('beneficios','MI AVANCE');renderMiAvance()" style="background:var(--pk);color:#fff;border:none;border-radius:20px;padding:8px 16px;font-size:11px;font-weight:700;cursor:pointer;font-family:Montserrat,sans-serif">Ver mi avance →</button>
+      <div>
+        <button onclick="setPanelMenu('beneficios','MI AVANCE');renderMiAvance()"
+          style="background:var(--pk);color:#fff;border:none;border-radius:6px;padding:10px 20px;font-size:12px;font-weight:700;cursor:pointer;font-family:Montserrat,sans-serif">
+          MI AVANCE ▶
+        </button>
+      </div>
+    </div>
+    <!-- Progress bar -->
+    <div class="nf-progress-row">
+      <div class="nf-prog-label">
+        <span id="nf-prog-label-left">Progreso al siguiente nivel</span>
+        <span id="nf-prog-label-right" style="color:var(--yw)"></span>
+      </div>
+      <div class="nf-prog-bar">
+        <div class="nf-prog-fill" id="nf-prog-fill" style="width:0%;background:linear-gradient(90deg,var(--pk),var(--yw))"></div>
       </div>
     </div>
   </div>
 
   <div class="prof-layout">
-    <!-- HAMBURGER TOGGLE BUTTON -->
-    <div class="pmenu-toggle" onclick="togglePmenu()">
-      <span class="pmenu-toggle-label" id="pmenu-current-label">HISTORIAL DE EXPERIENCIAS</span>
-      <div class="hamburger" id="hamburger-icon">
-        <span></span><span></span><span></span>
-      </div>
+    <!-- NETFLIX HORIZONTAL TABS -->
+    <div class="nf-tabs">
+      <div class="nf-tab active" id="nftab-historial"    onclick="nfTab('historial')">📅 Historial</div>
+      <div class="nf-tab"        id="nftab-beneficios"   onclick="nfTab('beneficios')">🗝 Mi Avance</div>
+      <div class="nf-tab"        id="nftab-guardados"    onclick="nfTab('guardados')">⭐ Guardados</div>
+      <div class="nf-tab"        id="nftab-preferencias" onclick="nfTab('preferencias')">🎭 Preferencias</div>
+      <div class="nf-tab"        id="nftab-cuenta"       onclick="nfTab('cuenta')">👤 Mi cuenta</div>
+      <div class="nf-tab"        id="nftab-pagos"        onclick="nfTab('pagos')">💳 Pagos</div>
+    </div>
+
+    <!-- HAMBURGER TOGGLE BUTTON (hidden but kept for mobile backup) -->
+    <div class="pmenu-toggle" onclick="togglePmenu()" style="display:none">
+      <span class="pmenu-toggle-label" id="pmenu-current-label">MI AVANCE</span>
+      <div class="hamburger" id="hamburger-icon"><span></span><span></span><span></span></div>
     </div>
 
     <!-- OVERLAY -->
@@ -2224,6 +2355,10 @@ footer { background:var(--fp); padding:40px var(--px) 0 }
   <div class="ft-bottom"><a onclick="goPg('pg-terms')">Términos y condiciones</a><a>Política de datos</a><a>Contacto</a></div>
 </div>
 
+  <footer><div class="ft-grid"><div><div class="ft-logo"><span class="lo">Oh</span><span class="ly">Yeah</span><span class="lx">!</span></div></div><div class="ft-col"><a>RESTAURANTES AFILIADOS</a><a>GOURMAND SOCIETY</a><a>REVISTA GOURMAND SOCIETY</a><a>TENGO UN RESTAURANTE</a></div><div class="ft-col"><a class="sm">Curaduría</a><a class="sm">Estatus</a><a class="sm">Miembro de una sociedad</a><a class="sm">Memoria viva</a></div></div></footer>
+  <div class="ft-bottom"><a onclick="goPg('pg-terms')">Términos y condiciones</a><a>Política de datos</a><a>Contacto</a></div>
+</div>
+
 <!-- ===== OVERLAYS ===== -->
 <!-- LOGIN -->
 <div class="ov" id="ov-login" onclick="ovBg(event,'ov-login')">
@@ -2322,13 +2457,8 @@ function goPg(id) {
   window.scrollTo(0, 0);
   closeAllDrops();
   if (id === 'pg-profile') {
-    // Refresh user data every time profile opens
-    if (STATE.loggedIn && STATE.user) {
-      loadUserProfile(STATE.user);
-    }
-    // Render Mi Avance if that panel is active
-    var activePp = document.querySelector('#pg-profile .ppanel.active');
-    if (!activePp || activePp.id === 'pp-beneficios') setTimeout(renderMiAvance, 150);
+    if (STATE.loggedIn && STATE.user) loadUserProfile(STATE.user);
+    setTimeout(function(){ renderProfileHome(); renderMiAvance(); }, 150);
   }
 }
 
@@ -3839,6 +3969,360 @@ if (supa) {
 }
 
 checkSession();
+function nfTab(id) {
+  document.querySelectorAll('.nf-tab').forEach(function(t){ t.classList.remove('active'); });
+  var tab = document.getElementById('nftab-' + id);
+  if (tab) tab.classList.add('active');
+  setPanel(id);
+  if (id === 'beneficios') setTimeout(renderMiAvance, 100);
+  // Update hamburger label too
+  var lbl = document.getElementById('pmenu-current-label');
+  if (lbl) lbl.textContent = tab ? tab.textContent : id;
+}
+
+// Update loadUserProfile to also update progress bar
+var _origLoadUser = loadUserProfile;
+function loadUserProfile(user) {
+  _origLoadUser(user);
+  // Update progress bar in header
+  if (typeof GS_LEVELS !== 'undefined' && getUserLevel) {
+    var lv    = getUserLevel();
+    var lvIdx = GS_LEVELS.findIndex(function(l){ return l.id === lv.id; });
+    var next  = lvIdx < GS_LEVELS.length-1 ? GS_LEVELS[lvIdx+1] : null;
+    var fill  = document.getElementById('nf-prog-fill');
+    var lleft = document.getElementById('nf-prog-label-left');
+    var lright= document.getElementById('nf-prog-label-right');
+    var lvlBadge = document.getElementById('prof-level-badge');
+    if (lvlBadge) lvlBadge.textContent = lv.emoji + ' ' + lv.name;
+    if (next) {
+      var pct = Math.round(((USER_VISITS - lv.visits_needed) / (next.visits_needed - lv.visits_needed)) * 100);
+      if (fill) { fill.style.width = pct+'%'; fill.style.background='linear-gradient(90deg,'+lv.color+','+next.color+')'; }
+      if (lleft)  lleft.textContent = 'Camino a ' + next.name;
+      if (lright) lright.textContent = (next.visits_needed - USER_VISITS) + ' visitas más';
+    } else {
+      if (fill)  { fill.style.width='100%'; fill.style.background=lv.color; }
+      if (lleft)  lleft.textContent = '👑 Nivel máximo alcanzado';
+      if (lright) lright.textContent = '';
+    }
+  }
+}
+
+
+/* ── NETFLIX RESTAURANT ROWS in Mi Avance ── */
+function renderNetflixSection() {
+  var container = document.getElementById('av-netflix');
+  if (!container || container.children.length > 0) return;
+
+  var imgs  = (typeof CARD_IMGS  !== 'undefined') ? CARD_IMGS  : [];
+  var privs = (typeof PRIV_IMGS  !== 'undefined') ? PRIV_IMGS  : [];
+  var top5i = (typeof TOP5_IMGS  !== 'undefined') ? TOP5_IMGS  : [];
+
+  var SECTIONS = [
+    {
+      title: '🔥 Más visitados en Oh Yeah!',
+      badge: 'POPULAR',
+      link: 'Ver todos',
+      data: [
+        { n:'OMM', m:'Internacional · $$$$$', match:'98%', img: imgs[0]||'' },
+        { n:'OMM', m:'Mediterráneo · $$$$',   match:'95%', img: privs[0]||'' },
+        { n:'OMM', m:'Coctelería · $$$',      match:'91%', img: imgs[1]||'' },
+        { n:'OMM', m:'Parrilla · $$$$$',      match:'88%', img: privs[1]||'' },
+        { n:'OMM', m:'Japonés · $$$$',        match:'85%', img: imgs[2]||'' },
+      ]
+    },
+    {
+      title: '✨ Novedades',
+      badge: 'NUEVO',
+      link: 'Ver novedades',
+      data: [
+        { n:'OMM', m:'Fusión · $$$$',         match:'',    img: privs[2]||'' },
+        { n:'OMM', m:'Healthy · $$$',         match:'',    img: imgs[3]||'' },
+        { n:'OMM', m:'Bar & Cócteles · $$$',  match:'',    img: privs[3]||'' },
+        { n:'OMM', m:'Mariscos · $$$$$',      match:'',    img: top5i[0]||'' },
+        { n:'OMM', m:'Italiana · $$$$',       match:'',    img: privs[4]||'' },
+      ]
+    },
+    {
+      title: '🎯 Sugeridos para tu perfil',
+      badge: 'PARA TI',
+      link: '',
+      data: [
+        { n:'OMM', m:'Mediterráneo · $$$$',   match:'99%', img: imgs[4]||'' },
+        { n:'OMM', m:'Coctelería · $$$',      match:'96%', img: privs[5]||'' },
+        { n:'OMM', m:'Japonés · $$$$$',       match:'94%', img: top5i[1]||'' },
+        { n:'OMM', m:'Fusión · $$$$',         match:'90%', img: imgs[5]||'' },
+        { n:'OMM', m:'Italiana · $$$',        match:'87%', img: top5i[2]||'' },
+      ]
+    }
+  ];
+
+  SECTIONS.forEach(function(sec) {
+    var wrap = document.createElement('div');
+    wrap.className = 'nf-row-section';
+    wrap.style.marginTop = '28px';
+
+    var labelHtml = '<div class="nf-row-label">' + sec.title +
+      (sec.link ? '<a onclick="goPg(\'pg-home\')">' + sec.link + '</a>' : '') + '</div>';
+    wrap.innerHTML = labelHtml;
+
+    var row = document.createElement('div');
+    row.className = 'nf-cards-row';
+
+    sec.data.forEach(function(r) {
+      var card = document.createElement('div');
+      card.className = 'nf-card-nf';
+      card.addEventListener('click', function(){ goPg('pg-rest'); });
+
+      var imgContent = r.img
+        ? '<img src="' + r.img + '" alt="' + r.n + '" loading="lazy">'
+        : '<div class="nf-card-nf-placeholder">🍽️</div>';
+
+      card.innerHTML =
+        imgContent +
+        '<div class="nf-card-nf-info">' +
+          '<div class="nf-card-nf-name">' + r.n + '</div>' +
+          '<div class="nf-card-nf-meta">' + r.m + '</div>' +
+        '</div>' +
+        '<div class="nf-card-nf-badge">' + sec.badge + '</div>' +
+        (r.match ? '<div class="nf-card-nf-match">' + r.match + '</div>' : '');
+
+      row.appendChild(card);
+    });
+
+    wrap.appendChild(row);
+    container.appendChild(wrap);
+  });
+}
+
+
+/* ════════════════════════════════════════════════
+   PROFILE HOME — renderProfileHome()
+════════════════════════════════════════════════ */
+function renderProfileHome() {
+  renderLevelProgress();
+  renderPremianRow();
+  renderGustariaRow();
+  renderHistorialList();
+  loadProximasReservas();
+}
+
+/* ── Level progress + road ── */
+function renderLevelProgress() {
+  if (typeof GS_LEVELS === 'undefined' || !getUserLevel) return;
+  var lv    = getUserLevel();
+  var lvIdx = GS_LEVELS.findIndex(function(l){ return l.id === lv.id; });
+  var next  = lvIdx < GS_LEVELS.length-1 ? GS_LEVELS[lvIdx+1] : null;
+
+  // Emoji + name
+  var emojiEl = document.getElementById('nivel-emoji');
+  var nameEl  = document.getElementById('nivel-name');
+  var subEl   = document.getElementById('nivel-sub');
+  if (emojiEl) emojiEl.textContent = lv.emoji;
+  if (nameEl)  { nameEl.textContent = lv.name; nameEl.style.color = lv.color; }
+  if (subEl)   subEl.textContent = 'Estás en el nivel ' + lv.name;
+
+  // Progress bar
+  var bar     = document.getElementById('nivel-bar');
+  var fromEl  = document.getElementById('nivel-from');
+  var toLbl   = document.getElementById('nivel-to-label');
+  var hintEl  = document.getElementById('nivel-hint');
+
+  if (next) {
+    var range = next.visits_needed - lv.visits_needed;
+    var done  = USER_VISITS - lv.visits_needed;
+    var pct   = Math.min(100, Math.round(done / range * 100));
+    var falta = next.visits_needed - USER_VISITS;
+    if (bar)    { bar.style.width = pct+'%'; bar.style.background = 'linear-gradient(90deg,'+lv.color+','+next.color+')'; }
+    if (fromEl) fromEl.textContent = lv.name;
+    if (toLbl)  { toLbl.textContent = next.name; toLbl.style.color = next.color; }
+    if (hintEl) hintEl.innerHTML =
+      'Te faltan <strong style="color:'+next.color+'">'+falta+' reserva'+(falta===1?'':'s')+'</strong> para subir a <strong style="color:'+next.color+'">'+next.emoji+' '+next.name+'</strong>';
+  } else {
+    if (bar)    { bar.style.width='100%'; bar.style.background = lv.color; }
+    if (hintEl) hintEl.innerHTML = '<strong style="color:'+lv.color+'">👑 Has alcanzado el nivel máximo — '+lv.name+'</strong>';
+  }
+
+  // Level road — show all levels, current highlighted
+  var road = document.getElementById('level-road');
+  if (!road) return;
+  road.innerHTML = '';
+  GS_LEVELS.forEach(function(l, i) {
+    var isPast    = i < lvIdx;
+    var isCurrent = i === lvIdx;
+    var isFuture  = i > lvIdx;
+
+    // Connector line before
+    if (i > 0) {
+      var line = document.createElement('div');
+      line.style.cssText = 'width:28px;height:3px;background:'+(isPast||isCurrent?'var(--pk)':'rgba(255,255,255,.15)')+';flex-shrink:0';
+      road.appendChild(line);
+    }
+
+    // Node
+    var node = document.createElement('div');
+    node.style.cssText = 'display:flex;flex-direction:column;align-items:center;gap:5px;flex-shrink:0;cursor:'+(isFuture?'default':'pointer');
+    var dot = document.createElement('div');
+    dot.style.cssText =
+      'width:'+(isCurrent?'44px':'32px')+';height:'+(isCurrent?'44px':'32px')+
+      ';border-radius:50%;display:flex;align-items:center;justify-content:center;'+
+      'font-size:'+(isCurrent?'20px':'14px')+';'+
+      'background:'+(isCurrent?l.color:(isPast?l.color+'55':'rgba(255,255,255,.08)'  ))+';'+
+      'border:2px solid '+(isCurrent?l.color:(isPast?l.color+'88':'rgba(255,255,255,.15)'))+';'+
+      'box-shadow:'+(isCurrent?'0 0 20px '+l.color+'88':'none')+';'+
+      'transition:transform .2s';
+    dot.textContent = l.emoji;
+    var lbl = document.createElement('div');
+    lbl.style.cssText = 'font-size:8px;font-weight:700;color:'+(isCurrent?l.color:(isPast?'var(--gr2)':'var(--d5)'))+';text-align:center;max-width:40px;line-height:1.2';
+    lbl.textContent = l.name.split(' ')[0];
+    node.appendChild(dot);
+    node.appendChild(lbl);
+    road.appendChild(node);
+  });
+}
+
+/* ── Restaurantes que te premian ── */
+function renderPremianRow() {
+  var row = document.getElementById('premian-row');
+  if (!row || row.children.length > 0) return;
+  if (typeof GS_LEVELS === 'undefined' || !getUserLevel) return;
+
+  var lv = getUserLevel();
+  var imgs = (typeof CARD_IMGS !== 'undefined') ? CARD_IMGS : [];
+
+  var PREMIOS = [
+    { n:'OMM',  premio:'🍷 Copa de vino de bienvenida', color:'#7BA4FF', img: imgs[0]||'' },
+    { n:'OMM',  premio:'🎂 Postre cortesía',            color:'#FF7A00', img: imgs[1]||'' },
+    { n:'OMM',  premio:'💳 10% en tu cuenta',           color:'#4ade80', img: imgs[2]||'' },
+    { n:'OMM',  premio:'🥂 Brindis de bienvenida',      color:'var(--yw)',img: imgs[3]||'' },
+    { n:'OMM',  premio:'🍮 Postre edición especial',    color:'var(--pk)',img: imgs[4]||'' },
+  ];
+
+  PREMIOS.forEach(function(p) {
+    var card = document.createElement('div');
+    card.style.cssText = 'flex-shrink:0;width:160px;border-radius:10px;overflow:hidden;cursor:pointer;background:var(--d2);border:1px solid var(--d3);transition:transform .2s';
+    card.addEventListener('mouseenter', function(){ card.style.transform='scale(1.04)'; });
+    card.addEventListener('mouseleave', function(){ card.style.transform=''; });
+    card.addEventListener('click', function(){ goPg('pg-rest'); });
+    var imgHtml = p.img
+      ? '<img src="'+p.img+'" style="width:100%;height:100px;object-fit:cover;display:block" loading="lazy">'
+      : '<div style="width:100%;height:100px;background:var(--d3);display:flex;align-items:center;justify-content:center;font-size:32px">🍽️</div>';
+    card.innerHTML = imgHtml +
+      '<div style="padding:10px 10px 12px">' +
+        '<div style="font-size:12px;font-weight:800;color:var(--wh);margin-bottom:4px">'+p.n+'</div>' +
+        '<div style="background:rgba(0,0,0,.3);border:1px solid '+p.color+'44;border-radius:6px;padding:5px 8px;font-size:10px;font-weight:700;color:'+p.color+'">'+p.premio+'</div>' +
+      '</div>';
+    row.appendChild(card);
+  });
+}
+
+/* ── Creemos que te gustaría ── */
+function renderGustariaRow() {
+  var row = document.getElementById('gustaria-row');
+  if (!row || row.children.length > 0) return;
+
+  var imgs  = (typeof CARD_IMGS !== 'undefined') ? CARD_IMGS  : [];
+  var privs = (typeof PRIV_IMGS !== 'undefined') ? PRIV_IMGS  : [];
+
+  var DATA = [
+    { n:'OMM', m:'Mediterráneo · $$$$',  match:'99%', img: imgs[0]||'' },
+    { n:'OMM', m:'Coctelería · $$$',     match:'96%', img: privs[0]||'' },
+    { n:'OMM', m:'Japonés · $$$$$',      match:'94%', img: imgs[1]||'' },
+    { n:'OMM', m:'Fusión · $$$$',        match:'90%', img: privs[1]||'' },
+    { n:'OMM', m:'Italiana · $$$',       match:'87%', img: imgs[2]||'' },
+  ];
+
+  DATA.forEach(function(r) {
+    var card = document.createElement('div');
+    card.className = 'nf-card-nf';
+    card.addEventListener('click', function(){ goPg('pg-rest'); });
+    var imgHtml = r.img
+      ? '<img src="'+r.img+'" alt="'+r.n+'" loading="lazy">'
+      : '<div class="nf-card-nf-placeholder">🍽️</div>';
+    card.innerHTML = imgHtml +
+      '<div class="nf-card-nf-info">' +
+        '<div class="nf-card-nf-name">'+r.n+'</div>' +
+        '<div class="nf-card-nf-meta">'+r.m+'</div>' +
+      '</div>' +
+      '<div class="nf-card-nf-match">'+r.match+'</div>';
+    row.appendChild(card);
+  });
+}
+
+/* ── Historial de visitas (desde Supabase) ── */
+async function renderHistorialList() {
+  var list = document.getElementById('historial-list');
+  var cnt  = document.getElementById('historial-count');
+  if (!list) return;
+
+  if (supa && STATE.user && STATE.user.email) {
+    try {
+      var { data } = await supa
+        .from('ohyeah_reservas')
+        .select('*')
+        .eq('guest_email', STATE.user.email)
+        .eq('status', 'confirmed')
+        .order('date', { ascending: false })
+        .limit(10);
+
+      if (data && data.length > 0) {
+        if (cnt) cnt.textContent = data.length + ' visita' + (data.length===1?'':'s');
+        list.innerHTML = data.map(function(r) {
+          var d = new Date(r.date).toLocaleDateString('es-CO',{day:'numeric',month:'long'});
+          return '<div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--d3)" onclick="goPg(\'pg-rest\')" style="cursor:pointer">' +
+            '<div style="width:44px;height:44px;border-radius:8px;background:var(--d3);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:20px">🍽️</div>' +
+            '<div style="flex:1">' +
+              '<div style="font-size:13px;font-weight:700;color:var(--yw)">' + (r.restaurant_name||'OMM') + '</div>' +
+              '<div style="font-size:11px;color:var(--gr2)">' + d + ' · ' + r.time + ' · ' + r.pax + ' persona' + (r.pax===1?'':'s') + '</div>' +
+            '</div>' +
+            '<div style="font-size:10px;background:rgba(74,222,128,.1);color:#4ade80;border:1px solid rgba(74,222,128,.2);border-radius:5px;padding:3px 8px;font-weight:700">COMPLETADA</div>' +
+          '</div>';
+        }).join('');
+        return;
+      }
+    } catch(e) { console.warn('Historial error:', e); }
+  }
+
+  // Demo state
+  list.innerHTML = '<div style="font-size:12px;color:var(--gr);text-align:center;padding:20px">Tu historial aparecerá aquí después de tu primera visita 🍽️</div>';
+}
+
+/* ── Próximas reservas ── */
+async function loadProximasReservas() {
+  var list = document.getElementById('proximas-reservas-list');
+  if (!list) return;
+
+  if (supa && STATE.user && STATE.user.email) {
+    try {
+      var today = new Date().toISOString().split('T')[0];
+      var { data } = await supa
+        .from('ohyeah_reservas')
+        .select('*')
+        .eq('guest_email', STATE.user.email)
+        .eq('status', 'confirmed')
+        .gte('date', today)
+        .order('date', { ascending: true })
+        .limit(3);
+
+      if (data && data.length > 0) {
+        list.innerHTML = data.map(function(r) {
+          var d = new Date(r.date).toLocaleDateString('es-CO',{weekday:'long',day:'numeric',month:'long'});
+          return '<div style="background:linear-gradient(135deg,rgba(255,0,127,.08),rgba(0,0,0,0));border:1.5px solid rgba(255,0,127,.25);border-radius:12px;padding:14px 16px;margin-bottom:10px;display:flex;align-items:center;gap:14px;cursor:pointer" onclick="goPg(\'pg-rest\')">' +
+            '<div style="width:48px;height:48px;border-radius:10px;background:var(--pk);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🍽️</div>' +
+            '<div style="flex:1">' +
+              '<div style="font-size:14px;font-weight:800;color:var(--wh)">' + (r.restaurant_name||'OMM') + '</div>' +
+              '<div style="font-size:11px;color:var(--gr2);margin-top:2px">📅 ' + d + ' · 🕐 ' + r.time + ' · 👥 ' + r.pax + '</div>' +
+            '</div>' +
+            '<div style="font-size:10px;background:rgba(223,255,0,.1);color:var(--yw);border:1px solid rgba(223,255,0,.3);border-radius:5px;padding:4px 9px;font-weight:700;flex-shrink:0">CONFIRMADA</div>' +
+          '</div>';
+        }).join('');
+        return;
+      }
+    } catch(e) {}
+  }
+
+  // Empty state — keep the default empty state HTML
+}
+
 </script>
 
 <!-- ===== OVERLAY CANJEAR CÓDIGO ===== -->
@@ -3878,4 +4362,78 @@ checkSession();
 </div>
 
 </body>
-</html>
+</html<div class="ppanel active" id="pp-historial">
+
+        <!-- ══ PRÓXIMAS RESERVAS ══ -->
+        <div style="margin-bottom:28px">
+          <div style="font-size:13px;font-weight:800;color:var(--wh);letter-spacing:.02em;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center">
+            📅 Mis próximas reservas
+            <button onclick="goReserve()" style="background:var(--pk);color:#fff;border:none;border-radius:20px;padding:6px 14px;font-size:11px;font-weight:700;cursor:pointer;font-family:Montserrat,sans-serif">+ Nueva</button>
+          </div>
+          <div id="proximas-reservas-list">
+            <div style="background:var(--d2);border:1.5px dashed var(--d4);border-radius:12px;padding:24px;text-align:center">
+              <div style="font-size:28px;margin-bottom:8px">🍽️</div>
+              <div style="font-size:13px;color:var(--gr2);margin-bottom:14px">Aún no tienes reservas próximas</div>
+              <button onclick="goReserve()" style="background:var(--yw);color:var(--bk);border:none;border-radius:20px;padding:9px 22px;font-size:12px;font-weight:800;cursor:pointer;font-family:Montserrat,sans-serif">Hacer una reserva</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ NIVEL Y PROGRESO ══ -->
+        <div style="background:linear-gradient(135deg,#0d0d0d,#1a1a1a);border:1px solid var(--d3);border-radius:14px;padding:20px;margin-bottom:28px;position:relative;overflow:hidden">
+          <div style="position:absolute;top:0;right:0;width:120px;height:120px;background:radial-gradient(circle,rgba(255,0,127,.12),transparent);border-radius:50%;transform:translate(30%,-30%)"></div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--gr);margin-bottom:10px">TU NIVEL ACTUAL</div>
+          <div id="nivel-indicator" style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+            <div id="nivel-emoji" style="font-size:32px">🏠</div>
+            <div>
+              <div id="nivel-name" style="font-size:20px;font-weight:900;color:var(--yw)">INICIADO</div>
+              <div id="nivel-sub"  style="font-size:11px;color:var(--gr2)">Estás en el nivel Iniciado</div>
+            </div>
+          </div>
+          <!-- Progress bar -->
+          <div style="margin-bottom:8px">
+            <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--gr);margin-bottom:5px">
+              <span id="nivel-from">Inicio</span>
+              <span id="nivel-to-label" style="color:var(--yw)">Siguiente nivel</span>
+            </div>
+            <div style="background:rgba(255,255,255,.1);border-radius:4px;height:8px;overflow:hidden">
+              <div id="nivel-bar" style="height:100%;border-radius:4px;background:linear-gradient(90deg,var(--pk),var(--yw));transition:width .8s ease;width:0%"></div>
+            </div>
+          </div>
+          <div id="nivel-hint" style="font-size:12px;color:var(--gr2);text-align:center;margin-top:10px;padding-top:10px;border-top:1px solid var(--d3)">Cargando progreso...</div>
+          <!-- Level journey road -->
+          <div style="margin-top:16px;overflow-x:auto;padding-bottom:4px">
+            <div id="level-road" style="display:flex;align-items:center;gap:0;min-width:max-content;padding:4px 0"></div>
+          </div>
+        </div>
+
+        <!-- ══ RESTAURANTES QUE TE PREMIAN ══ -->
+        <div style="margin-bottom:28px">
+          <div style="font-size:13px;font-weight:800;color:var(--wh);margin-bottom:4px">🏆 Restaurantes que te premian</div>
+          <div style="font-size:11px;color:var(--gr2);margin-bottom:14px">Beneficios exclusivos para tu nivel en Gourmand Society</div>
+          <div class="nf-cards-row" id="premian-row"></div>
+        </div>
+
+        <!-- ══ HISTORIAL DE RESTAURANTES ══ -->
+        <div style="margin-bottom:28px">
+          <div style="font-size:13px;font-weight:800;color:var(--wh);margin-bottom:14px;display:flex;justify-content:space-between">
+            🕐 Historial de restaurantes
+            <span style="font-size:11px;color:var(--gr2);font-weight:400" id="historial-count">0 visitas</span>
+          </div>
+          <div id="historial-list">
+            <div style="font-size:12px;color:var(--gr);text-align:center;padding:20px">
+              Tu historial aparecerá aquí después de tu primera visita
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ CREEMOS QUE TE GUSTARÍA ══ -->
+        <div>
+          <div style="font-size:13px;font-weight:800;color:var(--wh);margin-bottom:4px">✨ Creemos que te gustaría</div>
+          <div style="font-size:11px;color:var(--gr2);margin-bottom:14px">Basado en tus preferencias y visitas</div>
+          <div class="nf-cards-row" id="gustaria-row"></div>
+        </div>
+
+      </div>
+
+>
