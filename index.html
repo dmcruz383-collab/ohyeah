@@ -2298,65 +2298,172 @@ footer { background:var(--fp); padding:40px var(--px) 0 }
 
 <!-- ===== SIGNUP PAGE ===== -->
 <div class="page" id="pg-signup">
-  <div class="tb"><div></div><div class="tb-right"><a onclick="goPg('pg-home')">← Volver</a><button class="lang-btn">ES ▾</button></div></div>
+  <div class="tb">
+    <div></div>
+    <div class="tb-right"><a onclick="goPg('pg-home')">← Volver</a><button class="lang-btn">ES ▾</button></div>
+  </div>
   <nav>
-    <div class="nav-left"><div class="logo" onclick="goPg('pg-home')"><span class="lo">Oh</span><span class="ly">Yeah</span><span class="lx">!</span></div></div>
-    <div class="nav-right"><button class="btn-login" id="btn-iniciar" onclick="STATE.loggedIn?goPg('pg-profile'):openOv('ov-login')">INICIAR SESIÓN</button><button class="btn-gs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px;flex-shrink:0"><circle cx="8" cy="8" r="5"/><path d="M21 21l-8.5-8.5"/><path d="M13.5 13.5l2 2"/></svg> GOURMAND SOCIETY</button></div>
+    <div class="nav-left">
+      <div class="logo" onclick="goPg('pg-home')"><span class="lo">Oh</span><span class="ly">Yeah</span><span class="lx">!</span></div>
+    </div>
+    <div class="nav-right">
+      <button class="btn-login" onclick="openOv('ov-login')">INICIAR SESIÓN</button>
+    </div>
   </nav>
-  <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:40px var(--px)">
-    <div style="background:var(--d2);border:1px solid var(--d3);border-radius:18px;padding:40px;width:640px;max-width:100%">
-      <div style="font-size:20px;font-weight:800;margin-bottom:4px">Acerca de mí</div>
-      <div style="font-size:12px;color:var(--gr);margin-bottom:22px">La información que ingreses aquí se compartirá con los restaurantes cuando hagas una reservación.</div>
-      <div class="field-row" style="margin-bottom:12px"><input class="fi" placeholder="Nombre" id="su-name"><input class="fi" placeholder="Apellidos" id="su-last"></div>
-      <input class="fi fi-full" placeholder="Restricciones alimentarias" id="su-restrictions">
-      <div class="field-row" style="margin-bottom:12px">
-        <input class="fi" placeholder="Correo electrónico" type="email" id="su-email">
-        <div class="ph-row"><div class="ph-pre">+57</div><input class="fi" placeholder="Celular" id="su-phone" type="tel"></div>
-      </div>
-      <div class="field-row" style="margin-bottom:12px">
-        <input class="fi" placeholder="Contraseña (mín. 6 caracteres)" type="password" id="su-password">
-        <input class="fi" placeholder="Confirmar contraseña" type="password" id="su-password2">
-      </div>
-      <div style="font-size:16px;font-weight:700;color:var(--yw);margin-bottom:12px">Ubicación principal para reservaciones</div>
-      <select class="fi fi-sel fi-full" id="su-city">
-        <option value="">Elige tu ubicación principal.</option>
-        <option>Bogotá</option><option>Medellín</option><option>Cali</option><option>Cartagena</option><option>Santa Marta</option>
-      </select>
-      <div class="field-row" style="gap:28px;margin-bottom:22px;margin-top:8px">
-        <div><div style="font-size:12px;font-weight:700;color:var(--yw);margin-bottom:8px">Cumpleaños</div>
-          <div class="field-row" style="gap:8px"><select class="fi fi-sel"><option>Mes</option><option>Enero</option><option>Febrero</option><option>Marzo</option><option>Abril</option><option>Mayo</option><option>Junio</option><option>Julio</option><option>Agosto</option><option>Septiembre</option><option>Octubre</option><option>Noviembre</option><option>Diciembre</option></select><input class="fi" placeholder="Día"></div>
+
+  <div style="flex:1;display:flex;justify-content:center;padding:32px 16px 48px;background:radial-gradient(ellipse at 50% 0%,rgba(255,0,127,.07),transparent 60%)">
+    <div style="width:100%;max-width:560px">
+
+      <!-- Header -->
+      <div style="text-align:center;margin-bottom:28px">
+        <div style="font-size:32px;font-weight:900;margin-bottom:6px">
+          <span class="lo">Oh</span><span class="ly">Yeah</span><span class="lx">!</span>
         </div>
-        <div><div style="font-size:12px;font-weight:700;color:var(--yw);margin-bottom:8px">Aniversario</div>
-          <div class="field-row" style="gap:8px">
-            <select class="fi fi-sel" id="su-anni-mes"><option value="">Mes</option><option>Enero</option><option>Febrero</option><option>Marzo</option><option>Abril</option><option>Mayo</option><option>Junio</option><option>Julio</option><option>Agosto</option><option>Septiembre</option><option>Octubre</option><option>Noviembre</option><option>Diciembre</option></select>
-            <input class="fi" placeholder="Día" id="su-anni-dia">
+        <div style="font-size:18px;font-weight:800;color:var(--wh);margin-bottom:4px">Crea tu cuenta</div>
+        <div style="font-size:12px;color:var(--gr)">Únete a la mejor comunidad de restaurantes del mundo</div>
+      </div>
+
+      <!-- Card principal -->
+      <div style="background:var(--d2);border:1px solid var(--d3);border-radius:18px;padding:28px;margin-bottom:14px">
+
+        <!-- Nombre y apellido -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+          <div>
+            <div style="font-size:10px;font-weight:700;color:var(--gr);letter-spacing:.07em;margin-bottom:5px">NOMBRE</div>
+            <input class="fi fi-full" placeholder="Tu nombre" id="su-name">
+          </div>
+          <div>
+            <div style="font-size:10px;font-weight:700;color:var(--gr);letter-spacing:.07em;margin-bottom:5px">APELLIDOS</div>
+            <input class="fi fi-full" placeholder="Tus apellidos" id="su-last">
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div style="margin-bottom:12px">
+          <div style="font-size:10px;font-weight:700;color:var(--gr);letter-spacing:.07em;margin-bottom:5px">CORREO ELECTRÓNICO</div>
+          <input class="fi fi-full" placeholder="tu@correo.com" type="email" id="su-email">
+        </div>
+
+        <!-- Teléfono -->
+        <div style="margin-bottom:12px">
+          <div style="font-size:10px;font-weight:700;color:var(--gr);letter-spacing:.07em;margin-bottom:5px">CELULAR</div>
+          <div style="display:flex;gap:8px">
+            <div style="background:var(--d3);border:1.5px solid var(--d4);border-radius:10px;padding:0 12px;display:flex;align-items:center;font-size:13px;font-weight:700;color:var(--gr2);flex-shrink:0">+57</div>
+            <input class="fi fi-full" placeholder="Número de celular" type="tel" id="su-phone">
+          </div>
+        </div>
+
+        <!-- Ciudad -->
+        <div style="margin-bottom:18px">
+          <div style="font-size:10px;font-weight:700;color:var(--gr);letter-spacing:.07em;margin-bottom:5px">CIUDAD PRINCIPAL</div>
+          <select class="fi fi-sel fi-full" id="su-city">
+            <option value="">Elige tu ciudad</option>
+            <option>Bogotá</option><option>Medellín</option><option>Cali</option>
+            <option>Cartagena</option><option>Santa Marta</option><option>Barranquilla</option>
+          </select>
+        </div>
+
+        <hr style="border:none;border-top:1px solid var(--d3);margin-bottom:18px">
+
+        <!-- Contraseña -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px">
+          <div>
+            <div style="font-size:10px;font-weight:700;color:var(--gr);letter-spacing:.07em;margin-bottom:5px">CONTRASEÑA</div>
+            <input class="fi fi-full" placeholder="Mín. 6 caracteres" type="password" id="su-password">
+          </div>
+          <div>
+            <div style="font-size:10px;font-weight:700;color:var(--gr);letter-spacing:.07em;margin-bottom:5px">CONFIRMAR</div>
+            <input class="fi fi-full" placeholder="Repite la contraseña" type="password" id="su-password2">
+          </div>
+        </div>
+
+        <hr style="border:none;border-top:1px solid var(--d3);margin-bottom:18px">
+
+        <!-- Fechas especiales -->
+        <div style="font-size:11px;font-weight:700;color:var(--yw);margin-bottom:12px;letter-spacing:.04em">FECHAS ESPECIALES <span style="font-size:10px;color:var(--gr);font-weight:400">(para sorprenderte)</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px">
+          <div>
+            <div style="font-size:10px;font-weight:700;color:var(--gr);letter-spacing:.07em;margin-bottom:6px">CUMPLEAÑOS</div>
+            <div style="display:flex;gap:6px">
+              <select class="fi fi-sel" style="flex:2" id="su-cumple-mes">
+                <option value="">Mes</option>
+                <option>Enero</option><option>Febrero</option><option>Marzo</option><option>Abril</option>
+                <option>Mayo</option><option>Junio</option><option>Julio</option><option>Agosto</option>
+                <option>Septiembre</option><option>Octubre</option><option>Noviembre</option><option>Diciembre</option>
+              </select>
+              <input class="fi" style="flex:1;min-width:0" placeholder="Día" type="number" min="1" max="31" id="su-cumple-dia">
+            </div>
+          </div>
+          <div>
+            <div style="font-size:10px;font-weight:700;color:var(--gr);letter-spacing:.07em;margin-bottom:6px">ANIVERSARIO</div>
+            <div style="display:flex;gap:6px">
+              <select class="fi fi-sel" style="flex:2" id="su-anni-mes">
+                <option value="">Mes</option>
+                <option>Enero</option><option>Febrero</option><option>Marzo</option><option>Abril</option>
+                <option>Mayo</option><option>Junio</option><option>Julio</option><option>Agosto</option>
+                <option>Septiembre</option><option>Octubre</option><option>Noviembre</option><option>Diciembre</option>
+              </select>
+              <input class="fi" style="flex:1;min-width:0" placeholder="Día" type="number" min="1" max="31" id="su-anni-dia">
+            </div>
+          </div>
+        </div>
+
+        <!-- Restricciones -->
+        <div style="margin-bottom:18px">
+          <div style="font-size:10px;font-weight:700;color:var(--gr);letter-spacing:.07em;margin-bottom:5px">RESTRICCIONES ALIMENTARIAS</div>
+          <input class="fi fi-full" placeholder="Ej: Vegetariano, sin gluten, alergia a mariscos..." id="su-restrictions">
+        </div>
+
+        <!-- Contacto preferido -->
+        <div>
+          <div style="font-size:10px;font-weight:700;color:var(--gr);letter-spacing:.07em;margin-bottom:10px">¿CÓMO PREFIERES QUE TE CONTACTEMOS?</div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <label style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--gr2);cursor:pointer;background:var(--d3);border:1px solid var(--d4);border-radius:8px;padding:8px 14px">
+              <input type="checkbox" id="su-chat-wa" style="accent-color:var(--pk)"> WhatsApp
+            </label>
+            <label style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--gr2);cursor:pointer;background:var(--d3);border:1px solid var(--d4);border-radius:8px;padding:8px 14px">
+              <input type="checkbox" id="su-chat-email" checked style="accent-color:var(--pk)"> Email
+            </label>
+            <label style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--gr2);cursor:pointer;background:var(--d3);border:1px solid var(--d4);border-radius:8px;padding:8px 14px">
+              <input type="checkbox" id="su-chat-sms" style="accent-color:var(--pk)"> SMS
+            </label>
           </div>
         </div>
       </div>
-      <div style="margin-bottom:16px">
-        <div style="font-size:12px;font-weight:700;color:var(--yw);margin-bottom:8px">¿Cómo prefieres que te contactemos?</div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--gr2);cursor:pointer"><input type="checkbox" id="su-chat-wa" style="accent-color:var(--pk)"> WhatsApp</label>
-          <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--gr2);cursor:pointer"><input type="checkbox" id="su-chat-email" checked style="accent-color:var(--pk)"> Email</label>
-          <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--gr2);cursor:pointer"><input type="checkbox" id="su-chat-sms" style="accent-color:var(--pk)"> SMS</label>
-        </div>
+
+      <!-- Botón crear cuenta -->
+      <button onclick="doSignup()" style="width:100%;background:var(--yw);color:var(--bk);border:none;border-radius:14px;padding:16px;font-size:15px;font-weight:900;cursor:pointer;font-family:Montserrat,sans-serif;letter-spacing:.06em;margin-bottom:12px;transition:opacity .2s" onmouseover="this.style.opacity='.9'" onmouseout="this.style.opacity='1'">
+        CREAR CUENTA 🗝
+      </button>
+
+      <!-- Terms -->
+      <div style="text-align:center;font-size:11px;color:var(--gr);line-height:1.6;margin-bottom:20px">
+        Al crear una cuenta aceptas los
+        <span style="color:var(--pk);cursor:pointer;font-weight:600" onclick="goPg('pg-terms')">Términos de uso</span>
+        y la <span style="color:var(--pk);cursor:pointer;font-weight:600">Política de privacidad</span> de Oh Yeah!
       </div>
-      <div style="display:none"><!-- hidden original anni --></div>
+
+      <!-- Login link -->
+      <div style="text-align:center;font-size:12px;color:var(--gr)">
+        ¿Ya tienes cuenta?
+        <span style="color:var(--yw);cursor:pointer;font-weight:700" onclick="openOv('ov-login')"> Inicia sesión</span>
       </div>
-      <div class="fg" style="margin-bottom:12px">
-        <label class="fl">CONTRASEÑA</label>
-        <input id="su-password" class="fi fi-full" type="password" placeholder="Mínimo 6 caracteres">
-      </div>
-      <button class="btn-reservar btn-full" style="border-radius:10px" onclick="doSignup()">Crear cuenta</button>
-      <div class="terms-sm">Al seleccionar <strong>"Crear una cuenta"</strong>, aceptas los <span class="lnk" onclick="goPg('pg-terms')">Términos de uso</span> y la <span class="lnk">Política de privacidad</span> de Oh yeah!</div>
+
     </div>
   </div>
-  <footer><div class="ft-grid"><div><div class="ft-logo"><span class="lo">Oh</span><span class="ly">Yeah</span><span class="lx">!</span></div></div><div class="ft-col"><a>RESTAURANTES AFILIADOS</a><a>GOURMAND SOCIETY</a><a>REVISTA GOURMAND SOCIETY</a><a>TENGO UN RESTAURANTE</a></div><div class="ft-col"><a class="sm">Curaduría</a><a class="sm">Estatus</a><a class="sm">Miembro de una sociedad</a><a class="sm">Memoria viva</a></div></div></footer>
-  <div class="ft-bottom"><a onclick="goPg('pg-terms')">Términos y condiciones</a><a>Política de datos</a><a>Contacto</a></div>
-</div>
 
-  <footer><div class="ft-grid"><div><div class="ft-logo"><span class="lo">Oh</span><span class="ly">Yeah</span><span class="lx">!</span></div></div><div class="ft-col"><a>RESTAURANTES AFILIADOS</a><a>GOURMAND SOCIETY</a><a>REVISTA GOURMAND SOCIETY</a><a>TENGO UN RESTAURANTE</a></div><div class="ft-col"><a class="sm">Curaduría</a><a class="sm">Estatus</a><a class="sm">Miembro de una sociedad</a><a class="sm">Memoria viva</a></div></div></footer>
-  <div class="ft-bottom"><a onclick="goPg('pg-terms')">Términos y condiciones</a><a>Política de datos</a><a>Contacto</a></div>
+  <footer>
+    <div class="ft-grid">
+      <div><div class="ft-logo"><span class="lo">Oh</span><span class="ly">Yeah</span><span class="lx">!</span></div></div>
+      <div class="ft-col"><a>RESTAURANTES AFILIADOS</a><a>GOURMAND SOCIETY</a><a>REVISTA GOURMAND SOCIETY</a><a>TENGO UN RESTAURANTE</a></div>
+      <div class="ft-col"><a class="sm">Curaduría</a><a class="sm">Estatus</a><a class="sm">Miembro de una sociedad</a><a class="sm">Memoria viva</a></div>
+    </div>
+  </footer>
+  <div class="ft-bottom">
+    <a onclick="goPg('pg-terms')">Términos y condiciones</a>
+    <a>Política de datos</a>
+    <a>Contacto</a>
+  </div>
 </div>
 
 <!-- ===== OVERLAYS ===== -->
@@ -2692,19 +2799,69 @@ function isPastTime(timeStr) {
   return slotMinutes < nowMinutes;
 }
 
+/* Cache de disponibilidad por fecha { "YYYY-MM-DD|HH:MM AM/PM": { disponible, libres } } */
+var _franjaCache = {};
+
+async function cargarFranjasDelDia(dateStr) {
+  if (!supa) return;
+  var SERVICE_HOURS = ['12:00 PM','1:00 PM','2:00 PM','7:00 PM','8:00 PM','9:00 PM','10:00 PM','11:00 PM','12:00 AM'];
+  var promises = SERVICE_HOURS.map(async function(t) {
+    var key = dateStr + '|' + t;
+    if (_franjaCache[key] !== undefined) return;
+    try {
+      var { data, error } = await supa.rpc('franja_disponibilidad', { p_fecha: dateStr, p_hora: t });
+      _franjaCache[key] = (error || !data) ? { disponible: true, libres: 15 } : data;
+    } catch(e) {
+      _franjaCache[key] = { disponible: true, libres: 15 };
+    }
+  });
+  await Promise.all(promises);
+}
+
+function getFranjaInfo(dateStr, timeStr) {
+  var key = dateStr + '|' + timeStr;
+  return _franjaCache[key] || null;
+}
+
 function buildTimeGrid(gridId) {
   const g = document.getElementById(gridId);
   if (!g) return;
   g.innerHTML = '';
+  var dateStr = STATE.date.toISOString().split('T')[0];
+
   TIMES.forEach(t => {
     const b = document.createElement('button');
-    const ua  = UNAVAIL.includes(t) || isPastTime(t);
-    const sel = t === STATE.time;
+    const franja = getFranjaInfo(dateStr, t);
+    const llena  = franja && !franja.disponible;
+    const ua     = UNAVAIL.includes(t) || isPastTime(t) || llena;
+    const sel    = t === STATE.time;
+    const pocas  = franja && franja.disponible && franja.libres <= 3;
+
     b.className = 'time-btn' + (sel ? ' sel' : '') + (ua ? ' unavail' : '');
-    b.textContent = t;
-    b.disabled = ua;
+    b.disabled  = ua;
+
+    // Show libres indicator
+    if (llena) {
+      b.innerHTML = t + '<br><span style="font-size:8px;color:#FF4444">Sin cupo</span>';
+    } else if (pocas) {
+      b.innerHTML = t + '<br><span style="font-size:8px;color:#FFD700">Últimos ' + franja.libres + '</span>';
+      b.style.borderColor = '#FFD700';
+    } else {
+      b.textContent = t;
+    }
+
     if (!ua) {
-      b.addEventListener('click', () => {
+      b.addEventListener('click', async () => {
+        // Validate on click before selecting
+        if (supa) {
+          var { data } = await supa.rpc('franja_disponibilidad', { p_fecha: dateStr, p_hora: t }).catch(() => ({ data: null }));
+          if (data && !data.disponible) {
+            showToast('😔 Esa franja está llena — elige otra hora', 4000);
+            b.className = 'time-btn unavail';
+            b.disabled = true;
+            return;
+          }
+        }
         STATE.time = t;
         updateTimePills();
         buildAllTimeGrids();
@@ -2716,7 +2873,9 @@ function buildTimeGrid(gridId) {
   });
 }
 
-function buildAllTimeGrids() {
+async function buildAllTimeGrids() {
+  var dateStr = STATE.date.toISOString().split('T')[0];
+  await cargarFranjasDelDia(dateStr);
   buildTimeGrid('time-grid');
   buildTimeGrid('time-grid-r');
   buildTimeGrid('time-grid-h');
@@ -2825,11 +2984,19 @@ async function doLogin() {
 
       closeOv('ov-login');
       STATE.loggedIn = true;
-      STATE.user = perfil || { nombre: emailEl.value.split('@')[0], email: emailEl.value };
+      // Sync visit count from DB
+      if (perfil) USER_VISITS = perfil.visit_count || 0;
+      STATE.user = perfil || {
+        nombre: emailEl.value.split('@')[0],
+        email:  emailEl.value,
+        gourmand_level: 'INICIADO',
+        visit_count: 0
+      };
       loadUserProfile(STATE.user);
       activateUserMode();
-      showToast('¡Bienvenido, ' + (STATE.user.nombre || '') + '! 🎉');
-      setTimeout(() => goPg('pg-profile'), 400);
+      var welcomeName = (STATE.user.nombre || '').split(' ')[0];
+      showToast('¡Bienvenido, ' + welcomeName + '! 🎉', 4000);
+      setTimeout(function(){ goPg('pg-home'); }, 300);
       return;
     } catch(e) { console.warn(e); }
   }
@@ -2840,8 +3007,9 @@ async function doLogin() {
   STATE.user = { nombre: emailEl.value.split('@')[0], email: emailEl.value };
   loadUserProfile(STATE.user);
   activateUserMode();
-  showToast('¡Bienvenido! 🎉');
-  setTimeout(() => goPg('pg-home'), 300);
+  var wName = (STATE.user.nombre||'').split(' ')[0];
+  showToast('¡Bienvenido, ' + wName + '! 🎉', 4000);
+  setTimeout(function(){ goPg('pg-home'); }, 300);
 }
 
 function doSignup() {
@@ -2918,8 +3086,9 @@ async function acceptTerms() {
   if (wName) wName.innerHTML = '¡Hola, <strong style="color:var(--yw)">' + perfil.nombre + '</strong>!<br>Bienvenido a Oh Yeah!';
   var wEmail = document.getElementById('welcome-email-shown');
   if (wEmail) wEmail.textContent = perfil.email;
-  showToast('¡Bienvenido a Gourmand Society! 🗝');
-  setTimeout(() => goPg('pg-welcome'), 300);
+  var wName2 = (perfil.nombre||'').split(' ')[0];
+  showToast('¡Bienvenido, ' + wName2 + '! 🗝', 4000);
+  setTimeout(function(){ goPg('pg-welcome'); }, 300);
 }
 
 function doLogout() {
@@ -2959,6 +3128,8 @@ async function goReserve() {
   updateDatePills();
   updateTimePills();
   goPg('pg-reserve');
+  var rb = document.querySelector('#pg-reserve .btn-reservar');
+  if (rb) rb.textContent = STATE.modifyMode ? 'CONFIRMAR CAMBIO' : 'CONFIRMAR RESERVACIÓN';
   // Check real-time availability
   var dateStr = STATE.date.toISOString().split('T')[0];
   if (supa) {
@@ -2967,21 +3138,27 @@ async function goReserve() {
     var capFill= document.getElementById('res-cap-fill');
     if (capBar) capBar.style.display = 'block';
     try {
-      var { data } = await supa
-        .from('ohyeah_reservas')
-        .select('pax')
-        .eq('restaurant_id', 'omm')
-        .eq('date', dateStr)
-        .eq('status', 'confirmed');
-      var total = (data || []).reduce(function(s,r){ return s + (r.pax||0); }, 0);
-      var CAPACITY = 40;
-      var pct = Math.min(100, Math.round(total / CAPACITY * 100));
-      var libre = CAPACITY - total;
-      if (capTxt) capTxt.textContent = libre > 10 ? 'Alta disponibilidad' : libre > 0 ? 'Solo ' + libre + ' plazas' : 'Completo';
-      if (capTxt) capTxt.style.color = libre > 10 ? '#4ade80' : libre > 0 ? '#FFD700' : '#FF4444';
-      if (capFill) { capFill.style.width = pct + '%'; capFill.style.background = libre > 10 ? '#4ade80' : libre > 0 ? '#FFD700' : '#FF4444'; }
-    } catch(e) {}
-    await checkTimeAvailability(dateStr);
+      // Load franja data for all service hours
+      await cargarFranjasDelDia(dateStr);
+
+      // Show general availability for selected hour
+      var { data: franjaActual } = await supa.rpc('franja_disponibilidad', {
+        p_fecha: dateStr, p_hora: STATE.time
+      });
+      if (franjaActual) {
+        var libre = franjaActual.libres;
+        if (capTxt) {
+          capTxt.textContent = !franjaActual.disponible ? 'Franja llena' : libre > 5 ? 'Alta disponibilidad' : 'Solo ' + libre + ' mesas';
+          capTxt.style.color  = !franjaActual.disponible ? '#FF4444' : libre > 5 ? '#4ade80' : '#FFD700';
+        }
+        if (capFill) {
+          var pct = Math.round((1 - libre/15) * 100);
+          capFill.style.width  = pct + '%';
+          capFill.style.background = !franjaActual.disponible ? '#FF4444' : libre > 5 ? '#4ade80' : '#FFD700';
+        }
+      }
+    } catch(e) { console.warn('goReserve franja error:', e); }
+    buildAllTimeGrids(); // rebuild grids with fresh franja data
   }
 }
 
@@ -3033,31 +3210,30 @@ async function confirmRes() {
     return;
   }
 
-  // ── Check availability in Supabase ──
+  // ── Validar franja con función Supabase ──
   if (supa) {
-    if (btn) { btn.textContent = 'Verificando...'; btn.disabled = true; }
+    if (btn) { btn.textContent = 'Verificando disponibilidad...'; btn.disabled = true; }
     try {
-      var dateStr = STATE.date.toISOString().split('T')[0];
-      var { data: existing, error } = await supa
-        .from('ohyeah_reservas')
-        .select('id, pax')
-        .eq('restaurant_id', 'omm')
-        .eq('date', dateStr)
-        .eq('time', STATE.time)
-        .eq('status', 'confirmed');
+      var dateStr2 = STATE.date.toISOString().split('T')[0];
+      var { data: franja, error: franjaErr } = await supa.rpc('franja_disponibilidad', {
+        p_fecha: dateStr2,
+        p_hora:  STATE.time
+      });
 
-      if (!error && existing) {
-        var totalPax = existing.reduce(function(sum, r){ return sum + (r.pax || 0); }, 0);
-        var CAPACITY = 40; // capacidad del restaurante
-        if (totalPax + STATE.pax > CAPACITY) {
-          showToast('😔 No hay disponibilidad para ' + STATE.pax + ' personas a las ' + STATE.time + '. Prueba otro horario.');
+      if (!franjaErr && franja) {
+        if (!franja.disponible) {
+          showToast('😔 Esa franja está llena — elige otra hora', 5000);
           if (btn) { btn.textContent = 'CONFIRMAR RESERVACIÓN'; btn.disabled = false; }
-          // Show alternative times
-          showAlternativeTimes(dateStr, STATE.pax);
+          // Refresh grids to show updated availability
+          await buildAllTimeGrids();
+          showAlternativeTimes(dateStr2, STATE.pax);
           return;
         }
+        if (franja.libres <= 3) {
+          showToast('⚡ Solo quedan ' + franja.libres + ' mesas para esta hora', 3000);
+        }
       }
-    } catch(e) { console.warn('Availability check failed:', e); }
+    } catch(e) { console.warn('Franja check error:', e); }
     if (btn) { btn.textContent = 'CONFIRMAR RESERVACIÓN'; btn.disabled = false; }
   }
 
@@ -3099,6 +3275,13 @@ async function confirmRes() {
         .insert([reservation])
         .select();
       if (error) {
+        // Trigger FRANJA_LLENA — mostrar mensaje amable
+        if (error.message && error.message.startsWith('FRANJA_LLENA')) {
+          showToast('😔 Lo sentimos, esta franja se llenó justo ahora. Elige otro horario.', 5000);
+          if (btn) { btn.textContent = 'CONFIRMAR RESERVACIÓN'; btn.disabled = false; }
+          await buildAllTimeGrids();
+          return;
+        }
         console.warn('Supabase insert error:', error.message);
         /* Si la tabla no existe aún, continuar igual */
       } else {
@@ -3927,6 +4110,29 @@ function loadUserProfile(user) {
   if (ws && lv) ws.textContent = lv.emoji+' '+lv.name+' — Estamos listos para tu próxima experiencia';
 
   console.log('✅ Perfil cargado:', nombre, '| Nivel:', lv?lv.name:'-');
+
+  // Update progress bar in header
+  if (typeof GS_LEVELS !== 'undefined' && getUserLevel) {
+    var lv    = getUserLevel();
+    var lvIdx = GS_LEVELS.findIndex(function(l){ return l.id === lv.id; });
+    var next  = lvIdx < GS_LEVELS.length-1 ? GS_LEVELS[lvIdx+1] : null;
+    var fill  = document.getElementById('nf-prog-fill');
+    var lleft = document.getElementById('nf-prog-label-left');
+    var lright= document.getElementById('nf-prog-label-right');
+    var lvlBadge = document.getElementById('prof-level-badge');
+    if (lvlBadge) lvlBadge.textContent = lv.emoji + ' ' + lv.name;
+    if (next) {
+      var pct = Math.round(((USER_VISITS - lv.visits_needed) / (next.visits_needed - lv.visits_needed)) * 100);
+      if (fill) { fill.style.width = pct+'%'; fill.style.background='linear-gradient(90deg,'+lv.color+','+next.color+')'; }
+      if (lleft)  lleft.textContent = 'Camino a ' + next.name;
+      if (lright) lright.textContent = (next.visits_needed - USER_VISITS) + ' visitas más';
+    } else {
+      if (fill)  { fill.style.width='100%'; fill.style.background=lv.color; }
+      if (lleft)  lleft.textContent = '👑 Nivel máximo alcanzado';
+      if (lright) lright.textContent = '';
+    }
+  }
+
 }
 
 /* ════════ SESSION MANAGEMENT ════════ */
@@ -3981,31 +4187,7 @@ function nfTab(id) {
 }
 
 // Update loadUserProfile to also update progress bar
-var _origLoadUser = loadUserProfile;
-function loadUserProfile(user) {
-  _origLoadUser(user);
-  // Update progress bar in header
-  if (typeof GS_LEVELS !== 'undefined' && getUserLevel) {
-    var lv    = getUserLevel();
-    var lvIdx = GS_LEVELS.findIndex(function(l){ return l.id === lv.id; });
-    var next  = lvIdx < GS_LEVELS.length-1 ? GS_LEVELS[lvIdx+1] : null;
-    var fill  = document.getElementById('nf-prog-fill');
-    var lleft = document.getElementById('nf-prog-label-left');
-    var lright= document.getElementById('nf-prog-label-right');
-    var lvlBadge = document.getElementById('prof-level-badge');
-    if (lvlBadge) lvlBadge.textContent = lv.emoji + ' ' + lv.name;
-    if (next) {
-      var pct = Math.round(((USER_VISITS - lv.visits_needed) / (next.visits_needed - lv.visits_needed)) * 100);
-      if (fill) { fill.style.width = pct+'%'; fill.style.background='linear-gradient(90deg,'+lv.color+','+next.color+')'; }
-      if (lleft)  lleft.textContent = 'Camino a ' + next.name;
-      if (lright) lright.textContent = (next.visits_needed - USER_VISITS) + ' visitas más';
-    } else {
-      if (fill)  { fill.style.width='100%'; fill.style.background=lv.color; }
-      if (lleft)  lleft.textContent = '👑 Nivel máximo alcanzado';
-      if (lright) lright.textContent = '';
-    }
-  }
-}
+
 
 
 /* ── NETFLIX RESTAURANT ROWS in Mi Avance ── */
@@ -4321,6 +4503,202 @@ async function loadProximasReservas() {
   }
 
   // Empty state — keep the default empty state HTML
+}
+
+
+/* ── postMessage bridge to NEXUM iframe ── */
+window.addEventListener('message', function(e) {
+  if (!e.data || !e.data.type) return;
+  switch(e.data.type) {
+    case 'RESTAURANTES':
+      console.log('Restaurantes desde NEXUM:', (e.data.payload||[]).length);
+      break;
+    case 'RESERVA_CONFIRMADA':
+      showToast('✅ Reserva confirmada en NEXUM #' + (e.data.id||'').substring(0,8));
+      break;
+    case 'BONO_VALIDO':
+      var res2 = document.getElementById('canje-result');
+      if (res2 && e.data.bono) showBonoValido(e.data.bono, res2);
+      break;
+    case 'BONO_INVALIDO':
+      var res3 = document.getElementById('canje-result');
+      if (res3) res3.innerHTML = '<div style="color:#FF4444;text-align:center;padding:12px;font-weight:700">❌ Código no válido o ya fue usado</div>';
+      break;
+  }
+});
+
+
+/* ════════════════════════════════════════════════
+   CANCELAR / MODIFICAR RESERVAS
+════════════════════════════════════════════════ */
+async function loadProximasReservas() {
+  var list = document.getElementById('proximas-reservas-list');
+  if (!list) return;
+
+  if (!supa || !STATE.user || !STATE.user.email) {
+    list.innerHTML = '<div style="background:var(--d2);border:1.5px dashed var(--d4);border-radius:12px;padding:24px;text-align:center"><div style="font-size:28px;margin-bottom:8px">🍽️</div><div style="font-size:13px;color:var(--gr2);margin-bottom:14px">Inicia sesión para ver tus reservas</div></div>';
+    return;
+  }
+
+  list.innerHTML = '<div style="color:var(--gr);font-size:12px;text-align:center;padding:16px">Cargando...</div>';
+
+  try {
+    var today = new Date().toISOString().split('T')[0];
+    var { data, error } = await supa
+      .from('ohyeah_reservas')
+      .select('*')
+      .eq('guest_email', STATE.user.email)
+      .eq('status', 'confirmed')
+      .gte('date', today)
+      .order('date', { ascending: true })
+      .limit(5);
+
+    if (error) throw error;
+
+    if (!data || data.length === 0) {
+      list.innerHTML = '<div style="background:var(--d2);border:1.5px dashed var(--d4);border-radius:12px;padding:24px;text-align:center"><div style="font-size:28px;margin-bottom:8px">🍽️</div><div style="font-size:13px;color:var(--gr2);margin-bottom:14px">Aún no tienes reservas próximas</div><button onclick="goReserve()" style="background:var(--yw);color:var(--bk);border:none;border-radius:20px;padding:9px 22px;font-size:12px;font-weight:800;cursor:pointer;font-family:Montserrat,sans-serif">Hacer una reserva</button></div>';
+      return;
+    }
+
+    list.innerHTML = data.map(function(r) {
+      var d = new Date(r.date);
+      var fechaStr = d.toLocaleDateString('es-CO', { weekday:'long', day:'numeric', month:'long' });
+      var diasRest = Math.ceil((d - new Date()) / 86400000);
+      var diasLabel = diasRest === 0 ? '¡Hoy!' : diasRest === 1 ? 'Mañana' : 'En ' + diasRest + ' días';
+      var canCancel = diasRest > 0 || (diasRest === 0);
+
+      return '<div id="res-card-' + r.id.substring(0,8) + '" style="background:linear-gradient(135deg,rgba(255,0,127,.06),rgba(0,0,0,0));border:1.5px solid rgba(255,0,127,.2);border-radius:14px;padding:16px;margin-bottom:10px">'
+        + '<div style="display:flex;align-items:flex-start;gap:12px">'
+        + '<div style="width:52px;height:52px;border-radius:10px;background:var(--pk);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0">🍽️</div>'
+        + '<div style="flex:1;min-width:0">'
+        + '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:4px">'
+        + '<div style="font-size:15px;font-weight:800;color:var(--wh)">' + (r.restaurant_name || 'OMM') + '</div>'
+        + '<span style="background:rgba(223,255,0,.12);color:var(--yw);border:1px solid rgba(223,255,0,.25);border-radius:5px;padding:2px 8px;font-size:9px;font-weight:700;flex-shrink:0">' + diasLabel + '</span>'
+        + '</div>'
+        + '<div style="font-size:12px;color:var(--gr2)">📅 ' + fechaStr + '</div>'
+        + '<div style="font-size:12px;color:var(--gr2)">🕐 ' + r.time + ' &nbsp;·&nbsp; 👥 ' + r.pax + ' persona' + (r.pax!==1?'s':'') + '</div>'
+        + '</div></div>'
+        + '<div style="display:flex;gap:8px;margin-top:12px">'
+        + '<button onclick="abrirModificar(\'' + r.id + '\',\'' + r.date + '\',\'' + r.time + '\',' + r.pax + ')" style="flex:1;background:var(--d3);color:var(--gr2);border:1px solid var(--d4);border-radius:8px;padding:8px;font-size:11px;font-weight:700;cursor:pointer;font-family:Montserrat,sans-serif">✏️ Modificar</button>'
+        + (canCancel ? '<button onclick="confirmarCancelar(\'' + r.id + '\')" style="flex:1;background:rgba(255,68,68,.08);color:#FF6B6B;border:1px solid rgba(255,68,68,.2);border-radius:8px;padding:8px;font-size:11px;font-weight:700;cursor:pointer;font-family:Montserrat,sans-serif">✕ Cancelar</button>' : '')
+        + '</div></div>';
+    }).join('');
+
+  } catch(e) {
+    console.warn('loadProximasReservas error:', e);
+    list.innerHTML = '<div style="font-size:12px;color:var(--gr);text-align:center;padding:16px">Error cargando reservas</div>';
+  }
+}
+
+async function confirmarCancelar(reservaId) {
+  var ok = confirm('¿Seguro que quieres cancelar esta reserva?\n\nRecuerda que puedes cancelar con hasta 2 horas de anticipación.');
+  if (!ok) return;
+
+  showToast('Cancelando reserva...');
+
+  if (supa && STATE.user) {
+    try {
+      var { data, error } = await supa.rpc('cancelar_reserva', {
+        p_id:    reservaId,
+        p_email: STATE.user.email
+      });
+
+      if (error) throw error;
+
+      if (data && data.ok) {
+        showToast('✅ Reserva cancelada', 3000);
+        USER_VISITS = Math.max(0, USER_VISITS - 1);
+        loadUserProfile(STATE.user);
+        loadProximasReservas();
+      } else {
+        showToast('⚠️ ' + (data && data.msg || 'No se pudo cancelar'), 4000);
+      }
+    } catch(e) {
+      console.warn('Cancel error:', e);
+      // Fallback: update directly
+      await supa.from('ohyeah_reservas')
+        .update({ status: 'cancelled' })
+        .eq('id', reservaId)
+        .eq('guest_email', STATE.user.email);
+      showToast('✅ Reserva cancelada');
+      loadProximasReservas();
+    }
+  }
+}
+
+function abrirModificar(resId, fecha, hora, pax) {
+  STATE.modifyingId = resId;
+  STATE.modifyingEmail = STATE.user ? STATE.user.email : '';
+  // Pre-fill the reserve page and open it in modify mode
+  var d = new Date(fecha + 'T12:00:00');
+  STATE.date = d;
+  STATE.time = hora;
+  STATE.pax  = pax;
+  updateDatePills();
+  updateTimePills();
+  STATE.modifyMode = true;
+  goPg('pg-reserve');
+  showToast('✏️ Modifica tu reserva y confirma', 3000);
+}
+
+/* Override confirmRes to handle modify mode */
+var _origConfirmRes = confirmRes;
+async function confirmRes() {
+  if (STATE.modifyMode && STATE.modifyingId) {
+    await _confirmarModificacion();
+  } else {
+    await _origConfirmRes();
+  }
+}
+
+async function _confirmarModificacion() {
+  var btn = document.querySelector('#pg-reserve .btn-reservar');
+  if (btn) { btn.textContent = 'Modificando...'; btn.disabled = true; }
+
+  var dateStr = STATE.date.toISOString().split('T')[0];
+
+  // Validate franja
+  if (supa) {
+    var { data: franja } = await supa.rpc('franja_disponibilidad', {
+      p_fecha: dateStr, p_hora: STATE.time
+    }).catch(() => ({ data: null }));
+    if (franja && !franja.disponible) {
+      showToast('😔 Esa franja está llena — elige otro horario', 4000);
+      if (btn) { btn.textContent = 'CONFIRMAR CAMBIO'; btn.disabled = false; }
+      return;
+    }
+  }
+
+  try {
+    var result;
+    if (supa) {
+      var { data } = await supa.rpc('modificar_reserva', {
+        p_id:    STATE.modifyingId,
+        p_email: STATE.modifyingEmail,
+        p_fecha: dateStr,
+        p_hora:  STATE.time,
+        p_pax:   STATE.pax
+      });
+      result = data;
+    }
+
+    var ok = !result || result.ok !== false;
+    if (ok) {
+      STATE.modifyMode    = false;
+      STATE.modifyingId   = null;
+      STATE.modifyingEmail = null;
+      showToast('✅ Reserva modificada exitosamente', 3000);
+      goPg('pg-profile');
+      setTimeout(loadProximasReservas, 500);
+    } else {
+      showToast('⚠️ ' + (result.msg || 'Error al modificar'), 4000);
+    }
+  } catch(e) {
+    console.warn('Modify error:', e);
+    showToast('⚠️ Error al modificar. Intenta de nuevo.', 4000);
+  }
+
+  if (btn) { btn.textContent = 'CONFIRMAR RESERVACIÓN'; btn.disabled = false; }
 }
 
 </script>
