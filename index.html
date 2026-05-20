@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Oh Yeah! — Los mejores restaurantes, eventos y experiencias</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Permanent+Marker&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
@@ -13,25 +14,19 @@
    RESET & VARIABLES
    ============================================================ */
 :root {
-  --pk: #FF007F;   --pk2: #CC005F;
-  --yw: #DFFF00;   --yw2: #C8F000;
-  --bk: #000000;   --d1: #080808;  --d2: #111111;
-  --d3: #1A1A1A;   --d4: #222222;  --d5: #2A2A2A;
-  --gr: #666;      --gr2: #999;    --wh: #ffffff;
-  --or: #FF7A00;   --bl: #7BA4FF;  --pu: #C87EFF;
-  --fp: #E63E88;
-  --px: clamp(16px,3vw,36px);
-  --nav-h: 56px; --tb-h: 33px; --sb-h: 52px;
-  --top: calc(var(--tb-h) + var(--nav-h));
-  --radius: 12px;
-  --trans: .18s ease;
+  --bk:#08070b; --wh:#fff;
+  --pk:#ff2d7e; --yw:#d6ff3a;
+  --d1:#0c0a10; --d2:#141019; --d3:#1b1622; --d4:#221b2b; --d5:#2a2035;
+  --gr:#6a6675; --gr2:#9d99a8;
+  --line:rgba(255,255,255,.07); --line2:rgba(255,255,255,.13);
+  --fp:#ff2d7e; --px:20px; --trans:.18s;
 }
 *,*::before,*::after { box-sizing:border-box; margin:0; padding:0 }
 html { scroll-behavior:smooth; -webkit-font-smoothing:antialiased }
-body { background:var(--bk); color:var(--wh); font-family:'Montserrat',sans-serif; overflow-x:hidden }
+body { background:var(--bk); color:var(--wh); font-family:Manrope,system-ui,sans-serif; overflow-x:hidden; background-image:radial-gradient(900px 600px at 15% 0%,rgba(255,45,126,.1),transparent 50%),radial-gradient(700px 500px at 85% 90%,rgba(214,255,58,.06),transparent 50%) }
 a { text-decoration:none; color:inherit }
-button { font-family:'Montserrat',sans-serif; cursor:pointer; border:none; background:none; color:var(--wh) }
-input,select,textarea { font-family:'Montserrat',sans-serif; outline:none; color:var(--wh) }
+button { font-family:Manrope,system-ui,sans-serif; cursor:pointer; border:none; background:none; color:var(--wh) }
+input,select,textarea { font-family:Manrope,system-ui,sans-serif; outline:none; color:var(--wh) }
 img { display:block }
 
 /* ============================================================
@@ -157,14 +152,17 @@ nav {
 
 /* PILLS */
 .pill {
-  background:var(--d3); border:1.5px solid var(--d4); border-radius:24px;
-  padding:11px 16px; display:flex; align-items:center; gap:8px;
+  background:var(--d4); border:1.3px solid var(--line);
+  border-radius:13px; padding:9px 12px;
+  display:flex; align-items:center; gap:7px;
   font-size:13px; cursor:pointer; white-space:nowrap; flex-shrink:0;
   transition:border-color var(--trans),background var(--trans);
   position:relative; user-select:none;
 }
+.pill:hover { border-color:var(--line2) }
+.pill.open  { border-color:var(--yw); background:#211c12 }
 .pill:hover, .pill.open { border-color:var(--yw); background:var(--d4) }
-.pill-val { font-weight:900; color:var(--yw); font-size:15px }
+.pill-val { font-weight:900; color:var(--pk); font-size:14px }
 .pill-unit { color:var(--gr2); font-size:11px; font-weight:500 }
 .pill-ico { font-size:14px }
 .pill svg { width:14px; height:14px; stroke:var(--gr2); flex-shrink:0 }
@@ -319,7 +317,7 @@ nav {
 .mc-logo { display:flex }
 .mc-r { width:30px;height:30px;border-radius:50%;background:#EB001B;margin-right:-10px }
 .mc-y { width:30px;height:30px;border-radius:50%;background:#F79E1B }
-.priceless { font-family:'Montserrat',sans-serif;font-size:28px;letter-spacing:3px;font-weight:300 }
+.priceless { font-family:Manrope,system-ui,sans-serif;font-size:28px;letter-spacing:3px;font-weight:300 }
 .conc-panel {
   background:var(--d1); border-left:1px solid var(--d2);
   display:flex; flex-direction:column; align-items:center;
@@ -379,7 +377,7 @@ nav {
 }
 .badge-top10 {
   background:rgba(8,8,8,.85); border:1.5px solid var(--pk); color:var(--pk);
-  font-family:'Montserrat',sans-serif; font-size:13px; padding:1px 7px;
+  font-family:Manrope,system-ui,sans-serif; font-size:13px; padding:1px 7px;
   line-height:1.4; display:flex; flex-direction:column; align-items:center;
 }
 .badge-top10 small { font-size:7px; letter-spacing:.1em }
@@ -398,7 +396,7 @@ nav {
 }
 .t10-card:hover { transform:translateY(-4px) }
 .t10-num {
-  font-family:'Montserrat',sans-serif; font-size:110px; font-weight:900;
+  font-family:Manrope,system-ui,sans-serif; font-size:110px; font-weight:900;
   color:var(--pk); position:absolute; bottom:-18px; left:-3px;
   line-height:1; z-index:2; text-shadow:0 0 40px rgba(255,45,120,.35);
   user-select:none;
@@ -640,7 +638,7 @@ footer { background:var(--fp); padding:40px var(--px) 0 }
 .occ-dropdown {
   width:100%; background:var(--pk); color:#fff; border:none; border-radius:9px;
   padding:12px 16px; font-size:13px; font-weight:700; letter-spacing:.04em;
-  appearance:none; cursor:pointer; margin-bottom:10px; font-family:'Montserrat',sans-serif;
+  appearance:none; cursor:pointer; margin-bottom:10px; font-family:Manrope,system-ui,sans-serif;
 }
 .occ-other {
   width:100%; background:var(--d1); border:1px solid var(--d3); border-radius:9px;
@@ -749,7 +747,7 @@ footer { background:var(--fp); padding:40px var(--px) 0 }
   background:var(--pk); color:#fff; border:none; border-radius:22px;
   padding:6px 13px; font-size:11px; font-weight:600; cursor:pointer;
   display:inline-flex; align-items:center; gap:5px; transition:opacity var(--trans);
-  font-family:'Montserrat',sans-serif;
+  font-family:Manrope,system-ui,sans-serif;
 }
 .tag-pill:hover { opacity:.8 }
 .btn-gs-join {
@@ -864,7 +862,7 @@ footer { background:var(--fp); padding:40px var(--px) 0 }
 .mbox-terms .tsub { font-size:15px; font-weight:700; color:var(--yw); margin-bottom:20px; line-height:1.4 }
 .mbox-terms .tbody { font-size:12px; color:var(--bk); text-align:left; margin-bottom:18px; line-height:1.8 }
 .mbox-terms .motto { font-size:14px; font-weight:700; color:var(--yw); font-style:italic; margin-bottom:24px }
-.btn-accept { background:var(--yw); color:var(--bk); padding:13px 24px; border-radius:9px; font-size:13px; font-weight:700; letter-spacing:.05em; width:100%; transition:transform var(--trans); border:none; cursor:pointer; font-family:'Montserrat',sans-serif }
+.btn-accept { background:var(--yw); color:var(--bk); padding:13px 24px; border-radius:9px; font-size:13px; font-weight:700; letter-spacing:.05em; width:100%; transition:transform var(--trans); border:none; cursor:pointer; font-family:'Manrope',system-ui,sans-serif }
 .btn-accept:hover { transform:scale(1.02) }
 
 /* TOAST */
@@ -1111,12 +1109,299 @@ footer { background:var(--fp); padding:40px var(--px) 0 }
 .nf-tabs { display:flex; gap:0; border-bottom:1px solid #333; padding:0 var(--px); margin-bottom:24px; overflow-x:auto }
 .nf-tabs::-webkit-scrollbar { display:none }
 .nf-tab {
-  padding:12px 16px; font-size:12px; font-weight:700; color:var(--gr);
+  padding:12px 16px; font-size:12px; font-weight:800; color:var(--gr);
   cursor:pointer; border-bottom:2px solid transparent; white-space:nowrap;
-  letter-spacing:.04em; transition:color .2s, border-color .2s;
+  letter-spacing:.05em; transition:color .2s, border-color .2s;
 }
+.nf-tab.active { color:#fff; border-bottom-color:var(--pk) }
 .nf-tab.active { color:var(--wh); border-bottom-color:var(--pk) }
 .nf-tab:hover:not(.active) { color:var(--gr2) }
+
+
+/* ══════════════════════════════════════════
+   EXACT APP BUTTON STYLES
+   Copied 1:1 from oh-yeah-app.html
+══════════════════════════════════════════ */
+
+
+
+
+.btn-reservar {
+  background:linear-gradient(180deg,var(--yw),#b9e22a);
+  color:#0a0a05; font-size:14px; font-weight:900;
+  letter-spacing:.06em; border:none; border-radius:14px;
+  padding:12px 24px; cursor:pointer; white-space:nowrap;
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  font-family:inherit; box-shadow:0 8px 24px rgba(214,255,58,.2);
+  transition:box-shadow .2s, transform .1s; flex-shrink:0;
+}
+.btn-reservar:hover { box-shadow:0 12px 32px rgba(214,255,58,.3); transform:translateY(-1px) }
+
+/* DATE / TIME / PAX SEGMENTS */
+
+
+
+
+
+/* Re-map our .pill to match .seg */
+.pill {
+  flex:1; background:#221b2b; border:1px solid var(--line);
+  border-radius:13px; padding:9px 8px;
+  display:flex; align-items:center; gap:6px; cursor:pointer; min-width:0;
+  transition:border-color .18s, background .18s; position:relative; user-select:none;
+}
+.pill:hover { border-color:var(--line2) }
+.pill.open  { border-color:var(--yw); background:#211c12 }
+.pill-ico   { width:15px; height:15px; color:var(--gr2); flex:0 0 auto }
+.pill-unit  { font-size:11px; font-weight:800; color:var(--gr2) }
+.pill-val   { font-size:11px; font-weight:800; white-space:nowrap; color:var(--pk) }
+.pill-caret { margin-left:auto; width:12px; height:12px; color:var(--gr); flex:0 0 auto }
+
+/* VIBE CHIPS */
+
+
+
+
+
+/* Re-map our mood classes to .vibe */
+.mood-item { flex:0 0 auto; width:82px; background:#1d1726; border:1.4px solid var(--line);
+  border-radius:15px; padding:11px 6px 9px; display:flex; flex-direction:column;
+  align-items:center; gap:7px; cursor:pointer; transition:.18s }
+.mood-item:hover { border-color:var(--line2) }
+.mood-item.on,.mood-item.sel { border-color:var(--yw); background:#211c12;
+  box-shadow:0 0 0 3px rgba(214,255,58,.12) }
+.mood-item .me { width:36px; height:36px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center; font-size:18px;
+  background:radial-gradient(circle,rgba(255,45,126,.28),rgba(255,45,126,.05)) }
+.mood-item.on .me,.mood-item.sel .me { background:radial-gradient(circle,rgba(214,255,58,.3),rgba(214,255,58,.06)) }
+.mood-item .ml { font-size:9.5px; font-weight:700; text-align:center; color:#d9d6e0; line-height:1.2 }
+
+/* VIBE pill (mood selector trigger) */
+.mood-pill { flex:1; background:#221b2b; border:1px solid var(--line);
+  border-radius:13px; padding:9px 10px; display:flex; align-items:center; gap:7px;
+  cursor:pointer; transition:border-color .18s, background .18s; width:100% }
+.mood-pill.open { border-color:var(--yw); background:#211c12 }
+.mood-txt { flex:1; font-size:11px; font-weight:800; color:var(--gr2) }
+
+/* GOCARD (search bar) */
+
+/* Re-map to .sbar */
+.sbar { margin:6px var(--px) 0; background:linear-gradient(180deg,#16121d,#100d15);
+  border:1px solid var(--line); border-radius:20px; padding:16px 16px 18px;
+  display:flex; align-items:center; gap:8px; flex-wrap:wrap; position:relative }
+
+/* PERK CARDS */
+
+
+
+/* LOGIN BUTTON */
+#btn-iniciar, .btn-login {
+  background:var(--pk); color:#fff; border:none; border-radius:22px;
+  padding:8px 18px; font-size:12px; font-weight:800; cursor:pointer;
+  font-family:inherit; letter-spacing:.04em; flex-shrink:0;
+}
+#btn-iniciar:hover, .btn-login:hover { opacity:.88 }
+
+/* GS / GOURMAND BUTTON */
+.btn-gs { background:var(--yw); color:#0a0a05; border:none; border-radius:22px;
+  padding:8px 18px; font-size:12px; font-weight:800; cursor:pointer;
+  font-family:inherit; letter-spacing:.04em; display:flex; align-items:center; gap:6px; flex-shrink:0 }
+.btn-gs:hover { background:#b9e22a }
+
+/* CANJEAR BUTTON */
+.btn-canje { background:transparent; color:var(--yw); border:1.3px solid var(--yw);
+  border-radius:22px; padding:7px 14px; font-size:11px; font-weight:800;
+  cursor:pointer; font-family:inherit; flex-shrink:0 }
+
+/* NAV AVATAR */
+.nav-av { width:32px; height:32px; border-radius:50%; background:#221b2b;
+  border:1.5px solid var(--line2); display:flex; align-items:center;
+  justify-content:center; font-size:12px; font-weight:800; cursor:pointer;
+  flex-shrink:0; overflow:hidden }
+
+/* TIME GRID BUTTONS */
+.time-btn { background:#221b2b; border:1px solid var(--line); border-radius:10px;
+  color:var(--gr2); font-size:11px; font-weight:800; padding:10px 4px;
+  cursor:pointer; text-align:center; font-family:inherit; transition:.15s; flex:1 }
+.time-btn:hover:not(:disabled) { border-color:var(--line2); color:#fff }
+.time-btn.sel { background:var(--pk); border-color:var(--pk); color:#fff }
+.time-btn.unavail { opacity:.28; cursor:not-allowed; text-decoration:line-through }
+
+/* PAX BUTTONS */
+.pax-preset { background:#221b2b; border:1px solid var(--line); border-radius:10px;
+  color:var(--gr2); font-size:13px; font-weight:800; padding:11px;
+  cursor:pointer; text-align:center; font-family:inherit; transition:.15s }
+.pax-preset.sel { background:var(--pk); border-color:var(--pk); color:#fff }
+.pax-btn { background:#221b2b; border:1px solid var(--line2); border-radius:50%;
+  width:36px; height:36px; font-size:18px; font-weight:800; color:#fff;
+  display:flex; align-items:center; justify-content:center; cursor:pointer; font-family:inherit }
+.pax-btn:hover { background:#2a2035 }
+
+/* RESERVE CONFIRM BUTTON */
+#btn-confirm-reserva, .btn-confirm {
+  width:100%; background:linear-gradient(180deg,var(--yw),#b9e22a);
+  color:#0a0a05; font-size:15px; font-weight:900; border:none;
+  border-radius:14px; padding:16px; cursor:pointer; font-family:inherit;
+  letter-spacing:.04em; box-shadow:0 8px 24px rgba(214,255,58,.2);
+}
+
+/* MODAL BUTTONS */
+.ov .btn-full, .mbox button.btn-full {
+  width:100%; background:linear-gradient(180deg,var(--yw),#b9e22a);
+  color:#0a0a05; border:none; border-radius:13px; padding:15px;
+  font-size:14px; font-weight:900; cursor:pointer; font-family:inherit;
+  letter-spacing:.04em;
+}
+.ov .btn-login-link { background:transparent; border:1.3px solid var(--pk);
+  color:var(--pk); border-radius:13px; padding:14px; width:100%;
+  font-size:14px; font-weight:800; cursor:pointer; font-family:inherit }
+
+/* SIGN UP PAGE BUTTON */
+#pg-signup button[onclick="doSignup()"] {
+  background:linear-gradient(180deg,var(--yw),#b9e22a);
+  color:#0a0a05; border:none; border-radius:14px; padding:16px;
+  font-size:15px; font-weight:900; cursor:pointer; font-family:inherit;
+  width:100%; letter-spacing:.04em; box-shadow:0 8px 24px rgba(214,255,58,.2);
+}
+
+/* WELCOME PAGE BUTTON */
+#pg-welcome button { background:linear-gradient(180deg,var(--yw),#b9e22a);
+  color:#0a0a05; border:none; border-radius:24px; padding:14px 40px;
+  font-size:15px; font-weight:900; cursor:pointer; font-family:inherit; }
+
+/* NEON LIME GLOW for primary actions */
+.btn-lime-glow {
+  background:linear-gradient(180deg,var(--yw),#b9e22a);
+  color:#0a0a05; border:none; border-radius:14px; padding:15px;
+  font-size:14px; font-weight:900; cursor:pointer; font-family:inherit;
+  box-shadow:0 8px 24px rgba(214,255,58,.2); transition:.2s;
+}
+.btn-lime-glow:hover { box-shadow:0 12px 32px rgba(214,255,58,.35); transform:translateY(-2px) }
+
+/* SECT LINKS */
+.sec-link { color:var(--pk); font-size:11.5px; font-weight:700;
+  display:flex; align-items:center; gap:4px; cursor:pointer }
+.sec-link:hover { opacity:.8 }
+
+
+/* MOOD DROP ITEMS - match actual HTML structure */
+.mood-drop { 
+  position:fixed; background:#0e0c13;
+  border:1px solid var(--line2); border-radius:20px;
+  box-shadow:0 24px 64px rgba(0,0,0,.8);
+  z-index:3000; display:none; overflow-y:auto;
+  max-height:80vh; min-width:280px; max-width:420px;
+  padding:10px;
+}
+.mood-drop.open { display:block }
+.mood-item { 
+  display:flex; align-items:flex-start; gap:12px;
+  padding:12px 14px; border-radius:13px;
+  cursor:pointer; transition:.15s; border:1.3px solid transparent;
+  margin-bottom:4px;
+}
+.mood-item:hover { background:#1d1726; border-color:var(--line) }
+.mood-item.sel { background:#211c12; border-color:var(--yw) }
+.mood-item .mood-ico { font-size:22px; flex-shrink:0; margin-top:2px }
+.mood-item h4 { font-size:13px; font-weight:800; color:#fff; margin:0 0 3px }
+.mood-item p { font-size:11px; color:var(--gr2); margin:0; line-height:1.5 }
+
+
+/* NAV RIGHT - ensure buttons are visible */
+#nav-guest { display:flex; align-items:center; gap:8px }
+#nav-user  { display:none; align-items:center; gap:8px }
+.nav-right { display:flex; align-items:center; gap:8px; margin-left:auto }
+
+
+/* SBAR - ensure all pills and button are in a row */
+.sbar { display:flex; align-items:center; flex-wrap:wrap; gap:8px }
+.sbar > .pill { flex:1; min-width:90px }
+.sbar > .mood-wrap { flex:0.8; min-width:130px }
+.sbar > .btn-reservar { flex-shrink:0; margin-top:0 }
+@media(max-width:600px) {
+  .sbar > .btn-reservar { width:100%; margin-top:4px }
+}
+
+
+/* ═══════════════════════════════════════
+   PROFILE - EXACT APP STYLES (TÚ SCREEN)
+═══════════════════════════════════════ */
+--card:#141019;
+  /* ===== TÚ ===== */
+.youhero{margin:6px 18px 0;border-radius:18px;overflow:hidden;position:relative;height:150px;border:1px solid var(--line)}
+.youhero .yhbg{position:absolute;inset:0;background-size:cover;background-position:center}
+.youhero .yhov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,7,11,.55),rgba(8,7,11,.92))}
+.youhero .yhin{position:absolute;left:16px;right:16px;bottom:14px}
+.youhero .yht{font-family:'Fraunces',serif;font-size:30px;font-weight:500;line-height:1}
+.youhero .yhg{font-size:14px;font-weight:800;margin-top:6px}
+.youhero .yhs{font-size:10.5px;color:#c7c4d0;font-weight:600;margin-top:2px}
+.levelmini{--card:#141019;margin:12px 18px 0;background:#141019;border:1px solid var(--line);border-radius:14px;padding:13px 14px}
+.levelmini .lmtop{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:800;color:var(--lime)}
+.levelmini .lmtop svg{width:14px;height:14px}
+.levelmini .lmpct{font-size:10px;color:var(--mut);font-weight:700;margin:7px 0 6px}
+
+.resv{background:#141019;border:1px solid var(--line);border-radius:14px;padding:11px;
+  display:flex;align-items:center;gap:11px;margin:0 18px 9px}
+.resv .rvimg{width:74px;height:74px;border-radius:11px;background-size:cover;background-position:center;flex:0 0 auto}
+.resv .rvbody{flex:1;min-width:0}
+.resv .rvtop{display:flex;align-items:center;justify-content:space-between}
+.resv .rvn{font-size:14px;font-weight:800}
+.resv .rvchip{font-size:8.5px;font-weight:800;color:var(--pink);border:1px solid rgba(255,45,126,.4);
+  border-radius:7px;padding:3px 7px}
+.resv .rvline{font-size:10px;color:var(--mut);font-weight:600;margin-top:5px;display:flex;align-items:center;gap:5px}
+.resv .rvline svg{width:11px;height:11px;color:var(--dim)}
+
+.savedc{width:78px;display:flex;flex-direction:column;align-items:center;gap:6px}
+.savedc .svi{width:70px;height:70px;border-radius:50%;background-size:cover;background-position:center;
+  border:1.5px solid var(--line2)}
+.savedc .svn{font-size:10.5px;font-weight:800;text-align:center}
+.savedc .svc{font-size:8px;color:var(--mut);font-weight:600;text-align:center}
+.savedc .svr{font-size:9px;font-weight:800;color:var(--lime)}
+
+.bonorail{display:flex;gap:9px;overflow-x:auto;padding:2px 18px 4px}
+.bonorail::-webkit-scrollbar{display:none}.bonorail{scrollbar-width:none}
+.bonoc{flex:0 0 auto;width:120px;border-radius:13px;padding:13px 11px;border:1px solid;
+  display:flex;flex-direction:column;gap:5px;min-height:128px}
+.bonoc .bici{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center}
+.bonoc .bici svg{width:16px;height:16px}
+.bonoc .bival{font-size:15px;font-weight:800;margin-top:3px}
+.bonoc .bisub{font-size:9px;font-weight:600;opacity:.85}
+.bonoc .bidiv{height:1px;background:rgba(255,255,255,.13);margin:auto 0 3px}
+.bonoc .bivu{font-size:8px;font-weight:600;opacity:.7}
+.bono-pink{background:linear-gradient(160deg,rgba(255,45,126,.2),rgba(255,45,126,.04));border-color:rgba(255,45,126,.35)}
+.bono-pink .bival,.bono-pink .bici svg{color:var(--pink)} .bono-pink .bici{background:rgba(255,45,126,.16)}
+.bono-gold{background:linear-gradient(160deg,rgba(236,217,137,.18),rgba(236,217,137,.03));border-color:rgba(236,217,137,.32)}
+.bono-gold .bival,.bono-gold .bici svg{color:var(--gold)} .bono-gold .bici{background:rgba(236,217,137,.14)}
+.bono-blue{background:linear-gradient(160deg,rgba(90,168,255,.18),rgba(90,168,255,.03));border-color:rgba(90,168,255,.32)}
+.bono-blue .bival,.bono-blue .bici svg{color:var(--blue)} .bono-blue .bici{background:rgba(90,168,255,.14)}
+.bono-lime{background:linear-gradient(160deg,rgba(214,255,58,.18),rgba(214,255,58,.03));border-color:rgba(214,255,58,.3)}
+.bono-lime .bival,.bono-lime .bici svg{color:var(--lime)} .bono-lime .bici{background:rgba(214,255,58,.13)}
+
+.recc{width:152px}
+.recc .rcimg{height:100px;border-radius:13px;background-size:cover;background-position:center;
+  position:relative;overflow:hidden}
+.recc .rcoff{position:absolute;bottom:7px;right:7px;background:rgba(10,9,13,.82);color:var(--lime);
+  font-size:8.5px;font-weight:800;border:1px solid rgba(214,255,58,.4);border-radius:6px;padding:3px 6px;z-index:2}
+.recc .rcn{font-size:12.5px;font-weight:800;margin-top:7px}
+.recc .rcc{font-size:9.5px;color:var(--mut);font-weight:600}
+.recc .rcr{font-size:9.5px;font-weight:800;color:var(--lime);margin-top:3px}
+
+.histc{width:150px}
+.histc .hcimg{height:78px;border-radius:11px;background-size:cover;background-position:center;
+  position:relative;overflow:hidden}
+.histc .hcimg::after{content:"";position:absolute;inset:0;background:rgba(8,7,11,.35)}
+.histc .hcn{font-size:11px;font-weight:800;margin-top:6px}
+.histc .hcd{font-size:8.5px;color:var(--mut);font-weight:600}
+.histc .hcr{font-size:9px;font-weight:800;color:var(--lime);margin-top:2px}
+
+
+
+/* Web profile max-width container */
+#pg-profile .prof-header,
+#pg-profile .prof-layout { max-width:900px; margin:0 auto }
+.youhero { margin:6px var(--px) 0 }
+.levelmini { margin:12px var(--px) 0 }
+.resv { margin:0 var(--px) 9px }
 
 </style>
 
@@ -1144,7 +1429,7 @@ footer { background:var(--fp); padding:40px var(--px) 0 }
     <!-- Guest nav -->
     <div class="nav-right" id="nav-guest">
       <button class="btn-login" id="btn-iniciar" onclick="STATE.loggedIn?goPg('pg-profile'):openOv('ov-login')">INICIAR SESIÓN</button>
-      <button class="btn-canje" onclick="openOv('ov-canje')" style="background:var(--d3);color:var(--yw);border:1.5px solid var(--yw);border-radius:22px;padding:7px 14px;font-size:11px;font-weight:800;cursor:pointer;letter-spacing:.05em;margin-right:4px;font-family:Montserrat,sans-serif">🎟 CANJEAR</button>
+      <button class="btn-canje" onclick="openOv('ov-canje')" style="background:var(--d3);color:var(--yw);border:1.5px solid var(--yw);border-radius:22px;padding:7px 14px;font-size:11px;font-weight:800;cursor:pointer;letter-spacing:.05em;margin-right:4px;font-family:Manrope,system-ui,sans-serif">🎟 CANJEAR</button>
       <button class="btn-gs" onclick="STATE.loggedIn?goPg('pg-profile'):openOv('ov-login')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px;flex-shrink:0"><circle cx="8" cy="8" r="5"/><path d="M21 21l-8.5-8.5"/><path d="M13.5 13.5l2 2"/></svg> GOURMAND SOCIETY</button>
     </div>
     <!-- User nav -->
@@ -1284,7 +1569,7 @@ footer { background:var(--fp); padding:40px var(--px) 0 }
       <div id="home-welcome-text" style="font-size:16px;font-weight:800;color:var(--yw)">¡Hola!</div>
       <div id="home-welcome-sub" style="font-size:11px;color:var(--gr2);margin-top:2px">Estamos listos para tu próxima experiencia</div>
     </div>
-    <button onclick="goPg('pg-profile')" style="background:var(--pk);color:#fff;border:none;border-radius:20px;padding:8px 18px;font-size:11px;font-weight:700;cursor:pointer;font-family:Montserrat,sans-serif;flex-shrink:0">Mi perfil</button>
+    <button onclick="goPg('pg-profile')" style="background:var(--pk);color:#fff;border:none;border-radius:20px;padding:8px 18px;font-size:11px;font-weight:700;cursor:pointer;font-family:Manrope,system-ui,sans-serif;flex-shrink:0">Mi perfil</button>
   </div>
 
   <!-- BASADOS EN TUS GUSTOS -->
@@ -1324,13 +1609,13 @@ footer { background:var(--fp); padding:40px var(--px) 0 }
       </div>
     </div>
     <div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin-bottom:16px">
-      <button class="cuisine-btn active" onclick="filterCuisine(this,'all')" style="background:var(--yw);color:var(--bk);border:none;border-radius:22px;padding:8px 18px;font-size:11px;font-weight:700;letter-spacing:.06em;cursor:pointer;flex-shrink:0;font-family:Montserrat,sans-serif">TODOS</button>
-      <button class="cuisine-btn" onclick="filterCuisine(this,'med')" style="background:var(--d3);color:var(--gr2);border:1.5px solid var(--d4);border-radius:22px;padding:8px 18px;font-size:11px;font-weight:700;letter-spacing:.06em;cursor:pointer;flex-shrink:0;font-family:Montserrat,sans-serif">🌊 MEDITERRÁNEO</button>
-      <button class="cuisine-btn" onclick="filterCuisine(this,'asi')" style="background:var(--d3);color:var(--gr2);border:1.5px solid var(--d4);border-radius:22px;padding:8px 18px;font-size:11px;font-weight:700;letter-spacing:.06em;cursor:pointer;flex-shrink:0;font-family:Montserrat,sans-serif">🍜 ASIÁTICO</button>
-      <button class="cuisine-btn" onclick="filterCuisine(this,'ita')" style="background:var(--d3);color:var(--gr2);border:1.5px solid var(--d4);border-radius:22px;padding:8px 18px;font-size:11px;font-weight:700;letter-spacing:.06em;cursor:pointer;flex-shrink:0;font-family:Montserrat,sans-serif">🍝 ITALIANO</button>
-      <button class="cuisine-btn" onclick="filterCuisine(this,'jap')" style="background:var(--d3);color:var(--gr2);border:1.5px solid var(--d4);border-radius:22px;padding:8px 18px;font-size:11px;font-weight:700;letter-spacing:.06em;cursor:pointer;flex-shrink:0;font-family:Montserrat,sans-serif">🍣 JAPONÉS</button>
-      <button class="cuisine-btn" onclick="filterCuisine(this,'per')" style="background:var(--d3);color:var(--gr2);border:1.5px solid var(--d4);border-radius:22px;padding:8px 18px;font-size:11px;font-weight:700;letter-spacing:.06em;cursor:pointer;flex-shrink:0;font-family:Montserrat,sans-serif">🥩 PARRILLA</button>
-      <button class="cuisine-btn" onclick="filterCuisine(this,'bar')" style="background:var(--d3);color:var(--gr2);border:1.5px solid var(--d4);border-radius:22px;padding:8px 18px;font-size:11px;font-weight:700;letter-spacing:.06em;cursor:pointer;flex-shrink:0;font-family:Montserrat,sans-serif">🍸 COCTELERÍA</button>
+      <button class="cuisine-btn active" onclick="filterCuisine(this,'all')" style="background:var(--yw);color:var(--bk);border:none;border-radius:22px;padding:8px 18px;font-size:11px;font-weight:700;letter-spacing:.06em;cursor:pointer;flex-shrink:0;font-family:Manrope,system-ui,sans-serif">TODOS</button>
+      <button class="cuisine-btn" onclick="filterCuisine(this,'med')" style="background:var(--d3);color:var(--gr2);border:1.5px solid var(--d4);border-radius:22px;padding:8px 18px;font-size:11px;font-weight:700;letter-spacing:.06em;cursor:pointer;flex-shrink:0;font-family:Manrope,system-ui,sans-serif">🌊 MEDITERRÁNEO</button>
+      <button class="cuisine-btn" onclick="filterCuisine(this,'asi')" style="background:var(--d3);color:var(--gr2);border:1.5px solid var(--d4);border-radius:22px;padding:8px 18px;font-size:11px;font-weight:700;letter-spacing:.06em;cursor:pointer;flex-shrink:0;font-family:Manrope,system-ui,sans-serif">🍜 ASIÁTICO</button>
+      <button class="cuisine-btn" onclick="filterCuisine(this,'ita')" style="background:var(--d3);color:var(--gr2);border:1.5px solid var(--d4);border-radius:22px;padding:8px 18px;font-size:11px;font-weight:700;letter-spacing:.06em;cursor:pointer;flex-shrink:0;font-family:Manrope,system-ui,sans-serif">🍝 ITALIANO</button>
+      <button class="cuisine-btn" onclick="filterCuisine(this,'jap')" style="background:var(--d3);color:var(--gr2);border:1.5px solid var(--d4);border-radius:22px;padding:8px 18px;font-size:11px;font-weight:700;letter-spacing:.06em;cursor:pointer;flex-shrink:0;font-family:Manrope,system-ui,sans-serif">🍣 JAPONÉS</button>
+      <button class="cuisine-btn" onclick="filterCuisine(this,'per')" style="background:var(--d3);color:var(--gr2);border:1.5px solid var(--d4);border-radius:22px;padding:8px 18px;font-size:11px;font-weight:700;letter-spacing:.06em;cursor:pointer;flex-shrink:0;font-family:Manrope,system-ui,sans-serif">🥩 PARRILLA</button>
+      <button class="cuisine-btn" onclick="filterCuisine(this,'bar')" style="background:var(--d3);color:var(--gr2);border:1.5px solid var(--d4);border-radius:22px;padding:8px 18px;font-size:11px;font-weight:700;letter-spacing:.06em;cursor:pointer;flex-shrink:0;font-family:Manrope,system-ui,sans-serif">🍸 COCTELERÍA</button>
     </div>
     <div class="scroll-row" id="row-cuisine"></div>
   </div>
@@ -1367,7 +1652,7 @@ footer { background:var(--fp); padding:40px var(--px) 0 }
         </div>
         <div style="background:rgba(0,0,0,.2);padding:12px 18px;display:flex;justify-content:space-between;align-items:center">
           <div style="font-size:11px;color:var(--yw);font-weight:700">🔥 Solo quedan 4 plazas</div>
-          <button style="background:var(--yw);color:var(--bk);border:none;border-radius:20px;padding:6px 16px;font-size:11px;font-weight:700;cursor:pointer;font-family:Montserrat,sans-serif" onclick="event.stopPropagation();showToast('🎟 Comprando ticket...')">COMPRAR</button>
+          <button style="background:var(--yw);color:var(--bk);border:none;border-radius:20px;padding:6px 16px;font-size:11px;font-weight:700;cursor:pointer;font-family:Manrope,system-ui,sans-serif" onclick="event.stopPropagation();showToast('🎟 Comprando ticket...')">COMPRAR</button>
         </div>
       </div>
       <div onclick="goPg('pg-rest')" style="flex-shrink:0;width:300px;background:linear-gradient(135deg,#1a0b2e,#4a1060);border-radius:14px;overflow:hidden;cursor:pointer;border:1.5px solid rgba(200,126,255,.3);transition:transform .18s ease" onmouseenter="this.style.transform='translateY(-4px)'" onmouseleave="this.style.transform=''">
@@ -1382,7 +1667,7 @@ footer { background:var(--fp); padding:40px var(--px) 0 }
         </div>
         <div style="background:rgba(0,0,0,.3);padding:12px 18px;display:flex;justify-content:space-between;align-items:center">
           <div style="font-size:11px;color:var(--pu);font-weight:700">12 plazas disponibles</div>
-          <button style="background:var(--pu);color:#fff;border:none;border-radius:20px;padding:6px 16px;font-size:11px;font-weight:700;cursor:pointer;font-family:Montserrat,sans-serif" onclick="event.stopPropagation();showToast('🎓 Inscribiéndote...')">INSCRIBIRSE</button>
+          <button style="background:var(--pu);color:#fff;border:none;border-radius:20px;padding:6px 16px;font-size:11px;font-weight:700;cursor:pointer;font-family:Manrope,system-ui,sans-serif" onclick="event.stopPropagation();showToast('🎓 Inscribiéndote...')">INSCRIBIRSE</button>
         </div>
       </div>
       <div onclick="showToast('Más eventos próximamente')" style="flex-shrink:0;width:300px;background:linear-gradient(135deg,#0a1a0a,#0d2e0d);border-radius:14px;overflow:hidden;cursor:pointer;border:1.5px solid rgba(223,255,0,.2);transition:transform .18s ease" onmouseenter="this.style.transform='translateY(-4px)'" onmouseleave="this.style.transform=''">
@@ -1397,7 +1682,7 @@ footer { background:var(--fp); padding:40px var(--px) 0 }
         </div>
         <div style="background:rgba(0,0,0,.3);padding:12px 18px;display:flex;justify-content:space-between;align-items:center">
           <div style="font-size:11px;color:var(--yw);font-weight:700">Cupos limitados</div>
-          <button style="background:var(--yw);color:var(--bk);border:none;border-radius:20px;padding:6px 16px;font-size:11px;font-weight:700;cursor:pointer;font-family:Montserrat,sans-serif" onclick="event.stopPropagation();showToast('🥂 Reservando cupo...')">RESERVAR</button>
+          <button style="background:var(--yw);color:var(--bk);border:none;border-radius:20px;padding:6px 16px;font-size:11px;font-weight:700;cursor:pointer;font-family:Manrope,system-ui,sans-serif" onclick="event.stopPropagation();showToast('🥂 Reservando cupo...')">RESERVAR</button>
         </div>
       </div>
     </div>
@@ -1469,7 +1754,7 @@ footer { background:var(--fp); padding:40px var(--px) 0 }
           <div style="font-size:11px;color:var(--gr2);margin-bottom:10px">Chef Marco Rossi · 3 horas · Máx 8 personas</div>
           <div style="display:flex;justify-content:space-between;align-items:center">
             <div style="font-size:15px;font-weight:800;color:var(--yw)">$120.000</div>
-            <button style="background:var(--pk);color:#fff;border:none;border-radius:20px;padding:5px 14px;font-size:10px;font-weight:700;cursor:pointer;font-family:Montserrat,sans-serif">INSCRIBIRSE</button>
+            <button style="background:var(--pk);color:#fff;border:none;border-radius:20px;padding:5px 14px;font-size:10px;font-weight:700;cursor:pointer;font-family:Manrope,system-ui,sans-serif">INSCRIBIRSE</button>
           </div>
         </div>
       </div>
@@ -1481,7 +1766,7 @@ footer { background:var(--fp); padding:40px var(--px) 0 }
           <div style="font-size:11px;color:var(--gr2);margin-bottom:10px">Bartender José Leal · 2.5 horas · Máx 10 personas</div>
           <div style="display:flex;justify-content:space-between;align-items:center">
             <div style="font-size:15px;font-weight:800;color:var(--pu)">$95.000</div>
-            <button style="background:var(--pu);color:#fff;border:none;border-radius:20px;padding:5px 14px;font-size:10px;font-weight:700;cursor:pointer;font-family:Montserrat,sans-serif">INSCRIBIRSE</button>
+            <button style="background:var(--pu);color:#fff;border:none;border-radius:20px;padding:5px 14px;font-size:10px;font-weight:700;cursor:pointer;font-family:Manrope,system-ui,sans-serif">INSCRIBIRSE</button>
           </div>
         </div>
       </div>
@@ -1493,7 +1778,7 @@ footer { background:var(--fp); padding:40px var(--px) 0 }
           <div style="font-size:11px;color:var(--gr2);margin-bottom:10px">Pit Master Andrés · 4 horas · Máx 6 personas</div>
           <div style="display:flex;justify-content:space-between;align-items:center">
             <div style="font-size:15px;font-weight:800;color:var(--or)">$180.000</div>
-            <button style="background:var(--or);color:#fff;border:none;border-radius:20px;padding:5px 14px;font-size:10px;font-weight:700;cursor:pointer;font-family:Montserrat,sans-serif">INSCRIBIRSE</button>
+            <button style="background:var(--or);color:#fff;border:none;border-radius:20px;padding:5px 14px;font-size:10px;font-weight:700;cursor:pointer;font-family:Manrope,system-ui,sans-serif">INSCRIBIRSE</button>
           </div>
         </div>
       </div>
@@ -1688,7 +1973,7 @@ footer { background:var(--fp); padding:40px var(--px) 0 }
           <div style="font-size:18px;font-weight:800;margin-bottom:6px">El Reservado</div>
           <div style="font-size:12px;color:var(--gr2);line-height:1.6;margin-bottom:14px">Mesa privada con vista al jardín. Capacidad máx. 12 personas. Menú exclusivo. Disponible para eventos y cenas especiales.</div>
           <div style="display:flex;gap:10px">
-            <button style="flex:1;background:var(--pk);color:#fff;border:none;border-radius:10px;padding:10px;font-size:12px;font-weight:700;cursor:pointer;font-family:Montserrat,sans-serif;letter-spacing:.04em" onclick="goPg('pg-reserve');showToast('Reservando sala privada...')">RESERVAR SALA PRIVADA</button>
+            <button style="flex:1;background:var(--pk);color:#fff;border:none;border-radius:10px;padding:10px;font-size:12px;font-weight:700;cursor:pointer;font-family:Manrope,system-ui,sans-serif;letter-spacing:.04em" onclick="goPg('pg-reserve');showToast('Reservando sala privada...')">RESERVAR SALA PRIVADA</button>
           </div>
         </div></div>
         <button class="btn-concierge" onclick="showToast('🤌 Conectando con concierge...')">HABLAR CON CONCIERGE</button>
@@ -1889,17 +2174,17 @@ footer { background:var(--fp); padding:40px var(--px) 0 }
     <div style="background:var(--d3);border:1px solid var(--d4);border-radius:20px;padding:5px 12px;font-size:11px;font-weight:700" id="disc-time-chip">8:00 PM</div>
     <div style="background:var(--d3);border:1px solid var(--d4);border-radius:20px;padding:5px 12px;font-size:11px;font-weight:700" id="disc-pax-chip">2 personas</div>
     <div style="background:rgba(255,0,127,.12);border:1px solid rgba(255,0,127,.3);border-radius:20px;padding:5px 12px;font-size:11px;font-weight:700;color:var(--pk)" id="disc-mood-chip">🔥 Con Buena VIBRA!</div>
-    <button onclick="goPg('pg-home')" style="background:none;border:1px solid var(--d4);border-radius:20px;padding:5px 12px;font-size:11px;color:var(--gr);cursor:pointer;font-family:Montserrat,sans-serif">✏ Editar</button>
+    <button onclick="goPg('pg-home')" style="background:none;border:1px solid var(--d4);border-radius:20px;padding:5px 12px;font-size:11px;color:var(--gr);cursor:pointer;font-family:Manrope,system-ui,sans-serif">✏ Editar</button>
   </div>
 
   <!-- Filter by cuisine -->
   <div style="background:var(--d1);border-bottom:1px solid var(--d2);padding:10px var(--px);display:flex;gap:6px;overflow-x:auto">
-    <button class="disc-filt active" data-f="all" onclick="discFilter(this,'all')" style="background:var(--yw);color:var(--bk);border:none;border-radius:20px;padding:7px 16px;font-size:11px;font-weight:700;cursor:pointer;flex-shrink:0;font-family:Montserrat,sans-serif">Todos</button>
-    <button class="disc-filt" data-f="med" onclick="discFilter(this,'med')" style="background:var(--d3);color:var(--gr2);border:1.5px solid var(--d4);border-radius:20px;padding:7px 16px;font-size:11px;font-weight:700;cursor:pointer;flex-shrink:0;font-family:Montserrat,sans-serif">🌊 Mediterráneo</button>
-    <button class="disc-filt" data-f="asi" onclick="discFilter(this,'asi')" style="background:var(--d3);color:var(--gr2);border:1.5px solid var(--d4);border-radius:20px;padding:7px 16px;font-size:11px;font-weight:700;cursor:pointer;flex-shrink:0;font-family:Montserrat,sans-serif">🍜 Asiático</button>
-    <button class="disc-filt" data-f="ita" onclick="discFilter(this,'ita')" style="background:var(--d3);color:var(--gr2);border:1.5px solid var(--d4);border-radius:20px;padding:7px 16px;font-size:11px;font-weight:700;cursor:pointer;flex-shrink:0;font-family:Montserrat,sans-serif">🍝 Italiano</button>
-    <button class="disc-filt" data-f="jap" onclick="discFilter(this,'jap')" style="background:var(--d3);color:var(--gr2);border:1.5px solid var(--d4);border-radius:20px;padding:7px 16px;font-size:11px;font-weight:700;cursor:pointer;flex-shrink:0;font-family:Montserrat,sans-serif">🍣 Japonés</button>
-    <button class="disc-filt" data-f="bar" onclick="discFilter(this,'bar')" style="background:var(--d3);color:var(--gr2);border:1.5px solid var(--d4);border-radius:20px;padding:7px 16px;font-size:11px;font-weight:700;cursor:pointer;flex-shrink:0;font-family:Montserrat,sans-serif">🍸 Coctelería</button>
+    <button class="disc-filt active" data-f="all" onclick="discFilter(this,'all')" style="background:var(--yw);color:var(--bk);border:none;border-radius:20px;padding:7px 16px;font-size:11px;font-weight:700;cursor:pointer;flex-shrink:0;font-family:Manrope,system-ui,sans-serif">Todos</button>
+    <button class="disc-filt" data-f="med" onclick="discFilter(this,'med')" style="background:var(--d3);color:var(--gr2);border:1.5px solid var(--d4);border-radius:20px;padding:7px 16px;font-size:11px;font-weight:700;cursor:pointer;flex-shrink:0;font-family:Manrope,system-ui,sans-serif">🌊 Mediterráneo</button>
+    <button class="disc-filt" data-f="asi" onclick="discFilter(this,'asi')" style="background:var(--d3);color:var(--gr2);border:1.5px solid var(--d4);border-radius:20px;padding:7px 16px;font-size:11px;font-weight:700;cursor:pointer;flex-shrink:0;font-family:Manrope,system-ui,sans-serif">🍜 Asiático</button>
+    <button class="disc-filt" data-f="ita" onclick="discFilter(this,'ita')" style="background:var(--d3);color:var(--gr2);border:1.5px solid var(--d4);border-radius:20px;padding:7px 16px;font-size:11px;font-weight:700;cursor:pointer;flex-shrink:0;font-family:Manrope,system-ui,sans-serif">🍝 Italiano</button>
+    <button class="disc-filt" data-f="jap" onclick="discFilter(this,'jap')" style="background:var(--d3);color:var(--gr2);border:1.5px solid var(--d4);border-radius:20px;padding:7px 16px;font-size:11px;font-weight:700;cursor:pointer;flex-shrink:0;font-family:Manrope,system-ui,sans-serif">🍣 Japonés</button>
+    <button class="disc-filt" data-f="bar" onclick="discFilter(this,'bar')" style="background:var(--d3);color:var(--gr2);border:1.5px solid var(--d4);border-radius:20px;padding:7px 16px;font-size:11px;font-weight:700;cursor:pointer;flex-shrink:0;font-family:Manrope,system-ui,sans-serif">🍸 Coctelería</button>
   </div>
 
   <!-- Results heading -->
@@ -1908,7 +2193,7 @@ footer { background:var(--fp); padding:40px var(--px) 0 }
       <div style="font-size:11px;color:var(--gr);letter-spacing:.08em;text-transform:uppercase;margin-bottom:2px">Disponibles ahora</div>
       <div style="font-size:18px;font-weight:800" id="disc-count">6 restaurantes encontrados</div>
     </div>
-    <select style="background:var(--d2);border:1px solid var(--d4);border-radius:8px;padding:7px 12px;font-size:11px;color:var(--wh);cursor:pointer;font-family:Montserrat,sans-serif">
+    <select style="background:var(--d2);border:1px solid var(--d4);border-radius:8px;padding:7px 12px;font-size:11px;color:var(--wh);cursor:pointer;font-family:Manrope,system-ui,sans-serif">
       <option>Más relevantes</option>
       <option>Mejor valorados</option>
       <option>Más reservados</option>
@@ -1977,7 +2262,7 @@ footer { background:var(--fp); padding:40px var(--px) 0 }
       </div>
       <div>
         <button onclick="setPanelMenu('beneficios','MI AVANCE');renderMiAvance()"
-          style="background:var(--pk);color:#fff;border:none;border-radius:6px;padding:10px 20px;font-size:12px;font-weight:700;cursor:pointer;font-family:Montserrat,sans-serif">
+          style="background:var(--pk);color:#fff;border:none;border-radius:6px;padding:10px 20px;font-size:12px;font-weight:700;cursor:pointer;font-family:Manrope,system-ui,sans-serif">
           MI AVANCE ▶
         </button>
       </div>
@@ -2049,51 +2334,116 @@ footer { background:var(--fp); padding:40px var(--px) 0 }
 
       <!-- HISTORIAL -->
       <div class="ppanel active" id="pp-historial">
-        <div class="no-res-box">
-          <h3>No hay reservaciones futuras</h3>
-          <div class="rmf">
-            <div class="pill" id="hist-pill-date" onclick="toggleDrop('hist-drop-date','hist-pill-date')">
-              <svg class="pill-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-              <span class="pill-unit" id="hist-month">FEB</span><span class="pill-val" id="hist-day">16</span>
-              <svg class="pill-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-              <div class="drop" id="hist-drop-date" onclick="event.stopPropagation()">
-                <div class="drop-hd">ELIGE LA FECHA</div>
-                <div class="cal-nav"><button onclick="calNavH(-1)">‹</button><span id="cal-month-h">Febrero 2026</span><button onclick="calNavH(1)">›</button></div>
-                <div class="cal-week-labels"><span>Lu</span><span>Ma</span><span>Mi</span><span>Ju</span><span>Vi</span><span>Sa</span><span>Do</span></div>
-                <div class="cal-grid" id="cal-grid-h"></div>
-              </div>
-            </div>
-            <div class="pill" id="hist-pill-time" onclick="toggleDrop('hist-drop-time','hist-pill-time')">
-              <svg class="pill-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-              <span class="pill-val" id="hist-time-val">7:00</span><span class="pill-unit" id="hist-time-ampm">PM</span>
-              <svg class="pill-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-              <div class="drop" id="hist-drop-time" onclick="event.stopPropagation()" style="min-width:280px">
-                <div class="drop-hd">ELIGE LA HORA</div>
-                <div class="time-grid" id="time-grid-h"></div>
-              </div>
-            </div>
-            <div class="pill" id="hist-pill-pax" onclick="toggleDrop('hist-drop-pax','hist-pill-pax')">
-              <svg class="pill-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-              <span class="pill-val" id="hist-pax-val">2</span><span class="pill-unit">PERSONAS</span>
-              <svg class="pill-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-              <div class="drop" id="hist-drop-pax" onclick="event.stopPropagation()" style="min-width:240px">
-                <div class="drop-hd">¿CUÁNTOS SON?</div>
-                <div class="pax-control">
-                  <button class="pax-btn" onclick="setPaxH(STATE.pax-1)">−</button>
-                  <span class="pax-num" id="hist-pax-display">2</span>
-                  <button class="pax-btn" onclick="setPaxH(STATE.pax+1)">+</button>
-                  <span style="font-size:12px;color:var(--gr)">personas</span>
-                </div>
-                <div class="pax-presets" id="pax-presets-h"></div>
-              </div>
-            </div>
-          </div>
-          <div class="rs-row">
-            <input class="rs-input" placeholder="🔍 ¿Qué restaurante buscas?" id="hist-search">
-            <button class="btn-reservar" style="white-space:nowrap" onclick="goPg('pg-rest')">RESERVAR</button>
+
+    <!-- HERO - App Style -->
+    <div class="youhero" id="you-hero">
+      <div class="yhbg" id="you-hero-bg" style="background-size:cover;background-position:center;background-image:url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80')"></div>
+      <div class="yhov"></div>
+      <div class="yhin">
+        <div class="yht" style="font-size:28px;font-weight:700">TÚ</div>
+        <div class="yhg" id="you-hero-greeting">Hola ✨</div>
+        <div class="yhs" id="you-hero-sub">Tu próxima experiencia te está esperando.</div>
+      </div>
+    </div>
+
+    <!-- LEVEL MINI - App Style -->
+    <div class="levelmini" id="you-level-mini">
+      <div class="lmtop">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.6 4.4L18 8l-4.4 1.6L12 14l-1.6-4.4L6 8l4.4-1.6z"/></svg>
+        <span id="you-level-name">INICIADO</span>
+      </div>
+      <div class="lmpct" id="you-level-pct">Comenzando tu camino gastronómico</div>
+      <div class="bar"><i id="you-level-bar" style="width:0%"></i></div>
+    </div>
+
+    <!-- PRÓXIMAS RESERVAS -->
+    <div class="sec">
+      <div class="sec-hd">
+        <div><div class="sec-t">1. Próximas reservas</div></div>
+        <div class="sec-link" onclick="openReserveFlow ? openReserveFlow() : goReserve()">+ Nueva</div>
+      </div>
+      <div id="proximas-reservas-list">
+        <div class="resv" style="cursor:pointer" onclick="openReserveFlow ? openReserveFlow() : goReserve()">
+          <div class="rvimg" style="background:#1d1726;display:flex;align-items:center;justify-content:center;font-size:28px">🍽️</div>
+          <div class="rvbody">
+            <div class="rvtop"><div class="rvn">Sin reservas próximas</div></div>
+            <div class="rvline">Haz tu primera reserva en Oh Yeah!</div>
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- RESTAURANTES GUARDADOS -->
+    <div class="sec">
+      <div class="sec-hd">
+        <div><div class="sec-t">2. Restaurantes guardados</div></div>
+        <div class="sec-link">Ver todos</div>
+      </div>
+      <div class="rail">
+        <div class="savedc" onclick="showToast('OMM')"><div class="svi" style="background-image:url('https://images.unsplash.com/photo-1559339352-11d035aa65de?w=200&q=70');background-size:cover"></div><div class="svn">OMM</div><div class="svc">Internacional</div><div class="svr">★ 4.9</div></div>
+        <div class="savedc" onclick="showToast('OMM')"><div class="svi" style="background-image:url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=200&q=70');background-size:cover"></div><div class="svn">OMM</div><div class="svc">Coctelería</div><div class="svr">★ 4.7</div></div>
+        <div class="savedc" onclick="showToast('OMM')"><div class="svi" style="background-image:url('https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=200&q=70');background-size:cover"></div><div class="svn">OMM</div><div class="svc">Rooftop</div><div class="svr">★ 4.8</div></div>
+        <div class="savedc" onclick="showToast('OMM')"><div class="svi" style="background-image:url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=200&q=70');background-size:cover"></div><div class="svn">OMM</div><div class="svc">Alta cocina</div><div class="svr">★ 4.9</div></div>
+      </div>
+    </div>
+
+    <!-- MIS BONOS -->
+    <div class="sec">
+      <div class="sec-hd">
+        <div><div class="sec-t">Mis bonos</div></div>
+        <div class="sec-link" onclick="openOv('ov-canje')">Canjear</div>
+      </div>
+      <div class="bonorail" id="you-bonos">
+        <div class="bonoc bono-pink" onclick="openOv('ov-canje')">
+          <div class="bici"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 22l2-6m4 6l-2-6m-6-4a4 4 0 018 0"/></svg></div>
+          <div class="bival">2x1</div><div class="bisub">En cócteles</div>
+          <div class="bidiv"></div><div class="bivu">Válido hasta 31 May</div>
+        </div>
+        <div class="bonoc bono-gold" onclick="openOv('ov-canje')">
+          <div class="bici"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M9 21h6M12 17v4"/></svg></div>
+          <div class="bival">10% OFF</div><div class="bisub">En tu próxima cuenta</div>
+          <div class="bidiv"></div><div class="bivu">Válido hasta 15 Jun</div>
+        </div>
+        <div class="bonoc bono-blue" onclick="openOv('ov-canje')">
+          <div class="bici"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M16 2l-4 6-4-6"/></svg></div>
+          <div class="bival">Postre</div><div class="bisub">de cortesía</div>
+          <div class="bidiv"></div><div class="bivu">Válido hasta 10 Jun</div>
+        </div>
+        <div class="bonoc bono-lime" onclick="openOv('ov-canje')">
+          <div class="bici"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg></div>
+          <div class="bival">15% OFF</div><div class="bisub">En vinos</div>
+          <div class="bidiv"></div><div class="bivu">Válido hasta 30 Jun</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RECOMENDADOS -->
+    <div class="sec">
+      <div class="sec-hd">
+        <div><div class="sec-t">3. Recomendados para ti</div></div>
+        <div class="sec-link">Ver todas</div>
+      </div>
+      <div class="rail">
+        <div class="recc" onclick="goPg('pg-rest')"><div class="rcimg" style="background-image:url('https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=400&q=70');background-size:cover"><div class="rcoff">10% OFF</div></div><div class="rcn">OMM</div><div class="rcc">Mediterráneo</div><div class="rcr">★ 4.9</div></div>
+        <div class="recc" onclick="goPg('pg-rest')"><div class="rcimg" style="background-image:url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=400&q=70');background-size:cover"><div class="rcoff">10% OFF</div></div><div class="rcn">OMM</div><div class="rcc">Coctelería</div><div class="rcr">★ 4.7</div></div>
+        <div class="recc" onclick="goPg('pg-rest')"><div class="rcimg" style="background-image:url('https://images.unsplash.com/photo-1559339352-11d035aa65de?w=400&q=70');background-size:cover"><div class="rcoff">15% OFF</div></div><div class="rcn">OMM</div><div class="rcc">Internacional</div><div class="rcr">★ 4.8</div></div>
+        <div class="recc" onclick="goPg('pg-rest')"><div class="rcimg" style="background-image:url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&q=70');background-size:cover"><div class="rcoff">10% OFF</div></div><div class="rcn">OMM</div><div class="rcc">Alta cocina</div><div class="rcr">★ 4.8</div></div>
+      </div>
+    </div>
+
+    <!-- HISTORIAL -->
+    <div class="sec">
+      <div class="sec-hd">
+        <div><div class="sec-t">5. Tu historial</div></div>
+        <div class="sec-link" id="historial-count">0 visitas</div>
+      </div>
+      <div class="rail" id="historial-list">
+        <div style="font-size:12px;color:var(--gr2);padding:16px var(--px)">Tu historial aparecerá aquí después de tu primera visita 🍽️</div>
+      </div>
+    </div>
+
+  </div>
+
 
       <!-- GUARDADOS -->
       <div class="ppanel" id="pp-guardados">
@@ -2241,7 +2591,7 @@ footer { background:var(--fp); padding:40px var(--px) 0 }
           <span style="color:var(--gr);font-size:11px;margin-top:4px;display:block">Revisa tu bandeja de entrada y también la carpeta de spam</span>
         </div>
       </div>
-      <button onclick="goPg('pg-home')" style="background:var(--yw);color:var(--bk);border:none;border-radius:24px;padding:14px 40px;font-size:15px;font-weight:900;cursor:pointer;font-family:Montserrat,sans-serif;letter-spacing:.06em;width:100%;max-width:320px">
+      <button onclick="goPg('pg-home')" style="background:var(--yw);color:var(--bk);border:none;border-radius:24px;padding:14px 40px;font-size:15px;font-weight:900;cursor:pointer;font-family:Manrope,system-ui,sans-serif;letter-spacing:.06em;width:100%;max-width:320px">
         IR AL INICIO 🎉
       </button>
       <div style="margin-top:14px;font-size:12px;color:var(--gr)">
@@ -2432,7 +2782,7 @@ footer { background:var(--fp); padding:40px var(--px) 0 }
       </div>
 
       <!-- Botón crear cuenta -->
-      <button onclick="doSignup()" style="width:100%;background:var(--yw);color:var(--bk);border:none;border-radius:14px;padding:16px;font-size:15px;font-weight:900;cursor:pointer;font-family:Montserrat,sans-serif;letter-spacing:.06em;margin-bottom:12px;transition:opacity .2s" onmouseover="this.style.opacity='.9'" onmouseout="this.style.opacity='1'">
+      <button onclick="doSignup()" style="width:100%;background:var(--yw);color:var(--bk);border:none;border-radius:14px;padding:16px;font-size:15px;font-weight:900;cursor:pointer;font-family:Manrope,system-ui,sans-serif;letter-spacing:.06em;margin-bottom:12px;transition:opacity .2s" onmouseover="this.style.opacity='.9'" onmouseout="this.style.opacity='1'">
         CREAR CUENTA 🗝
       </button>
 
@@ -3195,6 +3545,12 @@ const SUPA_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIs
 const supa = (typeof supabase !== 'undefined') ? supabase.createClient(SUPA_URL, SUPA_KEY) : null;
 
 async function confirmRes() {
+  // ── Modify mode: reroute to modification flow ──
+  if (STATE.modifyMode && STATE.modifyingId) {
+    await _confirmarModificacion();
+    return;
+  }
+
   const m = MONTHS_ES[STATE.date.getMonth()];
   const d = STATE.date.getDate();
   const contact = document.getElementById('res-contact');
@@ -3627,7 +3983,7 @@ function renderDiscGrid(filter) {
     card.addEventListener('mouseleave', function(){ card.style.transform=''; card.style.boxShadow=''; });
     card.addEventListener('click', function(){ goPg('pg-rest'); });
     const imgHtml = img ? '<img src="' + img + '" style="width:100%;height:100%;object-fit:cover" loading="lazy">' : '<div style="width:100%;height:100%;background:var(--d3)"></div>';
-    card.innerHTML = '<div style="position:relative;height:160px;overflow:hidden">' + imgHtml + '<div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.6),transparent)"></div>' + bHtml + '</div><div style="padding:14px 16px"><div style="font-size:20px;font-weight:900;margin-bottom:2px">' + r.n + '</div><div style="font-size:11px;color:var(--gr2);margin-bottom:6px">' + r.m + '</div><div style="display:flex;align-items:center;justify-content:space-between"><span style="color:var(--yw);font-size:12px;font-weight:700">&#9733; ' + r.s + '</span>' + avHtml + '</div>' + crmHtml + '<button style="width:100%;margin-top:12px;border:none;border-radius:10px;padding:10px;font-size:12px;font-weight:700;font-family:Montserrat,sans-serif;' + bSt + '" ' + btnClickAttr + '>' + (r.open ? 'RESERVAR AQUI' : 'SIN DISPONIBILIDAD') + '</button></div>';
+    card.innerHTML = '<div style="position:relative;height:160px;overflow:hidden">' + imgHtml + '<div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.6),transparent)"></div>' + bHtml + '</div><div style="padding:14px 16px"><div style="font-size:20px;font-weight:900;margin-bottom:2px">' + r.n + '</div><div style="font-size:11px;color:var(--gr2);margin-bottom:6px">' + r.m + '</div><div style="display:flex;align-items:center;justify-content:space-between"><span style="color:var(--yw);font-size:12px;font-weight:700">&#9733; ' + r.s + '</span>' + avHtml + '</div>' + crmHtml + '<button style="width:100%;margin-top:12px;border:none;border-radius:10px;padding:10px;font-size:12px;font-weight:700;font-family:Manrope,system-ui,sans-serif;' + bSt + '" ' + btnClickAttr + '>' + (r.open ? 'RESERVAR AQUI' : 'SIN DISPONIBILIDAD') + '</button></div>';
     grid.appendChild(card);
   });
 }
@@ -4556,7 +4912,7 @@ async function loadProximasReservas() {
     if (error) throw error;
 
     if (!data || data.length === 0) {
-      list.innerHTML = '<div style="background:var(--d2);border:1.5px dashed var(--d4);border-radius:12px;padding:24px;text-align:center"><div style="font-size:28px;margin-bottom:8px">🍽️</div><div style="font-size:13px;color:var(--gr2);margin-bottom:14px">Aún no tienes reservas próximas</div><button onclick="goReserve()" style="background:var(--yw);color:var(--bk);border:none;border-radius:20px;padding:9px 22px;font-size:12px;font-weight:800;cursor:pointer;font-family:Montserrat,sans-serif">Hacer una reserva</button></div>';
+      list.innerHTML = '<div style="background:var(--d2);border:1.5px dashed var(--d4);border-radius:12px;padding:24px;text-align:center"><div style="font-size:28px;margin-bottom:8px">🍽️</div><div style="font-size:13px;color:var(--gr2);margin-bottom:14px">Aún no tienes reservas próximas</div><button onclick="goReserve()" style="background:var(--yw);color:var(--bk);border:none;border-radius:20px;padding:9px 22px;font-size:12px;font-weight:800;cursor:pointer;font-family:Manrope,system-ui,sans-serif">Hacer una reserva</button></div>';
       return;
     }
 
@@ -4579,8 +4935,8 @@ async function loadProximasReservas() {
         + '<div style="font-size:12px;color:var(--gr2)">🕐 ' + r.time + ' &nbsp;·&nbsp; 👥 ' + r.pax + ' persona' + (r.pax!==1?'s':'') + '</div>'
         + '</div></div>'
         + '<div style="display:flex;gap:8px;margin-top:12px">'
-        + '<button onclick="abrirModificar(\'' + r.id + '\',\'' + r.date + '\',\'' + r.time + '\',' + r.pax + ')" style="flex:1;background:var(--d3);color:var(--gr2);border:1px solid var(--d4);border-radius:8px;padding:8px;font-size:11px;font-weight:700;cursor:pointer;font-family:Montserrat,sans-serif">✏️ Modificar</button>'
-        + (canCancel ? '<button onclick="confirmarCancelar(\'' + r.id + '\')" style="flex:1;background:rgba(255,68,68,.08);color:#FF6B6B;border:1px solid rgba(255,68,68,.2);border-radius:8px;padding:8px;font-size:11px;font-weight:700;cursor:pointer;font-family:Montserrat,sans-serif">✕ Cancelar</button>' : '')
+        + '<button onclick="abrirModificar(\'' + r.id + '\',\'' + r.date + '\',\'' + r.time + '\',' + r.pax + ')" style="flex:1;background:var(--d3);color:var(--gr2);border:1px solid var(--d4);border-radius:8px;padding:8px;font-size:11px;font-weight:700;cursor:pointer;font-family:Manrope,system-ui,sans-serif">✏️ Modificar</button>'
+        + (canCancel ? '<button onclick="confirmarCancelar(\'' + r.id + '\')" style="flex:1;background:rgba(255,68,68,.08);color:#FF6B6B;border:1px solid rgba(255,68,68,.2);border-radius:8px;padding:8px;font-size:11px;font-weight:700;cursor:pointer;font-family:Manrope,system-ui,sans-serif">✕ Cancelar</button>' : '')
         + '</div></div>';
     }).join('');
 
@@ -4641,15 +4997,7 @@ function abrirModificar(resId, fecha, hora, pax) {
   showToast('✏️ Modifica tu reserva y confirma', 3000);
 }
 
-/* Override confirmRes to handle modify mode */
-var _origConfirmRes = confirmRes;
-async function confirmRes() {
-  if (STATE.modifyMode && STATE.modifyingId) {
-    await _confirmarModificacion();
-  } else {
-    await _origConfirmRes();
-  }
-}
+/* modify mode handled inside confirmRes */
 
 async function _confirmarModificacion() {
   var btn = document.querySelector('#pg-reserve .btn-reservar');
@@ -4713,7 +5061,7 @@ async function _confirmarModificacion() {
 
       <div style="display:flex;gap:8px;margin-bottom:16px">
         <input id="canje-input" class="fi" placeholder="Ej: CAFE2024, BONO10, VINO2024..." style="flex:1;text-transform:uppercase;letter-spacing:.1em;font-weight:700" oninput="this.value=this.value.toUpperCase()">
-        <button onclick="canjearCodigo()" style="background:var(--yw);color:var(--bk);border:none;border-radius:10px;padding:0 20px;font-size:13px;font-weight:800;cursor:pointer;font-family:Montserrat,sans-serif;white-space:nowrap">VALIDAR</button>
+        <button onclick="canjearCodigo()" style="background:var(--yw);color:var(--bk);border:none;border-radius:10px;padding:0 20px;font-size:13px;font-weight:800;cursor:pointer;font-family:Manrope,system-ui,sans-serif;white-space:nowrap">VALIDAR</button>
       </div>
 
       <div id="canje-result" style="display:none"></div>
@@ -4721,7 +5069,7 @@ async function _confirmarModificacion() {
       <div id="canje-login-prompt" style="display:none;background:rgba(255,0,127,.08);border:1px solid rgba(255,0,127,.25);border-radius:10px;padding:14px 16px;margin-top:12px;text-align:center">
         <div style="font-size:13px;font-weight:700;color:var(--wh);margin-bottom:6px">Guarda tu bono en tu cuenta</div>
         <div style="font-size:12px;color:var(--gr2);margin-bottom:12px">Inicia sesión para que quede registrado y puedas usarlo en cualquier restaurante Oh Yeah!</div>
-        <button onclick="closeOv('ov-canje');openOv('ov-login')" style="background:var(--pk);color:#fff;border:none;border-radius:20px;padding:9px 24px;font-size:12px;font-weight:700;cursor:pointer;font-family:Montserrat,sans-serif">Iniciar sesión para guardar</button>
+        <button onclick="closeOv('ov-canje');openOv('ov-login')" style="background:var(--pk);color:#fff;border:none;border-radius:20px;padding:9px 24px;font-size:12px;font-weight:700;cursor:pointer;font-family:Manrope,system-ui,sans-serif">Iniciar sesión para guardar</button>
       </div>
 
       <div style="background:var(--d3);border-radius:10px;padding:16px;margin-top:16px">
@@ -4746,13 +5094,13 @@ async function _confirmarModificacion() {
         <div style="margin-bottom:28px">
           <div style="font-size:13px;font-weight:800;color:var(--wh);letter-spacing:.02em;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center">
             📅 Mis próximas reservas
-            <button onclick="goReserve()" style="background:var(--pk);color:#fff;border:none;border-radius:20px;padding:6px 14px;font-size:11px;font-weight:700;cursor:pointer;font-family:Montserrat,sans-serif">+ Nueva</button>
+            <button onclick="goReserve()" style="background:var(--pk);color:#fff;border:none;border-radius:20px;padding:6px 14px;font-size:11px;font-weight:700;cursor:pointer;font-family:Manrope,system-ui,sans-serif">+ Nueva</button>
           </div>
           <div id="proximas-reservas-list">
             <div style="background:var(--d2);border:1.5px dashed var(--d4);border-radius:12px;padding:24px;text-align:center">
               <div style="font-size:28px;margin-bottom:8px">🍽️</div>
               <div style="font-size:13px;color:var(--gr2);margin-bottom:14px">Aún no tienes reservas próximas</div>
-              <button onclick="goReserve()" style="background:var(--yw);color:var(--bk);border:none;border-radius:20px;padding:9px 22px;font-size:12px;font-weight:800;cursor:pointer;font-family:Montserrat,sans-serif">Hacer una reserva</button>
+              <button onclick="goReserve()" style="background:var(--yw);color:var(--bk);border:none;border-radius:20px;padding:9px 22px;font-size:12px;font-weight:800;cursor:pointer;font-family:Manrope,system-ui,sans-serif">Hacer una reserva</button>
             </div>
           </div>
         </div>
