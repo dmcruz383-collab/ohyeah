@@ -1685,36 +1685,199 @@ section.on{display:block}
 <!-- SIGNUP OVERLAY -->
 <div class="ov" id="ov-signup" onclick="ovBg(event,'ov-signup')">
 <div class="modal"><button class="m-close" onclick="closeOv('ov-signup')">✕</button>
-<div class="mbox" style="width:440px;max-height:88vh;overflow-y:auto">
-  <div style="text-align:center;margin-bottom:20px">
-    <div style="font-family:'Fraunces',serif;font-size:24px;font-weight:600;font-style:italic;margin-bottom:4px"><span style="color:var(--pk)">Oh</span><span style="color:var(--yw)">Yeah!</span></div>
-    <div style="font-size:12px;color:var(--mut)">Únete a la mejor comunidad gastronómica</div>
+<div class="mbox" style="width:460px;max-height:90vh;overflow-y:auto">
+
+  <!-- HEADER -->
+  <div style="text-align:center;margin-bottom:22px">
+    <div style="font-family:'Fraunces',serif;font-size:26px;font-weight:600;font-style:italic;margin-bottom:4px">
+      <span style="color:var(--pk)">Oh</span><span style="color:var(--yw)">Yeah!</span>
+    </div>
+    <div style="font-size:12px;color:var(--mut)">Únete a la mejor comunidad gastronómica · Es gratis 🗝</div>
   </div>
+
+  <!-- PASO 1: DATOS PERSONALES -->
+  <div style="font-size:9px;font-weight:800;color:var(--yw);letter-spacing:.1em;margin-bottom:12px">PASO 1 · TUS DATOS</div>
+
+  <!-- Nombre + Apellidos -->
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
-    <div><div style="font-size:9px;font-weight:800;color:var(--mut);letter-spacing:.08em;margin-bottom:4px">NOMBRE</div><input class="fi" id="su-name" placeholder="Tu nombre"></div>
-    <div><div style="font-size:9px;font-weight:800;color:var(--mut);letter-spacing:.08em;margin-bottom:4px">APELLIDOS</div><input class="fi" id="su-last" placeholder="Apellidos"></div>
+    <div>
+      <div style="font-size:9px;font-weight:800;color:var(--mut);letter-spacing:.08em;margin-bottom:4px">NOMBRE *</div>
+      <input class="fi" id="su-name" placeholder="Tu nombre" autocomplete="given-name">
+    </div>
+    <div>
+      <div style="font-size:9px;font-weight:800;color:var(--mut);letter-spacing:.08em;margin-bottom:4px">APELLIDOS *</div>
+      <input class="fi" id="su-last" placeholder="Apellidos" autocomplete="family-name">
+    </div>
   </div>
-  <div style="margin-bottom:10px"><div style="font-size:9px;font-weight:800;color:var(--mut);letter-spacing:.08em;margin-bottom:4px">CORREO</div><input class="fi" id="su-email" type="email" placeholder="tu@correo.com"></div>
-  <div style="margin-bottom:10px"><div style="font-size:9px;font-weight:800;color:var(--mut);letter-spacing:.08em;margin-bottom:4px">CELULAR</div><div style="display:flex;gap:6px"><div style="background:#1d1726;border:1px solid var(--line);border-radius:12px;padding:0 12px;display:flex;align-items:center;font-size:12px;font-weight:800;color:var(--mut);flex-shrink:0">+57</div><input class="fi" id="su-phone" type="tel" placeholder="Celular"></div></div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px">
-    <div><div style="font-size:9px;font-weight:800;color:var(--mut);letter-spacing:.08em;margin-bottom:4px">CONTRASEÑA</div><input class="fi" id="su-password" type="password" placeholder="Mín. 6 caracteres"></div>
-    <div><div style="font-size:9px;font-weight:800;color:var(--mut);letter-spacing:.08em;margin-bottom:4px">CONFIRMAR</div><input class="fi" id="su-password2" type="password" placeholder="Repite"></div>
+
+  <!-- Correo -->
+  <div style="margin-bottom:10px">
+    <div style="font-size:9px;font-weight:800;color:var(--mut);letter-spacing:.08em;margin-bottom:4px">CORREO *</div>
+    <input class="fi" id="su-email" type="email" placeholder="tu@correo.com" autocomplete="email">
   </div>
+
+  <!-- Celular con selector de país -->
+  <div style="margin-bottom:10px">
+    <div style="font-size:9px;font-weight:800;color:var(--mut);letter-spacing:.08em;margin-bottom:4px">CELULAR *</div>
+    <div style="display:flex;gap:6px">
+      <div style="position:relative;flex-shrink:0">
+        <select id="su-country-code" class="fi" style="padding-left:10px;padding-right:28px;min-width:100px;cursor:pointer;font-weight:700;background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236a6675' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E&quot;);background-repeat:no-repeat;background-position:right 8px center;background-size:14px;-webkit-appearance:none" onchange="updateCountryFlag(this)">
+          <option value="+57" data-flag="🇨🇴">🇨🇴 +57 Colombia</option>
+          <option value="+1" data-flag="🇺🇸">🇺🇸 +1 EE.UU.</option>
+          <option value="+52" data-flag="🇲🇽">🇲🇽 +52 México</option>
+          <option value="+34" data-flag="🇪🇸">🇪🇸 +34 España</option>
+          <option value="+54" data-flag="🇦🇷">🇦🇷 +54 Argentina</option>
+          <option value="+55" data-flag="🇧🇷">🇧🇷 +55 Brasil</option>
+          <option value="+56" data-flag="🇨🇱">🇨🇱 +56 Chile</option>
+          <option value="+51" data-flag="🇵🇪">🇵🇪 +51 Perú</option>
+          <option value="+58" data-flag="🇻🇪">🇻🇪 +58 Venezuela</option>
+          <option value="+593" data-flag="🇪🇨">🇪🇨 +593 Ecuador</option>
+          <option value="+502" data-flag="🇬🇹">🇬🇹 +502 Guatemala</option>
+          <option value="+506" data-flag="🇨🇷">🇨🇷 +506 Costa Rica</option>
+          <option value="+507" data-flag="🇵🇦">🇵🇦 +507 Panamá</option>
+          <option value="+503" data-flag="🇸🇻">🇸🇻 +503 El Salvador</option>
+          <option value="+504" data-flag="🇭🇳">🇭🇳 +504 Honduras</option>
+          <option value="+505" data-flag="🇳🇮">🇳🇮 +505 Nicaragua</option>
+          <option value="+509" data-flag="🇭🇹">🇭🇹 +509 Haití</option>
+          <option value="+591" data-flag="🇧🇴">🇧🇴 +591 Bolivia</option>
+          <option value="+595" data-flag="🇵🇾">🇵🇾 +595 Paraguay</option>
+          <option value="+598" data-flag="🇺🇾">🇺🇾 +598 Uruguay</option>
+          <option value="+44" data-flag="🇬🇧">🇬🇧 +44 Reino Unido</option>
+          <option value="+33" data-flag="🇫🇷">🇫🇷 +33 Francia</option>
+          <option value="+49" data-flag="🇩🇪">🇩🇪 +49 Alemania</option>
+          <option value="+39" data-flag="🇮🇹">🇮🇹 +39 Italia</option>
+          <option value="+31" data-flag="🇳🇱">🇳🇱 +31 Países Bajos</option>
+          <option value="+41" data-flag="🇨🇭">🇨🇭 +41 Suiza</option>
+          <option value="+61" data-flag="🇦🇺">🇦🇺 +61 Australia</option>
+          <option value="+81" data-flag="🇯🇵">🇯🇵 +81 Japón</option>
+          <option value="+82" data-flag="🇰🇷">🇰🇷 +82 Corea del Sur</option>
+          <option value="+86" data-flag="🇨🇳">🇨🇳 +86 China</option>
+          <option value="+91" data-flag="🇮🇳">🇮🇳 +91 India</option>
+          <option value="+7" data-flag="🇷🇺">🇷🇺 +7 Rusia</option>
+          <option value="+27" data-flag="🇿🇦">🇿🇦 +27 Sudáfrica</option>
+          <option value="+971" data-flag="🇦🇪">🇦🇪 +971 Emiratos</option>
+          <option value="+966" data-flag="🇸🇦">🇸🇦 +966 Arabia Saudita</option>
+          <option value="+972" data-flag="🇮🇱">🇮🇱 +972 Israel</option>
+          <option value="+20" data-flag="🇪🇬">🇪🇬 +20 Egipto</option>
+          <option value="+234" data-flag="🇳🇬">🇳🇬 +234 Nigeria</option>
+        </select>
+      </div>
+      <input class="fi" id="su-phone" type="tel" placeholder="Número de celular" autocomplete="tel" style="flex:1">
+    </div>
+  </div>
+
+  <!-- Contraseña con validación en tiempo real -->
+  <div style="margin-bottom:6px">
+    <div style="font-size:9px;font-weight:800;color:var(--mut);letter-spacing:.08em;margin-bottom:4px">CONTRASEÑA *</div>
+    <div style="position:relative">
+      <input class="fi" id="su-password" type="password" placeholder="Mínimo 6 caracteres"
+        autocomplete="new-password" oninput="validatePasswords()"
+        style="width:100%;padding-right:40px">
+      <button onclick="togglePass('su-password','eye1')" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--dim)" id="eye1">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div style="margin-bottom:6px">
+    <div style="font-size:9px;font-weight:800;color:var(--mut);letter-spacing:.08em;margin-bottom:4px">CONFIRMAR CONTRASEÑA *</div>
+    <div style="position:relative">
+      <input class="fi" id="su-password2" type="password" placeholder="Repite la contraseña"
+        autocomplete="new-password" oninput="validatePasswords()"
+        style="width:100%;padding-right:40px">
+      <button onclick="togglePass('su-password2','eye2')" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--dim)" id="eye2">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+      </button>
+    </div>
+    <!-- Password match indicator -->
+    <div id="pass-match-indicator" style="height:20px;margin-top:5px;font-size:10.5px;font-weight:700;display:flex;align-items:center;gap:5px"></div>
+  </div>
+
+  <!-- Password strength -->
+  <div style="margin-bottom:16px">
+    <div style="background:rgba(255,255,255,.06);border-radius:3px;height:3px;overflow:hidden;margin-bottom:4px">
+      <div id="pass-strength-bar" style="height:100%;border-radius:3px;width:0%;transition:width .3s,background .3s"></div>
+    </div>
+    <div id="pass-strength-txt" style="font-size:9.5px;color:var(--dim);font-weight:600"></div>
+  </div>
+
+  <!-- Terms checkbox -->
+  <div style="margin-bottom:16px;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:12px;padding:12px">
+    <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer">
+      <input type="checkbox" id="su-terms-check" style="margin-top:2px;accent-color:var(--yw);width:15px;height:15px;flex-shrink:0">
+      <span style="font-size:11.5px;color:var(--mut);line-height:1.6">
+        Acepto los
+        <span style="color:var(--yw);font-weight:700;cursor:pointer;text-decoration:underline" onclick="openOv('ov-terms-full')">Términos y Condiciones</span>
+        y la
+        <span style="color:var(--yw);font-weight:700;cursor:pointer;text-decoration:underline" onclick="openOv('ov-terms-full')">Política de Privacidad</span>
+        de Oh Yeah!
+      </span>
+    </label>
+  </div>
+
+  <!-- Submit -->
   <button onclick="doSignup()" class="btn-modal" style="margin-bottom:10px">CREAR CUENTA 🗝</button>
-  <div style="text-align:center;font-size:11.5px;color:var(--mut)">¿Ya tienes cuenta? <span style="color:var(--pk);cursor:pointer;font-weight:700" onclick="closeOv('ov-signup');openOv('ov-login')">Inicia sesión</span></div>
+  <div style="text-align:center;font-size:11.5px;color:var(--mut)">
+    ¿Ya tienes cuenta?
+    <span style="color:var(--pk);cursor:pointer;font-weight:700" onclick="closeOv('ov-signup');openOv('ov-login')">Inicia sesión</span>
+  </div>
+
 </div></div>
 </div>
 
 <!-- TERMS OVERLAY -->
+<!-- TERMS ACCEPT (simple) -->
 <div class="ov" id="ov-terms" onclick="ovBg(event,'ov-terms')">
 <div class="modal"><button class="m-close" onclick="closeOv('ov-terms')">✕</button>
 <div class="mbox" style="width:440px">
-  <div style="font-size:18px;font-weight:800;margin-bottom:8px">Términos y condiciones</div>
-  <div style="font-size:12px;color:var(--mut);line-height:1.7;margin-bottom:20px;max-height:200px;overflow-y:auto">Al crear una cuenta en Oh Yeah! aceptas nuestros términos de uso, política de privacidad y que tu información será usada para personalizar tu experiencia gastronómica. Tus datos nunca serán vendidos a terceros. Puedes eliminar tu cuenta en cualquier momento desde configuración.</div>
+  <div style="font-size:18px;font-weight:800;margin-bottom:8px">Confirmar registro</div>
+  <div style="font-size:12px;color:var(--mut);line-height:1.7;margin-bottom:20px">
+    Al crear tu cuenta en Oh Yeah! aceptas el uso de tus datos para personalizar tu experiencia gastronómica.
+    Tus datos nunca serán vendidos a terceros.
+    <span style="color:var(--yw);cursor:pointer;font-weight:700" onclick="openOv('ov-terms-full')">Ver términos completos →</span>
+  </div>
   <button onclick="acceptTerms()" class="btn-modal" style="margin-bottom:8px">ACEPTO Y CONTINÚO</button>
   <button onclick="closeOv('ov-terms')" class="btn-modal-pink">Cancelar</button>
 </div></div>
 </div>
+
+<!-- FULL TERMS & CONDITIONS OVERLAY -->
+<div class="ov" id="ov-terms-full" onclick="ovBg(event,'ov-terms-full')">
+<div class="modal"><button class="m-close" onclick="closeOv('ov-terms-full')">✕</button>
+<div class="mbox" style="width:560px;max-height:85vh;overflow-y:auto">
+  <div style="font-family:'Fraunces',serif;font-size:22px;font-weight:500;font-style:italic;color:var(--yw);margin-bottom:4px">Términos y Condiciones</div>
+  <div style="font-size:10px;color:var(--dim);font-weight:600;margin-bottom:20px">Última actualización: Mayo 2026</div>
+
+  <div style="font-size:12.5px;color:rgba(240,237,232,.8);line-height:1.8">
+    <div style="font-size:13px;font-weight:800;color:var(--wh);margin-bottom:8px;margin-top:0">1. Uso de la plataforma</div>
+    <p style="margin-bottom:14px">Oh Yeah! es una plataforma de reservas y descubrimiento gastronómico. Al registrarte, aceptas usar el servicio de manera responsable y honesta. Las reservas realizadas generan un compromiso con el restaurante.</p>
+
+    <div style="font-size:13px;font-weight:800;color:var(--wh);margin-bottom:8px">2. Privacidad y datos</div>
+    <p style="margin-bottom:14px">Recopilamos nombre, correo y teléfono para gestionar tus reservas y personalizarte la experiencia. <strong style="color:var(--wh)">Nunca vendemos tus datos a terceros.</strong> Puedes solicitar la eliminación de tu cuenta en cualquier momento escribiéndonos.</p>
+
+    <div style="font-size:13px;font-weight:800;color:var(--wh);margin-bottom:8px">3. Reservas y cancelaciones</div>
+    <p style="margin-bottom:14px">Las reservas son vinculantes. Si necesitas cancelar, hazlo con al menos 2 horas de anticipación. Los no-shows repetidos pueden resultar en restricciones de la cuenta.</p>
+
+    <div style="font-size:13px;font-weight:800;color:var(--wh);margin-bottom:8px">4. Gourmand Society</div>
+    <p style="margin-bottom:14px">El programa de niveles es gratuito. Los beneficios se calculan automáticamente con base en visitas verificadas. Oh Yeah! se reserva el derecho de ajustar los beneficios con previo aviso.</p>
+
+    <div style="font-size:13px;font-weight:800;color:var(--wh);margin-bottom:8px">5. Bonos y cupones</div>
+    <p style="margin-bottom:14px">Los bonos tienen fecha de vencimiento y son de uso personal e intransferible. Un bono válido debe ser mostrado en el restaurante antes de pagar. Oh Yeah! no es responsable de bonos expirados.</p>
+
+    <div style="font-size:13px;font-weight:800;color:var(--wh);margin-bottom:8px">6. Propiedad intelectual</div>
+    <p style="margin-bottom:14px">Todo el contenido de Oh Yeah! (diseño, textos, curación) es propiedad de Oh Yeah! SAS. No puedes reproducirlo sin autorización.</p>
+
+    <div style="font-size:13px;font-weight:800;color:var(--wh);margin-bottom:8px">7. Contacto</div>
+    <p style="margin-bottom:4px">Para dudas o solicitudes: <span style="color:var(--yw)">hola@ohyeah.co</span></p>
+  </div>
+
+  <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--line)">
+    <button onclick="closeOv('ov-terms-full')" class="btn-modal">ENTENDIDO</button>
+  </div>
+</div></div>
+</div>
+
+
 
 <!-- WELCOME OVERLAY -->
 <div class="ov" id="ov-welcome" onclick="ovBg(event,'ov-welcome')">
@@ -1988,12 +2151,20 @@ async function doLogin(){
   STATE.loggedIn=true;STATE.user={nombre:email.value.split('@')[0],email:email.value,visit_count:0};loadUserProfile(STATE.user);closeOv('ov-login');showToast('¡Bienvenido! 🎉',3000);
 }
 async function doSignup(){
-  var name=document.getElementById('su-name'),email=document.getElementById('su-email');
-  var pass1=document.getElementById('su-password'),pass2=document.getElementById('su-password2');
-  if(!name||!name.value){showToast('⚠️ Ingresa tu nombre');return;}
-  if(!email||!email.value){showToast('⚠️ Ingresa tu correo');return;}
-  if(!pass1||pass1.value.length<6){showToast('⚠️ Contraseña mínimo 6 caracteres');return;}
-  if(pass2&&pass1.value!==pass2.value){showToast('⚠️ Las contraseñas no coinciden');return;}
+  var name  = document.getElementById('su-name');
+  var email = document.getElementById('su-email');
+  var phone = document.getElementById('su-phone');
+  var pass1 = document.getElementById('su-password');
+  var pass2 = document.getElementById('su-password2');
+  var terms = document.getElementById('su-terms-check');
+
+  if (!name||!name.value.trim())            { showToast('⚠️ Ingresa tu nombre'); name.focus(); return; }
+  if (!email||!email.value.trim()||!email.value.includes('@')) { showToast('⚠️ Correo inválido'); email.focus(); return; }
+  if (!phone||!phone.value.trim())          { showToast('⚠️ Ingresa tu celular'); phone.focus(); return; }
+  if (!pass1||pass1.value.length < 6)       { showToast('⚠️ Contraseña mínimo 6 caracteres'); pass1.focus(); return; }
+  if (!pass2||pass1.value !== pass2.value)  { showToast('⚠️ Las contraseñas no coinciden'); pass2.focus(); return; }
+  if (!terms||!terms.checked)               { showToast('⚠️ Acepta los términos y condiciones'); return; }
+
   openOv('ov-terms');
 }
 async function acceptTerms(){
@@ -2001,7 +2172,7 @@ async function acceptTerms(){
   var nombre=((document.getElementById('su-name')||{}).value||'')+' '+((document.getElementById('su-last')||{}).value||'');nombre=nombre.trim();
   var email=(document.getElementById('su-email')||{}).value||'';
   var password=(document.getElementById('su-password')||{}).value||'';
-  var perfil={nombre:nombre,email:email,gourmand_level:'INICIADO',visit_count:0,is_first_visit:true,source:'ohyeah',acepto_terminos:true,registro_at:new Date().toISOString()};
+  var telefono=getFullPhone();var perfil={nombre:nombre,email:email,telefono:telefono,gourmand_level:'INICIADO',visit_count:0,is_first_visit:true,source:'ohyeah',acepto_terminos:true,registro_at:new Date().toISOString()};
   if(supa&&password){try{var r=await supa.auth.signUp({email:email,password:password,options:{data:{nombre:nombre}}});if(!r.error||r.error.message.includes('already registered'))await supa.from('ohyeah_clientes').upsert([perfil],{onConflict:'email'});}catch(e){}}
   else if(supa){try{await supa.from('ohyeah_clientes').upsert([perfil],{onConflict:'email'});}catch(e){}}
   STATE.loggedIn=true;STATE.user=perfil;USER_VISITS=0;loadUserProfile(STATE.user);
@@ -2270,6 +2441,63 @@ function selectSimilar(rest) {
   // Update confirm button
   var btn = document.getElementById('ov-confirm-btn');
   if (btn) btn.textContent = 'RESERVAR EN ' + rest.name.toUpperCase();
+}
+
+/* ══ PASSWORD VALIDATION ══ */
+function validatePasswords() {
+  var p1 = document.getElementById('su-password');
+  var p2 = document.getElementById('su-password2');
+  var ind = document.getElementById('pass-match-indicator');
+  var strengthBar = document.getElementById('pass-strength-bar');
+  var strengthTxt = document.getElementById('pass-strength-txt');
+  if (!p1) return;
+
+  // Strength
+  var val = p1.value;
+  var strength = 0;
+  if (val.length >= 6)  strength++;
+  if (val.length >= 10) strength++;
+  if (/[A-Z]/.test(val)) strength++;
+  if (/[0-9]/.test(val)) strength++;
+  if (/[^A-Za-z0-9]/.test(val)) strength++;
+
+  var colors = ['#ff6b6b','#ff6b6b','#ecd989','#4ade80','#4ade80'];
+  var labels = ['','Débil','Regular','Buena','Muy segura'];
+  if (strengthBar) { strengthBar.style.width = (strength * 20) + '%'; strengthBar.style.background = colors[strength] || '#ff6b6b'; }
+  if (strengthTxt) strengthTxt.textContent = labels[strength] || '';
+
+  // Match
+  if (!p2 || !p2.value) { if (ind) ind.innerHTML = ''; return; }
+  var match = p1.value === p2.value;
+  if (ind) {
+    ind.innerHTML = match
+      ? '<span style="color:#4ade80">✓ Las contraseñas coinciden</span>'
+      : '<span style="color:#ff6b6b">✕ Las contraseñas no coinciden</span>';
+  }
+  if (p2) { p2.style.borderColor = match ? 'rgba(74,222,128,.4)' : 'rgba(255,107,107,.4)'; }
+}
+
+/* ══ TOGGLE PASSWORD VISIBILITY ══ */
+function togglePass(inputId, btnId) {
+  var inp = document.getElementById(inputId);
+  var btn = document.getElementById(btnId);
+  if (!inp) return;
+  var isPass = inp.type === 'password';
+  inp.type = isPass ? 'text' : 'password';
+  if (btn) btn.style.color = isPass ? 'var(--yw)' : 'var(--dim)';
+}
+
+/* ══ COUNTRY CODE HELPER ══ */
+function updateCountryFlag(sel) {
+  // Visual feedback - could update a flag display
+  console.log('País seleccionado:', sel.value);
+}
+
+/* ══ GET FULL PHONE with country code ══ */
+function getFullPhone() {
+  var code = (document.getElementById('su-country-code') || {value: '+57'}).value;
+  var num  = (document.getElementById('su-phone') || {value: ''}).value.trim().replace(/\D/g, '');
+  return num ? code + num : '';
 }
 
 </script>
