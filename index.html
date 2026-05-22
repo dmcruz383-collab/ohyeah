@@ -1524,6 +1524,40 @@ section.on{display:block}
       <option value="celebracion">🎉 Celebración</option>
     </select>
   </div>
+
+  <!-- GUEST FIELDS (shown when not logged in) -->
+  <div id="guest-fields" style="display:none;margin-bottom:18px">
+    <div style="background:rgba(214,255,58,.04);border:1px solid rgba(214,255,58,.15);border-radius:14px;padding:16px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px">
+        <div style="font-size:16px">👤</div>
+        <div>
+          <div style="font-size:12px;font-weight:800;color:var(--wh)">Continuar como invitado</div>
+          <div style="font-size:10.5px;color:var(--mut);margin-top:1px">Recibirás confirmación por correo</div>
+        </div>
+        <div style="margin-left:auto;font-size:10px;font-weight:700;color:var(--yw);cursor:pointer" onclick="closeOv('ov-reserve');openOv('ov-login')">¿Tienes cuenta? →</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:9px">
+        <div>
+          <div style="font-size:9px;font-weight:800;color:var(--mut);letter-spacing:.08em;margin-bottom:4px">NOMBRE COMPLETO *</div>
+          <input id="guest-name" class="fi" placeholder="Tu nombre y apellido" autocomplete="name">
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <div>
+            <div style="font-size:9px;font-weight:800;color:var(--mut);letter-spacing:.08em;margin-bottom:4px">CORREO *</div>
+            <input id="guest-email" class="fi" type="email" placeholder="tu@correo.com" autocomplete="email">
+          </div>
+          <div>
+            <div style="font-size:9px;font-weight:800;color:var(--mut);letter-spacing:.08em;margin-bottom:4px">CELULAR *</div>
+            <div style="display:flex;gap:5px">
+              <div style="background:#1d1726;border:1px solid var(--line);border-radius:12px;padding:0 10px;display:flex;align-items:center;font-size:12px;font-weight:800;color:var(--mut);flex-shrink:0">+57</div>
+              <input id="guest-phone" class="fi" type="tel" placeholder="Celular" autocomplete="tel" style="flex:1">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <button id="ov-confirm-btn" onclick="confirmRes()" class="btn-modal">CONFIRMAR RESERVA</button>
 </div>
 </div>
@@ -1780,20 +1814,63 @@ function setPax(n){STATE.pax=Math.max(1,Math.min(20,n));var pd=document.getEleme
 (function(){var cont=document.getElementById('pax-presets');if(!cont)return;[1,2,3,4,5,6,7,8].forEach(function(n){var btn=document.createElement('button');btn.className='pax-preset'+(n===2?' sel':'');btn.dataset.pax=n;btn.textContent=n+' pers.';btn.onclick=function(){setPax(n);closeAllDrops();};cont.appendChild(btn);});})();
 
 /* RESERVE MODAL */
-function openReserveModal(){if(!STATE.loggedIn){openOv('ov-login');return;}openOv('ov-reserve');setTimeout(function(){buildTimeGrid('ov-time-grid');buildFranjaGrid();updateDateDisplay();updateTimeDisplay();var pv=document.getElementById('ov-pax-val');if(pv)pv.textContent=STATE.pax;},50);}
+function openReserveModal(){
+  openOv('ov-reserve');
+  // Show guest fields if not logged in
+  var gf=document.getElementById('guest-fields');
+  if(gf) gf.style.display=STATE.loggedIn?'none':'block';
+  setTimeout(function(){
+    buildTimeGrid('ov-time-grid');
+    buildFranjaGrid();
+    updateDateDisplay();
+    updateTimeDisplay();
+    var pv=document.getElementById('ov-pax-val');if(pv)pv.textContent=STATE.pax;
+  },50);
+}
 
 /* CONFIRM RES */
 async function confirmRes(){
   if(STATE.modifyMode&&STATE.modifyingId){await _confirmarModificacion();return;}
   var btn=document.getElementById('ov-confirm-btn');if(btn){btn.textContent='Verificando...';btn.disabled=true;}
+
+  // ── Validate guest fields if not logged in ──
+  var guestName=null, guestEmail=null, guestPhone=null;
+  if(!STATE.loggedIn){
+    var gn=document.getElementById('guest-name');
+    var ge=document.getElementById('guest-email');
+    var gp=document.getElementById('guest-phone');
+    if(!gn||!gn.value.trim()){showToast('⚠️ Ingresa tu nombre');if(btn){btn.textContent='CONFIRMAR RESERVA';btn.disabled=false;}return;}
+    if(!ge||!ge.value.trim()||!ge.value.includes('@')){showToast('⚠️ Ingresa un correo válido');if(btn){btn.textContent='CONFIRMAR RESERVA';btn.disabled=false;}return;}
+    if(!gp||!gp.value.trim()){showToast('⚠️ Ingresa tu celular');if(btn){btn.textContent='CONFIRMAR RESERVA';btn.disabled=false;}return;}
+    guestName=gn.value.trim();
+    guestEmail=ge.value.trim().toLowerCase();
+    guestPhone=gp.value.trim();
+  }
+
   var dateStr=STATE.date.toISOString().split('T')[0];
   if(supa){try{var r=await supa.rpc('franja_disponibilidad',{p_fecha:dateStr,p_hora:STATE.time});if(r.data&&!r.data.disponible){showToast('😔 Franja llena — elige otro horario',4000);if(btn){btn.textContent='CONFIRMAR RESERVA';btn.disabled=false;}await buildFranjaGrid();return;}}catch(e){}}
   var occ=document.getElementById('occ-select');
-  var reservation={restaurant_id:'omm',restaurant_name:'OMM',date:dateStr,time:STATE.time,pax:STATE.pax,guest_name:STATE.user?STATE.user.nombre:null,guest_email:STATE.user?STATE.user.email:null,gourmand_level:getUserLevel().name,is_first_visit:USER_VISITS===0,visit_count:USER_VISITS,mood:STATE.mood,occasion:occ?occ.value:null,status:'confirmed',source:'ohyeah',nexum_brief:JSON.stringify({instruccion:USER_VISITS===0?'Primera visita':'Cliente recurrente — '+USER_VISITS+' visitas',nivel:getUserLevel().name})};
+  var finalName  = STATE.loggedIn ? STATE.user.nombre : guestName;
+  var finalEmail = STATE.loggedIn ? STATE.user.email  : guestEmail;
+  var finalPhone = STATE.loggedIn ? (STATE.user.telefono||'') : guestPhone;
+  var reservation={restaurant_id:'omm',restaurant_name:'OMM',date:dateStr,time:STATE.time,pax:STATE.pax,guest_name:finalName,guest_email:finalEmail,guest_phone:finalPhone,gourmand_level:STATE.loggedIn?getUserLevel().name:'INVITADO',is_first_visit:!STATE.loggedIn||USER_VISITS===0,visit_count:STATE.loggedIn?USER_VISITS:0,mood:STATE.mood,occasion:occ?occ.value:null,status:'confirmed',source:STATE.loggedIn?'ohyeah':'ohyeah_guest',nexum_brief:JSON.stringify({instruccion:!STATE.loggedIn?'Invitado — sin cuenta':'Cliente '+(USER_VISITS===0?'nuevo':'recurrente — '+USER_VISITS+' visitas'),nombre:finalName,email:finalEmail,telefono:finalPhone,nivel:STATE.loggedIn?getUserLevel().name:'INVITADO'})};
   var savedOk=false;
   if(supa){try{var ins=await supa.from('ohyeah_reservas').insert([reservation]).select();if(!ins.error){savedOk=true;USER_VISITS++;}else if(ins.error.message&&ins.error.message.startsWith('FRANJA_LLENA')){showToast('😔 La franja se llenó. Elige otro horario.',5000);if(btn){btn.textContent='CONFIRMAR RESERVA';btn.disabled=false;}await buildFranjaGrid();return;}}catch(e){}}
   var m=MONTHS_ES[STATE.date.getMonth()],d=STATE.date.getDate();
-  var detail=document.getElementById('conf-detail');if(detail)detail.innerHTML='Tu mesa en <strong>OMM</strong> está confirmada para el '+d+' de '+m+' a las <strong>'+STATE.time+'</strong> · '+STATE.pax+' persona'+(STATE.pax!==1?'s':'')+'.<br><br>'+(savedOk?'<span style="color:#4ade80;font-size:11px">✓ Confirmado</span>':'<span style="color:var(--mut);font-size:11px">Recibirás confirmación pronto</span>');
+  var emailToShow = STATE.loggedIn ? STATE.user.email : guestEmail;
+  var nameToShow  = STATE.loggedIn ? (STATE.user.nombre||'').split(' ')[0] : guestName.split(' ')[0];
+  var detail=document.getElementById('conf-detail');
+  if(detail)detail.innerHTML=
+    '<div style="text-align:left">'+
+    '<div style="font-size:13px;font-weight:700;color:var(--wh);margin-bottom:12px">Hola, <strong>'+nameToShow+'</strong> 👋</div>'+
+    '<div style="background:rgba(255,255,255,.04);border-radius:12px;padding:14px;margin-bottom:12px;font-size:12px;color:var(--mut);line-height:1.9">'+
+    '🍽️ <strong style="color:var(--wh)">OMM</strong><br>'+
+    '📅 '+d+' de '+m+'<br>'+
+    '🕐 '+STATE.time+'<br>'+
+    '👥 '+STATE.pax+' persona'+(STATE.pax!==1?'s':'')+
+    (STATE.mood?'<br>✨ '+STATE.mood:'')+
+    '</div>'+
+    (emailToShow?'<div style="background:rgba(214,255,58,.06);border:1px solid rgba(214,255,58,.2);border-radius:10px;padding:12px;font-size:11.5px;color:var(--mut)">📧 Confirmación enviada a <strong style="color:var(--yw)">'+emailToShow+'</strong></div>':'')+'</div>';
   if(btn){btn.textContent='CONFIRMAR RESERVA';btn.disabled=false;}
   closeOv('ov-reserve');openOv('ov-confirm');showToast('🎉 ¡Reserva confirmada!');
   if(STATE.loggedIn){loadUserProfile(STATE.user);setTimeout(updateYouSection,200);}
