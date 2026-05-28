@@ -1319,10 +1319,10 @@ section.on{display:block}
         <div class="trend-card-info"><div class="trend-card-name">OMM</div><div class="trend-card-cat">Rooftop · Cocktails</div></div>
         <div class="trend-card-footer"><div class="trend-card-rating">★ 4.7</div><div class="trend-card-avail">Últimas mesas</div></div>
       </div>
-      <div class="trend-card" onclick="openReserveModal()">
-        <div class="trend-card-img" style="background-image:url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=700&q=85')"><div class="trend-card-overlay"></div><div class="trend-card-num">3</div><div class="trend-card-badge" style="color:#4ade80">Nuevo</div></div>
-        <div class="trend-card-info"><div class="trend-card-name">OMM</div><div class="trend-card-cat">Speakeasy · Bar</div></div>
-        <div class="trend-card-footer"><div class="trend-card-rating">★ 4.6</div><div class="trend-card-avail">Disponible</div></div>
+      <div class="trend-card" onclick="bookSlotDirect('Gallo Colorado','8:00 PM')">
+        <div class="trend-card-img" style="background-image:url('https://images.unsplash.com/photo-1544025162-d76694265947?w=700&q=85')"><div class="trend-card-overlay"></div><div class="trend-card-num">3</div><div class="trend-card-badge" style="color:#ff2d7e">🐓 Nuevo</div></div>
+        <div class="trend-card-info"><div class="trend-card-name">Gallo Colorado</div><div class="trend-card-cat">Cocina mestiza · Bogotá</div></div>
+        <div class="trend-card-footer"><div class="trend-card-rating">★ 4.8</div><div class="trend-card-avail">Mesas disponibles</div></div>
       </div>
     </div>
   </div>
@@ -1680,6 +1680,40 @@ section.on{display:block}
           <button class="ot-slot ot-slot-hot" onclick="bookSlot('OMM Speakeasy','9:00 PM')">9:00 PM 🔥</button>
           <button class="ot-slot" onclick="bookSlot('OMM Speakeasy','10:00 PM')">10:00 PM</button>
           <button class="ot-slot" onclick="bookSlot('OMM Speakeasy','11:00 PM')">11:00 PM</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- GALLO COLORADO -->
+    <div class="ot-card" id="rest-gc" data-type="restaurante" style="border-color:rgba(255,45,126,.2)">
+      <div class="ot-img" style="background-image:url('https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=85');position:relative">
+        <div style="position:absolute;top:12px;left:12px;background:var(--pk);color:#fff;font-size:9px;font-weight:900;border-radius:6px;padding:4px 9px;letter-spacing:.06em">🐓 NUEVO</div>
+      </div>
+      <div class="ot-body">
+        <div class="ot-top">
+          <div>
+            <div class="ot-name">Gallo Colorado <span class="ot-rating">★ 4.8</span></div>
+            <div class="ot-meta">Cocina mestiza · Bogotá · $$$ · Abierto ahora</div>
+            <div class="ot-tags">
+              <span class="ot-tag">Cocina de autor</span>
+              <span class="ot-tag">Maridaje</span>
+              <span class="ot-tag">Experiencia</span>
+            </div>
+          </div>
+          <div class="ot-booked">
+            <div class="ot-booked-num">🔥 21</div>
+            <div class="ot-booked-lbl">reservas hoy</div>
+          </div>
+        </div>
+        <div class="ot-slots-label">Mesas disponibles</div>
+        <div class="ot-slots" id="slots-gc">
+          <button class="ot-slot" onclick="bookSlot('Gallo Colorado','7:00 PM')">7:00 PM</button>
+          <button class="ot-slot" onclick="bookSlot('Gallo Colorado','7:30 PM')">7:30 PM</button>
+          <button class="ot-slot ot-slot-hot" onclick="bookSlot('Gallo Colorado','8:00 PM')">8:00 PM 🔥</button>
+          <button class="ot-slot" onclick="bookSlot('Gallo Colorado','8:30 PM')">8:30 PM</button>
+          <button class="ot-slot ot-slot-few" onclick="bookSlot('Gallo Colorado','9:00 PM')">9:00 PM ⚡</button>
+          <button class="ot-slot-full" disabled>9:30 PM</button>
+          <button class="ot-slot" onclick="bookSlot('Gallo Colorado','10:00 PM')">10:00 PM</button>
         </div>
       </div>
     </div>
@@ -2459,7 +2493,7 @@ async function confirmRes(){
   var finalName  = STATE.loggedIn ? STATE.user.nombre : guestName;
   var finalEmail = STATE.loggedIn ? STATE.user.email  : guestEmail;
   var finalPhone = STATE.loggedIn ? (STATE.user.telefono||'') : guestPhone;
-  var reservation={restaurant_id:'omm',restaurant_name:(STATE.restaurantName||'OMM'),date:dateStr,time:STATE.time,pax:STATE.pax,guest_name:finalName,guest_email:finalEmail,guest_phone:finalPhone,gourmand_level:STATE.loggedIn?getUserLevel().name:'INVITADO',is_first_visit:!STATE.loggedIn||USER_VISITS===0,visit_count:STATE.loggedIn?USER_VISITS:0,mood:STATE.mood,occasion:occ?occ.value:null,status:'confirmed',source:STATE.loggedIn?'ohyeah':'ohyeah_guest',nexum_brief:JSON.stringify({instruccion:!STATE.loggedIn?'Invitado — sin cuenta':'Cliente '+(USER_VISITS===0?'nuevo':'recurrente — '+USER_VISITS+' visitas'),nombre:finalName,email:finalEmail,telefono:finalPhone,nivel:STATE.loggedIn?getUserLevel().name:'INVITADO'})};
+  var reservation={restaurant_id:(STATE.restaurantName&&STATE.restaurantName.toLowerCase().includes('gallo')?'429b20fa-1d11-4295-8775-907827dcc364':'omm'),restaurant_name:(STATE.restaurantName||'OMM'),date:dateStr,time:STATE.time,pax:STATE.pax,guest_name:finalName,guest_email:finalEmail,guest_phone:finalPhone,gourmand_level:STATE.loggedIn?getUserLevel().name:'INVITADO',is_first_visit:!STATE.loggedIn||USER_VISITS===0,visit_count:STATE.loggedIn?USER_VISITS:0,mood:STATE.mood,occasion:occ?occ.value:null,status:'confirmed',source:STATE.loggedIn?'ohyeah':'ohyeah_guest',nexum_brief:JSON.stringify({instruccion:!STATE.loggedIn?'Invitado — sin cuenta':'Cliente '+(USER_VISITS===0?'nuevo':'recurrente — '+USER_VISITS+' visitas'),nombre:finalName,email:finalEmail,telefono:finalPhone,nivel:STATE.loggedIn?getUserLevel().name:'INVITADO'})};
   var savedOk=false;
   if(supa){try{var ins=await supa.from('ohyeah_reservas').insert([reservation]).select();if(!ins.error){savedOk=true;USER_VISITS++;}else if(ins.error.message&&ins.error.message.startsWith('FRANJA_LLENA')){showToast('😔 La franja se llenó. Elige otro horario.',5000);if(btn){btn.textContent='CONFIRMAR RESERVA';btn.disabled=false;}await buildFranjaGrid();return;}}catch(e){}}
   var m=MONTHS_ES[STATE.date.getMonth()],d=STATE.date.getDate();
@@ -2949,6 +2983,12 @@ function syncEventPills() {
     var label = d.getDate() + ' de ' + ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'][d.getMonth()];
     disp.textContent = label;
   }
+}
+
+/* bookSlotDirect — for cards outside the eventos section */
+function bookSlotDirect(restName, time) {
+  STATE.restaurantName = restName;
+  bookSlot(restName, time);
 }
 
 </script>
