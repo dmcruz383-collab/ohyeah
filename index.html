@@ -1144,6 +1144,65 @@ section.on{display:block}
 .similar-avail.ok   { background:rgba(74,222,128,.1);  color:#4ade80; border:1px solid rgba(74,222,128,.2) }
 .similar-avail.poco { background:rgba(236,217,137,.1); color:#ecd989; border:1px solid rgba(236,217,137,.2) }
 
+
+/* ════ OPENTABLE CARDS ════ */
+.ot-card {
+  display:flex;gap:0;background:var(--card2);
+  border:1px solid var(--line);border-radius:18px;
+  overflow:hidden;transition:border-color .2s,transform .15s;
+}
+.ot-card:hover{border-color:var(--line2);transform:translateY(-2px)}
+.ot-img {
+  width:180px;flex-shrink:0;
+  background-size:cover;background-position:center;
+  position:relative;
+}
+@media(max-width:600px){.ot-img{width:110px}}
+.ot-body{flex:1;padding:18px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.ot-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.ot-name{font-size:16px;font-weight:800;margin-bottom:3px}
+.ot-rating{font-size:11px;font-weight:800;color:var(--yw);margin-left:6px}
+.ot-meta{font-size:11.5px;color:var(--mut);font-weight:600;margin-bottom:6px}
+.ot-tags{display:flex;gap:5px;flex-wrap:wrap}
+.ot-tag{
+  font-size:9.5px;font-weight:700;color:var(--mut);
+  border:1px solid var(--line);border-radius:5px;
+  padding:2px 7px;
+}
+.ot-booked{text-align:right;flex-shrink:0}
+.ot-booked-num{font-size:13px;font-weight:800;white-space:nowrap}
+.ot-booked-lbl{font-size:9px;color:var(--dim);font-weight:600;white-space:nowrap}
+.ot-slots-label{
+  font-size:9.5px;font-weight:800;letter-spacing:.07em;
+  text-transform:uppercase;color:var(--mut);
+}
+.ot-slots{display:flex;gap:7px;flex-wrap:wrap}
+.ot-slot{
+  background:rgba(255,45,126,.08);
+  border:1.3px solid rgba(255,45,126,.25);
+  border-radius:9px;padding:8px 12px;
+  font-size:11.5px;font-weight:800;color:#ff2d7e;
+  cursor:pointer;font-family:inherit;transition:.18s;white-space:nowrap;
+}
+.ot-slot:hover{background:var(--pk);color:#fff;border-color:var(--pk)}
+.ot-slot-hot{
+  background:rgba(214,255,58,.08);
+  border-color:rgba(214,255,58,.3);
+  color:var(--yw) !important;
+}
+.ot-slot-hot:hover{background:var(--yw);color:#0a0a05 !important;border-color:var(--yw)}
+.ot-slot-few{
+  background:rgba(236,217,137,.08);
+  border-color:rgba(236,217,137,.3);
+  color:var(--gold) !important;
+}
+.ot-slot-full{
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);
+  border-radius:9px;padding:8px 12px;font-size:11.5px;font-weight:700;
+  color:rgba(240,237,232,.2);cursor:not-allowed;
+  text-decoration:line-through;white-space:nowrap;
+}
+
 </style>
 </head>
 <body>
@@ -1155,7 +1214,7 @@ section.on{display:block}
   </div>
   <div class="nav-tabs" id="nav-tabs">
     <div class="nav-tab home on" data-sec="home">OH YEAH!</div>
-    <div class="nav-tab" data-sec="discover">Descubrir</div>
+    <div class="nav-tab" data-sec="discover">Eventos</div>
     <div class="nav-tab" data-sec="society">Society</div>
     <div class="nav-tab" data-sec="access">Access</div>
     <div class="nav-tab" data-sec="you">Tú</div>
@@ -1315,6 +1374,128 @@ section.on{display:block}
     </div>
   </div>
 
+
+  <!-- ════ EVENTOS ════ -->
+  <div class="sec">
+    <div class="sec-hd">
+      <div>
+        <div class="sec-title">Eventos &amp; experiencias</div>
+        <div class="sec-sub">Lo que está pasando en Bogotá este mes</div>
+      </div>
+      <div class="sec-link" onclick="goSec('discover')">Ver todos →</div>
+    </div>
+
+    <!-- LIVE BADGE -->
+    <div style="padding:0 var(--px);margin-bottom:14px">
+      <span class="live-badge">HAPPENING TONIGHT · BOGOTÁ</span>
+    </div>
+
+    <!-- EVENT CARDS ROW -->
+    <div class="row" id="home-events-row">
+      <div class="event-card" onclick="openReserveModal()" style="width:220px">
+        <div class="event-card-img" style="background-image:url('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=500&q=85')">
+          <div class="event-card-ov"></div>
+          <div class="event-card-date"><div class="event-date-d">24</div><div class="event-date-m">MAY</div></div>
+          <div style="position:absolute;top:10px;right:10px;background:rgba(255,45,126,.85);color:#fff;font-size:8.5px;font-weight:800;border-radius:5px;padding:3px 7px;letter-spacing:.06em">HOY</div>
+        </div>
+        <div class="event-card-info">
+          <div class="event-card-name">Sunset Rooftop Party</div>
+          <div class="event-card-meta">OMM · Rooftop · 6:00 PM</div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px">
+            <span style="font-size:9.5px;font-weight:800;color:#4ade80">Entradas disponibles</span>
+            <span style="font-size:9.5px;color:rgba(240,237,232,.4);font-weight:600">Gratis con cuenta</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-card" onclick="openReserveModal()" style="width:220px">
+        <div class="event-card-img" style="background-image:url('https://images.unsplash.com/photo-1611514026316-87aa0e90e9a0?w=500&q=85')">
+          <div class="event-card-ov"></div>
+          <div class="event-card-date"><div class="event-date-d">30</div><div class="event-date-m">MAY</div></div>
+          <div style="position:absolute;top:10px;right:10px;background:rgba(236,217,137,.85);color:#0a0a05;font-size:8.5px;font-weight:800;border-radius:5px;padding:3px 7px;letter-spacing:.06em">EXCLUSIVO</div>
+        </div>
+        <div class="event-card-info">
+          <div class="event-card-name">Chef's Table Experience</div>
+          <div class="event-card-meta">OMM · Solo 12 personas · 9:00 PM</div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px">
+            <span style="font-size:9.5px;font-weight:800;color:#ecd989">Últimas 3 mesas</span>
+            <span style="font-size:9.5px;color:rgba(240,237,232,.4);font-weight:600">Members only</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-card" onclick="openReserveModal()" style="width:220px">
+        <div class="event-card-img" style="background-image:url('https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=500&q=85')">
+          <div class="event-card-ov"></div>
+          <div class="event-card-date"><div class="event-date-d">07</div><div class="event-date-m">JUN</div></div>
+        </div>
+        <div class="event-card-info">
+          <div class="event-card-name">Wine Dinner · Borgoña</div>
+          <div class="event-card-meta">OMM · Sommelier invitado · 8:00 PM</div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px">
+            <span style="font-size:9.5px;font-weight:800;color:#4ade80">Disponible</span>
+            <span style="font-size:9.5px;color:rgba(240,237,232,.4);font-weight:600">$180k/persona</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-card" onclick="openReserveModal()" style="width:220px">
+        <div class="event-card-img" style="background-image:url('https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=500&q=85')">
+          <div class="event-card-ov"></div>
+          <div class="event-card-date"><div class="event-date-d">14</div><div class="event-date-m">JUN</div></div>
+        </div>
+        <div class="event-card-info">
+          <div class="event-card-name">Live Jazz Night</div>
+          <div class="event-card-meta">OMM · Speakeasy · 7:30 PM</div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px">
+            <span style="font-size:9.5px;font-weight:800;color:#4ade80">Alta disponibilidad</span>
+            <span style="font-size:9.5px;color:rgba(240,237,232,.4);font-weight:600">Gratis</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-card" onclick="openReserveModal()" style="width:220px">
+        <div class="event-card-img" style="background-image:url('https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=500&q=85')">
+          <div class="event-card-ov"></div>
+          <div class="event-card-date"><div class="event-date-d">21</div><div class="event-date-m">JUN</div></div>
+          <div style="position:absolute;top:10px;right:10px;background:rgba(90,168,255,.85);color:#fff;font-size:8.5px;font-weight:800;border-radius:5px;padding:3px 7px;letter-spacing:.06em">NUEVO</div>
+        </div>
+        <div class="event-card-info">
+          <div class="event-card-name">Brunch del Sol</div>
+          <div class="event-card-meta">OMM · DJ set · 11:00 AM</div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px">
+            <span style="font-size:9.5px;font-weight:800;color:#4ade80">Disponible</span>
+            <span style="font-size:9.5px;color:rgba(240,237,232,.4);font-weight:600">$95k/persona</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-card" onclick="openReserveModal()" style="width:220px">
+        <div class="event-card-img" style="background-image:url('https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500&q=85')">
+          <div class="event-card-ov"></div>
+          <div class="event-card-date"><div class="event-date-d">28</div><div class="event-date-m">JUN</div></div>
+        </div>
+        <div class="event-card-info">
+          <div class="event-card-name">Noche de DJs · Techno</div>
+          <div class="event-card-meta">OMM · Rooftop · 10:00 PM</div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px">
+            <span style="font-size:9.5px;font-weight:800;color:#ecd989">Pocas entradas</span>
+            <span style="font-size:9.5px;color:rgba(240,237,232,.4);font-weight:600">$65k entrada</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA Banner -->
+    <div style="margin:8px var(--px) 0;background:linear-gradient(135deg,rgba(255,45,126,.07),rgba(214,255,58,.05));border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap">
+      <div>
+        <div style="font-size:14px;font-weight:800;margin-bottom:3px">¿Tu restaurante tiene un evento?</div>
+        <div style="font-size:12px;color:rgba(240,237,232,.5);font-weight:600">Publícalo en Oh Yeah! y llega a miles de gourmands en Bogotá.</div>
+      </div>
+      <button onclick="showToast('Próximamente 🚀')" style="background:var(--pk);color:#fff;border:none;border-radius:12px;padding:11px 20px;font-size:12px;font-weight:800;cursor:pointer;font-family:inherit;white-space:nowrap;flex-shrink:0">Publicar evento →</button>
+    </div>
+  </div>
+
   <footer class="footer">
     <div class="footer-grid">
       <div><div class="footer-logo"><span class="o">Oh</span><span class="y">Yeah!</span></div><div class="footer-tag">Los mejores restaurantes, eventos<br>y experiencias de Colombia.</div></div>
@@ -1332,46 +1513,207 @@ section.on{display:block}
 <!-- ════════ DISCOVER ════════ -->
 <section id="sec-discover">
   <div class="discover-hero">
-    <div class="hero-tag">Motor de descubrimiento</div>
-    <h1 class="discover-h1">Descubrir<br><em style="color:var(--pk);font-style:italic">Bogotá</em></h1>
-    <p class="discover-sub">Restaurantes, eventos, rooftops, speakeasies y experiencias que no se olvidan.</p>
+    <div class="hero-tag">Motor de reservas · OpenTable style</div>
+    <h1 class="discover-h1">Eventos &amp;<br><em style="color:var(--pk);font-style:italic">Reservas</em></h1>
+    <p class="discover-sub">Encuentra mesa ahora mismo. Filtra por fecha, hora, personas y tipo de experiencia.</p>
   </div>
-  <div class="search-bar" style="max-width:none">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-    <input placeholder="Busca por nombre, mood, cocina, barrio..." id="discover-search"/>
-    <div class="search-ai">IA</div>
+  <!-- OpenTable Search Bar -->
+  <div style="background:linear-gradient(180deg,#16121d,#100d15);border:1px solid var(--line2);border-radius:20px;padding:16px 18px;margin:0 var(--px) 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+    <!-- Date -->
+    <div class="sp-pill" id="ev-pill-date" onclick="toggleDrop('drop-date','ev-pill-date')" style="flex:1;min-width:100px">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;color:var(--dim);flex-shrink:0"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/></svg>
+      <div><div class="sp-pill-lbl">FECHA</div><div class="sp-pill-val" id="ev-date-val">Hoy</div></div>
+    </div>
+    <!-- Time -->
+    <div class="sp-pill" id="ev-pill-time" onclick="toggleDrop('drop-time','ev-pill-time')" style="flex:1;min-width:100px">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;color:var(--dim);flex-shrink:0"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <div><div class="sp-pill-lbl">HORA</div><div class="sp-pill-val" id="ev-time-val">8:00 PM</div></div>
+    </div>
+    <!-- Pax -->
+    <div class="sp-pill" id="ev-pill-pax" onclick="toggleDrop('drop-pax','ev-pill-pax')" style="flex:1;min-width:90px">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;color:var(--dim);flex-shrink:0"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+      <div><div class="sp-pill-lbl">PERSONAS</div><div class="sp-pill-val" id="ev-pax-val">2</div></div>
+    </div>
+    <!-- Search input -->
+    <div style="flex:2;min-width:160px;display:flex;align-items:center;gap:8px;background:#221b2b;border:1px solid var(--line);border-radius:12px;padding:9px 12px">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;color:var(--dim);flex-shrink:0"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input id="discover-search" placeholder="Restaurante, barrio, cocina..." style="background:transparent;border:none;color:#fff;font-size:12px;font-weight:600;outline:none;font-family:inherit;flex:1" oninput="filterRestaurants()">
+      <span style="font-size:9px;font-weight:800;letter-spacing:.06em;color:var(--pk);background:rgba(255,45,126,.1);border:1px solid rgba(255,45,126,.2);border-radius:5px;padding:3px 6px;flex-shrink:0">IA</span>
+    </div>
+    <!-- Search button -->
+    <button onclick="searchRestaurants()" style="background:linear-gradient(180deg,var(--yw),#b9e22a);color:#0a0a05;border:none;border-radius:12px;padding:11px 20px;font-size:13px;font-weight:900;cursor:pointer;font-family:inherit;white-space:nowrap;flex-shrink:0;box-shadow:0 6px 20px rgba(214,255,58,.2)">BUSCAR</button>
   </div>
+  <!-- Filters -->
   <div class="filter-row">
-    <div class="filter-chip on" onclick="filterClick(this)">Todos</div>
-    <div class="filter-chip" onclick="filterClick(this)">🍽️ Restaurantes</div>
-    <div class="filter-chip" onclick="filterClick(this)">🥂 Rooftops</div>
-    <div class="filter-chip" onclick="filterClick(this)">🎵 DJ Sets</div>
-    <div class="filter-chip" onclick="filterClick(this)">👨‍🍳 Chef's Table</div>
-    <div class="filter-chip" onclick="filterClick(this)">☀️ Brunch</div>
-    <div class="filter-chip" onclick="filterClick(this)">🕯️ Speakeasy</div>
-    <div class="filter-chip" onclick="filterClick(this)">✨ Experiencias</div>
+    <div class="filter-chip on" onclick="filterClick(this)" data-type="all">Todos</div>
+    <div class="filter-chip" onclick="filterClick(this)" data-type="restaurante">🍽️ Restaurantes</div>
+    <div class="filter-chip" onclick="filterClick(this)" data-type="rooftop">🥂 Rooftops</div>
+    <div class="filter-chip" onclick="filterClick(this)" data-type="evento">🎵 Eventos</div>
+    <div class="filter-chip" onclick="filterClick(this)" data-type="chef">👨‍🍳 Chef's Table</div>
+    <div class="filter-chip" onclick="filterClick(this)" data-type="brunch">☀️ Brunch</div>
+    <div class="filter-chip" onclick="filterClick(this)" data-type="speakeasy">🕯️ Speakeasy</div>
   </div>
 
-  <div class="sec">
-    <div class="live-badge">PASANDO AHORA EN BOGOTÁ</div>
-    <div class="sec-hd"><div><div class="sec-title">Eventos esta noche</div></div><div class="sec-link">Ver todos</div></div>
-    <div class="row">
-      <div class="event-card" onclick="openReserveModal()"><div class="event-card-img" style="background-image:url('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=500&q=85')"><div class="event-card-ov"></div><div class="event-card-date"><div class="event-date-d">24</div><div class="event-date-m">MAY</div></div></div><div class="event-card-info"><div class="event-card-name">Sunset Rooftop Party</div><div class="event-card-meta">OMM · 6:00 PM</div></div></div>
-      <div class="event-card" onclick="openReserveModal()"><div class="event-card-img" style="background-image:url('https://images.unsplash.com/photo-1611514026316-87aa0e90e9a0?w=500&q=85')"><div class="event-card-ov"></div><div class="event-card-date"><div class="event-date-d">30</div><div class="event-date-m">MAY</div></div></div><div class="event-card-info"><div class="event-card-name">Chef's Table Experience</div><div class="event-card-meta">OMM · 9:00 PM</div></div></div>
-      <div class="event-card" onclick="openReserveModal()"><div class="event-card-img" style="background-image:url('https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=500&q=85')"><div class="event-card-ov"></div><div class="event-card-date"><div class="event-date-d">07</div><div class="event-date-m">JUN</div></div></div><div class="event-card-info"><div class="event-card-name">Wine Dinner</div><div class="event-card-meta">OMM · 8:00 PM</div></div></div>
-      <div class="event-card" onclick="openReserveModal()"><div class="event-card-img" style="background-image:url('https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=500&q=85')"><div class="event-card-ov"></div><div class="event-card-date"><div class="event-date-d">14</div><div class="event-date-m">JUN</div></div></div><div class="event-card-info"><div class="event-card-name">Live Jazz Night</div><div class="event-card-meta">OMM · 7:30 PM</div></div></div>
-    </div>
+  <!-- Results count -->
+  <div style="padding:0 var(--px);margin-bottom:16px;display:flex;align-items:center;justify-content:space-between">
+    <div style="font-size:12px;color:var(--mut);font-weight:600"><span id="results-count">1</span> restaurante disponible</div>
+    <div class="live-badge" style="margin:0">● TIEMPO REAL</div>
   </div>
 
-  <div class="sec">
-    <div class="sec-hd"><div><div class="sec-title">Mesas disponibles hoy</div><div class="sec-sub">Reserva en segundos</div></div><div class="sec-link">Ver todas</div></div>
-    <div class="row">
-      <div class="table-card" onclick="openReserveModal()"><div class="table-card-img" style="background-image:url('https://images.unsplash.com/photo-1550966871-3ed3cfd1a7c5?w=400&q=85')"></div><div class="table-card-body"><div class="table-card-name">OMM</div><div class="table-card-avail">8:00 PM · 9:00 PM</div></div></div>
-      <div class="table-card" onclick="openReserveModal()"><div class="table-card-img" style="background-image:url('https://images.unsplash.com/photo-1445116572660-236099ec97a0?w=400&q=85')"></div><div class="table-card-body"><div class="table-card-name">OMM</div><div class="table-card-avail">7:30 PM · 9:30 PM</div></div></div>
-      <div class="table-card" onclick="openReserveModal()"><div class="table-card-img" style="background-image:url('https://images.unsplash.com/photo-1527761939622-933c972f5e35?w=400&q=85')"></div><div class="table-card-body"><div class="table-card-name">OMM</div><div class="table-card-avail">10:00 PM</div></div></div>
-      <div class="table-card" onclick="openReserveModal()"><div class="table-card-img" style="background-image:url('https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?w=400&q=85')"></div><div class="table-card-body"><div class="table-card-name">OMM</div><div class="table-card-avail">8:30 PM</div></div></div>
+  <!-- RESTAURANT LISTINGS (OpenTable style) -->
+  <div id="restaurants-grid" style="padding:0 var(--px);display:flex;flex-direction:column;gap:14px;margin-bottom:32px">
+
+    <!-- OMM -->
+    <div class="ot-card" id="rest-omm" data-type="restaurante">
+      <div class="ot-img" style="background-image:url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=85')"></div>
+      <div class="ot-body">
+        <div class="ot-top">
+          <div>
+            <div class="ot-name">OMM <span class="ot-rating">★ 4.9</span></div>
+            <div class="ot-meta">Internacional · Bogotá · $$$ · Abierto ahora</div>
+            <div class="ot-tags">
+              <span class="ot-tag">Fecha especial</span>
+              <span class="ot-tag">Negocios</span>
+              <span class="ot-tag">Vino</span>
+            </div>
+          </div>
+          <div class="ot-booked">
+            <div class="ot-booked-num" id="omm-booked-num">🔥 23</div>
+            <div class="ot-booked-lbl">reservas hoy</div>
+          </div>
+        </div>
+        <!-- Available slots -->
+        <div class="ot-slots-label">Mesas disponibles para <span id="ot-date-display">hoy</span></div>
+        <div class="ot-slots" id="slots-omm">
+          <button class="ot-slot" onclick="bookSlot('OMM','7:00 PM')">7:00 PM</button>
+          <button class="ot-slot" onclick="bookSlot('OMM','7:30 PM')">7:30 PM</button>
+          <button class="ot-slot ot-slot-hot" onclick="bookSlot('OMM','8:00 PM')">8:00 PM 🔥</button>
+          <button class="ot-slot" onclick="bookSlot('OMM','8:30 PM')">8:30 PM</button>
+          <button class="ot-slot" onclick="bookSlot('OMM','9:00 PM')">9:00 PM</button>
+          <button class="ot-slot ot-slot-few" onclick="bookSlot('OMM','9:30 PM')">9:30 PM ⚡</button>
+          <button class="ot-slot" onclick="bookSlot('OMM','10:00 PM')">10:00 PM</button>
+        </div>
+      </div>
     </div>
+
+    <!-- OMM ROOFTOP -->
+    <div class="ot-card" id="rest-rooftop" data-type="rooftop">
+      <div class="ot-img" style="background-image:url('https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?w=600&q=85')"></div>
+      <div class="ot-body">
+        <div class="ot-top">
+          <div>
+            <div class="ot-name">OMM Rooftop <span class="ot-rating">★ 4.7</span></div>
+            <div class="ot-meta">Coctelería · Bogotá · $$ · Abierto ahora</div>
+            <div class="ot-tags">
+              <span class="ot-tag">Vistas</span>
+              <span class="ot-tag">Cócteles</span>
+              <span class="ot-tag">Sunset</span>
+            </div>
+          </div>
+          <div class="ot-booked">
+            <div class="ot-booked-num">🔥 18</div>
+            <div class="ot-booked-lbl">reservas hoy</div>
+          </div>
+        </div>
+        <div class="ot-slots-label">Mesas disponibles</div>
+        <div class="ot-slots" id="slots-rooftop">
+          <button class="ot-slot" onclick="bookSlot('OMM Rooftop','6:00 PM')">6:00 PM</button>
+          <button class="ot-slot ot-slot-hot" onclick="bookSlot('OMM Rooftop','7:00 PM')">7:00 PM 🔥</button>
+          <button class="ot-slot ot-slot-few" onclick="bookSlot('OMM Rooftop','7:30 PM')">7:30 PM ⚡</button>
+          <button class="ot-slot-full" disabled>8:00 PM</button>
+          <button class="ot-slot-full" disabled>8:30 PM</button>
+          <button class="ot-slot" onclick="bookSlot('OMM Rooftop','9:00 PM')">9:00 PM</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chef's Table -->
+    <div class="ot-card" id="rest-chef" data-type="chef">
+      <div class="ot-img" style="background-image:url('https://images.unsplash.com/photo-1611514026316-87aa0e90e9a0?w=600&q=85')">
+        <div style="position:absolute;top:12px;left:12px;background:rgba(236,217,137,.9);color:#0a0a05;font-size:9px;font-weight:900;border-radius:6px;padding:4px 9px;letter-spacing:.06em">EXCLUSIVO</div>
+      </div>
+      <div class="ot-body">
+        <div class="ot-top">
+          <div>
+            <div class="ot-name">OMM Chef's Table <span class="ot-rating" style="color:var(--gold)">★ 5.0</span></div>
+            <div class="ot-meta">Alta cocina · Solo 12 personas · $$$$</div>
+            <div class="ot-tags">
+              <span class="ot-tag" style="border-color:rgba(236,217,137,.35);color:var(--gold)">Experiencia única</span>
+              <span class="ot-tag" style="border-color:rgba(236,217,137,.35);color:var(--gold)">Maridaje incluido</span>
+            </div>
+          </div>
+          <div class="ot-booked">
+            <div class="ot-booked-num">🌟 8</div>
+            <div class="ot-booked-lbl">cupos totales</div>
+          </div>
+        </div>
+        <div class="ot-slots-label">Próximas fechas disponibles</div>
+        <div class="ot-slots" id="slots-chef">
+          <button class="ot-slot ot-slot-few" onclick="bookSlot('OMM Chef\'s Table','9:00 PM')">Hoy 9PM ⚡</button>
+          <button class="ot-slot" onclick="bookSlot('OMM Chef\'s Table','9:00 PM')">Mañana 9PM</button>
+          <button class="ot-slot" onclick="bookSlot('OMM Chef\'s Table','9:00 PM')">Sáb 9PM</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Speakeasy -->
+    <div class="ot-card" id="rest-speak" data-type="speakeasy">
+      <div class="ot-img" style="background-image:url('https://images.unsplash.com/photo-1455853659719-4b521eebc76d?w=600&q=85')"></div>
+      <div class="ot-body">
+        <div class="ot-top">
+          <div>
+            <div class="ot-name">OMM Speakeasy <span class="ot-rating">★ 4.8</span></div>
+            <div class="ot-meta">Bar secreto · Cócteles artesanales · $$</div>
+            <div class="ot-tags">
+              <span class="ot-tag">Jazz en vivo</span>
+              <span class="ot-tag">Cock­tails</span>
+            </div>
+          </div>
+          <div class="ot-booked">
+            <div class="ot-booked-num">🔥 12</div>
+            <div class="ot-booked-lbl">reservas hoy</div>
+          </div>
+        </div>
+        <div class="ot-slots-label">Mesas disponibles esta noche</div>
+        <div class="ot-slots" id="slots-speak">
+          <button class="ot-slot" onclick="bookSlot('OMM Speakeasy','8:00 PM')">8:00 PM</button>
+          <button class="ot-slot ot-slot-hot" onclick="bookSlot('OMM Speakeasy','9:00 PM')">9:00 PM 🔥</button>
+          <button class="ot-slot" onclick="bookSlot('OMM Speakeasy','10:00 PM')">10:00 PM</button>
+          <button class="ot-slot" onclick="bookSlot('OMM Speakeasy','11:00 PM')">11:00 PM</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Brunch -->
+    <div class="ot-card" id="rest-brunch" data-type="brunch">
+      <div class="ot-img" style="background-image:url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=85')"></div>
+      <div class="ot-body">
+        <div class="ot-top">
+          <div>
+            <div class="ot-name">OMM Brunch <span class="ot-rating">★ 4.6</span></div>
+            <div class="ot-meta">Desayunos · Brunch · $$ · Fines de semana</div>
+            <div class="ot-tags">
+              <span class="ot-tag">DJ set</span>
+              <span class="ot-tag">Mimosas</span>
+            </div>
+          </div>
+          <div class="ot-booked">
+            <div class="ot-booked-num">☀️ 14</div>
+            <div class="ot-booked-lbl">reservas hoy</div>
+          </div>
+        </div>
+        <div class="ot-slots-label">Próximo brunch disponible</div>
+        <div class="ot-slots" id="slots-brunch">
+          <button class="ot-slot" onclick="bookSlot('OMM Brunch','11:00 AM')">11:00 AM</button>
+          <button class="ot-slot" onclick="bookSlot('OMM Brunch','12:00 PM')">12:00 PM</button>
+          <button class="ot-slot ot-slot-hot" onclick="bookSlot('OMM Brunch','1:00 PM')">1:00 PM 🔥</button>
+          <button class="ot-slot" onclick="bookSlot('OMM Brunch','2:00 PM')">2:00 PM</button>
+        </div>
+      </div>
+    </div>
+
   </div>
+
   <footer class="footer"><div class="footer-bottom" style="max-width:none">© 2026 Oh Yeah!</div></footer>
 </section>
 
@@ -1553,7 +1895,7 @@ section.on{display:block}
   <button class="m-close" onclick="closeOv('ov-reserve')">✕</button>
   <div style="margin-bottom:20px">
     <div style="font-size:10px;font-weight:800;letter-spacing:.1em;color:var(--mut);margin-bottom:6px">RESERVAR EN</div>
-    <div style="font-size:22px;font-weight:800">OMM</div>
+    <div style="font-size:22px;font-weight:800" id="ov-rest-name">OMM</div>
     <div style="font-size:12px;color:var(--mut);font-weight:600">Internacional · Bogotá</div>
   </div>
   <!-- DATE/TIME/PAX pills -->
@@ -2050,7 +2392,7 @@ function buildCal(gridId,viewDate){
     grid.appendChild(btn);}
 }
 function calNav(dir){calViewMain.setMonth(calViewMain.getMonth()+dir);var lbl=document.getElementById('cal-month-label');if(lbl)lbl.textContent=MONTHS_ES[calViewMain.getMonth()]+' '+calViewMain.getFullYear();buildCal('cal-grid',calViewMain);}
-function updateDateDisplay(){var d=STATE.date;var label=MONTHS_SHORT[d.getMonth()]+' '+d.getDate();['bp-date-val','ov-date-val'].forEach(function(id){var el=document.getElementById(id);if(el)el.textContent=label;});}
+function updateDateDisplay(){var d=STATE.date;var label=MONTHS_SHORT[d.getMonth()]+' '+d.getDate();['bp-date-val','ov-date-val'].forEach(function(id){var el=document.getElementById(id);if(el)el.textContent=label;});syncEventPills&&syncEventPills();}
 
 /* TIME */
 function isPastTime(t){var now=new Date(),sel=STATE.date;if(sel.toDateString()!==now.toDateString())return false;var parts=t.match(/(\d+):(\d+)\s*(AM|PM)/i);if(!parts)return false;var h=parseInt(parts[1]),m=parseInt(parts[2]),ap=parts[3].toUpperCase();if(ap==='PM'&&h!==12)h+=12;if(ap==='AM'&&h===12)h=0;return(h*60+m)<(now.getHours()*60+now.getMinutes()+60);}
@@ -2079,6 +2421,7 @@ function setPax(n){STATE.pax=Math.max(1,Math.min(20,n));var pd=document.getEleme
 /* RESERVE MODAL */
 function openReserveModal(){
   openOv('ov-reserve');
+  var rn=document.getElementById('ov-rest-name');if(rn)rn.textContent=STATE.restaurantName||'OMM';
   // Show guest fields if not logged in
   var gf=document.getElementById('guest-fields');
   if(gf) gf.style.display=STATE.loggedIn?'none':'block';
@@ -2116,7 +2459,7 @@ async function confirmRes(){
   var finalName  = STATE.loggedIn ? STATE.user.nombre : guestName;
   var finalEmail = STATE.loggedIn ? STATE.user.email  : guestEmail;
   var finalPhone = STATE.loggedIn ? (STATE.user.telefono||'') : guestPhone;
-  var reservation={restaurant_id:'omm',restaurant_name:'OMM',date:dateStr,time:STATE.time,pax:STATE.pax,guest_name:finalName,guest_email:finalEmail,guest_phone:finalPhone,gourmand_level:STATE.loggedIn?getUserLevel().name:'INVITADO',is_first_visit:!STATE.loggedIn||USER_VISITS===0,visit_count:STATE.loggedIn?USER_VISITS:0,mood:STATE.mood,occasion:occ?occ.value:null,status:'confirmed',source:STATE.loggedIn?'ohyeah':'ohyeah_guest',nexum_brief:JSON.stringify({instruccion:!STATE.loggedIn?'Invitado — sin cuenta':'Cliente '+(USER_VISITS===0?'nuevo':'recurrente — '+USER_VISITS+' visitas'),nombre:finalName,email:finalEmail,telefono:finalPhone,nivel:STATE.loggedIn?getUserLevel().name:'INVITADO'})};
+  var reservation={restaurant_id:'omm',restaurant_name:(STATE.restaurantName||'OMM'),date:dateStr,time:STATE.time,pax:STATE.pax,guest_name:finalName,guest_email:finalEmail,guest_phone:finalPhone,gourmand_level:STATE.loggedIn?getUserLevel().name:'INVITADO',is_first_visit:!STATE.loggedIn||USER_VISITS===0,visit_count:STATE.loggedIn?USER_VISITS:0,mood:STATE.mood,occasion:occ?occ.value:null,status:'confirmed',source:STATE.loggedIn?'ohyeah':'ohyeah_guest',nexum_brief:JSON.stringify({instruccion:!STATE.loggedIn?'Invitado — sin cuenta':'Cliente '+(USER_VISITS===0?'nuevo':'recurrente — '+USER_VISITS+' visitas'),nombre:finalName,email:finalEmail,telefono:finalPhone,nivel:STATE.loggedIn?getUserLevel().name:'INVITADO'})};
   var savedOk=false;
   if(supa){try{var ins=await supa.from('ohyeah_reservas').insert([reservation]).select();if(!ins.error){savedOk=true;USER_VISITS++;}else if(ins.error.message&&ins.error.message.startsWith('FRANJA_LLENA')){showToast('😔 La franja se llenó. Elige otro horario.',5000);if(btn){btn.textContent='CONFIRMAR RESERVA';btn.disabled=false;}await buildFranjaGrid();return;}}catch(e){}}
   var m=MONTHS_ES[STATE.date.getMonth()],d=STATE.date.getDate();
@@ -2498,6 +2841,114 @@ function getFullPhone() {
   var code = (document.getElementById('su-country-code') || {value: '+57'}).value;
   var num  = (document.getElementById('su-phone') || {value: ''}).value.trim().replace(/\D/g, '');
   return num ? code + num : '';
+}
+
+/* ════ OPENTABLE FUNCTIONS ════ */
+function bookSlot(restName, time) {
+  STATE.time = time;
+  STATE.restaurantName = restName;
+  // Update display
+  updateTimeDisplay();
+  // Show reserve modal
+  openReserveModal();
+  // Pre-fill restaurant in modal
+  setTimeout(function() {
+    var title = document.querySelector('#ov-reserve .mbox > div:first-child > div:last-child');
+    if (title) title.textContent = restName;
+    var subt = document.querySelector('#ov-reserve .mbox > div:first-child > div[style*="mut"]');
+    if (subt) { /* keep */ }
+    var btn = document.getElementById('ov-confirm-btn');
+    if (btn) btn.textContent = 'CONFIRMAR EN ' + restName.toUpperCase();
+  }, 60);
+  showToast('🍽️ ' + restName + ' · ' + time);
+}
+
+function searchRestaurants() {
+  var q = (document.getElementById('discover-search')||{value:''}).value.toLowerCase().trim();
+  var dateStr = STATE.date.toISOString().split('T')[0];
+  var d = STATE.date;
+  var label = d.getDate() + ' ' + ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'][d.getMonth()];
+  var disp = document.getElementById('ot-date-display');
+  if (disp) disp.textContent = label;
+  // Update ev-date-val and ev-time-val
+  var edv = document.getElementById('ev-date-val');
+  var etv = document.getElementById('ev-time-val');
+  var epv = document.getElementById('ev-pax-val');
+  if (edv) edv.textContent = ['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'][d.getMonth()] + ' ' + d.getDate();
+  if (etv) etv.textContent = STATE.time;
+  if (epv) epv.textContent = STATE.pax;
+  // Filter restaurants
+  filterRestaurants(q);
+  // Load real availability from Supabase
+  loadRealAvailability(dateStr);
+  showToast('Buscando disponibilidad...', 2000);
+}
+
+function filterRestaurants(q) {
+  var activeFilter = document.querySelector('.filter-chip.on');
+  var type = activeFilter ? activeFilter.dataset.type : 'all';
+  q = q || (document.getElementById('discover-search')||{value:''}).value.toLowerCase().trim();
+  var cards = document.querySelectorAll('.ot-card');
+  var visible = 0;
+  cards.forEach(function(c) {
+    var cardType = c.dataset.type || '';
+    var name = (c.querySelector('.ot-name')||{textContent:''}).textContent.toLowerCase();
+    var matchType = type === 'all' || cardType === type;
+    var matchQ = !q || name.includes(q);
+    var show = matchType && matchQ;
+    c.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  var cnt = document.getElementById('results-count');
+  if (cnt) cnt.textContent = visible;
+}
+
+async function loadRealAvailability(dateStr) {
+  if (!supa) return;
+  var today = dateStr || STATE.date.toISOString().split('T')[0];
+  await cargarFranjasDelDia(today);
+  // Update slots based on real data
+  TIMES.forEach(function(t) {
+    var f = getFranjaInfo(today, t);
+    if (!f) return;
+    // Find all slot buttons with this time
+    document.querySelectorAll('.ot-slot').forEach(function(btn) {
+      if (btn.textContent.includes(t.replace(' 🔥','').replace(' ⚡',''))) {
+        if (!f.disponible) {
+          btn.className = 'ot-slot-full';
+          btn.disabled = true;
+          btn.textContent = t + ' ✕';
+        } else if (f.libres <= 3) {
+          btn.className = 'ot-slot ot-slot-few';
+          btn.textContent = t + ' ⚡';
+        }
+      }
+    });
+  });
+}
+
+// Override filterClick for discover section
+var _origFilterClick = filterClick;
+function filterClick(el) {
+  document.querySelectorAll('.filter-chip').forEach(function(c){ c.classList.remove('on'); });
+  el.classList.add('on');
+  filterRestaurants();
+}
+
+// Sync date/time/pax pills in discover section
+function syncEventPills() {
+  var d = STATE.date;
+  var edv = document.getElementById('ev-date-val');
+  var etv = document.getElementById('ev-time-val');
+  var epv = document.getElementById('ev-pax-val');
+  if (edv) edv.textContent = ['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'][d.getMonth()] + ' ' + d.getDate();
+  if (etv) etv.textContent = STATE.time;
+  if (epv) epv.textContent = STATE.pax;
+  var disp = document.getElementById('ot-date-display');
+  if (disp) {
+    var label = d.getDate() + ' de ' + ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'][d.getMonth()];
+    disp.textContent = label;
+  }
 }
 
 </script>
